@@ -1,0 +1,58 @@
+$br: 3px;
+
+
+.Keyboard {
+
+  background: url(http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png);
+
+  ul {
+    padding: 0;
+    height: 70vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    padding: 10px;
+    // border-radius: 3px;
+      background: rgba(0, 0, 0, .3);
+  }
+  li {
+    border-right: 1px solid black;
+    cursor: pointer;
+    // width: 30px;
+    background: white;
+    list-style: none;
+    border-radius: 0 0 $br $br;
+    flex-grow: 1;
+    // flex: 1;
+    // display: inline-flex;
+    // align-items: center;
+    &:first-child {
+      border-radius: $br $br $br 10px;
+    }
+    &:last-child {
+      border: none;
+      border-radius: $br $br 10px $br;
+    }
+    &.sharp {
+      background: #333;
+      // justify-content: center;
+      // position: relative;
+      // height: 70%;
+      // background-color: #474747;
+      // color: white;
+      // width: 8%;
+      // margin: 0 -4%;
+    }
+    &:not(.sharp) {
+      // flex-flow: column;
+      // justify-content: flex-end;
+      // outline: 2px solid #474747;
+      // color: #474747;
+      // background-color: #ffffff;
+      // padding-bottom: 1%;
+    }
+  }
+
+}
