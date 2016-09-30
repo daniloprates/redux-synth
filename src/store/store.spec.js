@@ -5,8 +5,7 @@ import * as ActionTypes from '../constants/actionTypes';
 import rootReducer from '../reducers';
 
 import initialState from '../constants/initialState';
-import { notes } from '../constants/notes';
-const { note, octave} = initialState.synth;
+const { note } = initialState.synth;
 
 describe('Store', () => {
 
@@ -14,16 +13,12 @@ describe('Store', () => {
     const store = createStore(rootReducer, initialState);
 
     const actions = [
-      { type: ActionTypes.NOTE_CHANGED, note, octave },
+      { type: ActionTypes.NOTE_ON, note },
     ];
     actions.forEach(action => store.dispatch(action));
 
     const actual = store.getState();
-    const expected = {
-      octave,
-      note,
-      noteObj: notes[4][0]
-    };
+    const expected = initialState.synth;
 
     expect(actual.synth).to.deep.equal(expected);
   });

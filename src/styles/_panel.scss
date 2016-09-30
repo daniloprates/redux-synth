@@ -6,4 +6,49 @@
     box-sizing: border-box;
     background: url('http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png');
 
+
+    .octaveButtons {
+      padding: 0;
+      display: flex;
+      box-sizing: border-box;
+
+      li {
+        width: 50px;
+        height: 50px;
+        background: #820b24;
+        margin-right: 1px;
+
+      }
+
+      &.active-octave-1 :nth-child(1),
+      &.active-octave-2 :nth-child(2),
+      &.active-octave-3 :nth-child(3),
+      &.active-octave-4 :nth-child(4),
+      &.active-octave-5 :nth-child(5),
+      &.active-octave-6 :nth-child(6),
+      &.active-octave-7 :nth-child(7),
+      &.active-octave-8 :nth-child(8),
+      &.active-octave-9 :nth-child(9),
+      &.active-octave-10 :nth-child(10)
+      {
+        background: green;
+      }
+
+      .octaveButtons li {
+          width: 50px;
+          height: 50px;
+          background: #820b24;
+          margin-right: 1px;
+      }
+    }
+
+}
+
+.Oscillator {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 100px;
+    height: 30px;
+    background: lightblue;
 }

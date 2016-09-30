@@ -1,13 +1,10 @@
-import { notes } from './notes';
-
 export default {
   synth: {
      // middle C
     octave: 4,
-    note: 0,
-    noteObj: notes[4][0],
-    noteOn: false,
+    notes: [],
     scale: '',
-    octaves: 1,
+    isPlaying: false,
+    amplitude: 0.5
   }
 };

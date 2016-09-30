@@ -36,7 +36,7 @@ export const notes = [
     {
       "name": "E",
       "octave": 0,
-      "frequency": "20.601",
+      "frequency": 20.601,
       "wavelength": "16.518m",
       "comment": ""
     },
@@ -91,7 +91,7 @@ export const notes = [
     {
       "name": "B",
       "octave": 0,
-      "frequency": "30.868",
+      "frequency": 30.868,
       "wavelength": "11.024m",
       "comment": "Lowest Note of 5 string bass"
     }
@@ -101,7 +101,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 1,
-      "frequency": "32.703",
+      "frequency": 32.703,
       "wavelength": "10.405m",
       "comment": "Lowest Note of double bass with C extension"
     },
@@ -117,7 +117,7 @@ export const notes = [
     {
       "name": "D",
       "octave": 1,
-      "frequency": "36.708",
+      "frequency": 36.708,
       "wavelength": "9.27m",
       "comment": ""
     },
@@ -133,7 +133,7 @@ export const notes = [
     {
       "name": "E",
       "octave": 1,
-      "frequency": "41.203",
+      "frequency": 41.203,
       "wavelength": "8.259m",
       "comment": "Lowest Note of Bass"
     },
@@ -198,7 +198,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 2,
-      "frequency": "65.406",
+      "frequency": 65.406,
       "wavelength": "5.203m",
       "comment": ""
     },
@@ -230,14 +230,14 @@ export const notes = [
     {
       "name": "E",
       "octave": 2,
-      "frequency": "82.407",
+      "frequency": 82.407,
       "wavelength": "4.129m",
       "comment": "Lowest Note of Guitar"
     },
     {
       "name": "F",
       "octave": 2,
-      "frequency": "87.307",
+      "frequency": 87.307,
       "wavelength": "3.898m",
       "comment": ""
     },
@@ -262,14 +262,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Ab",
       "octave": 2,
-      "frequency": "103.826",
+      "frequency": 103.826,
       "wavelength": "3.278m",
       "comment": ""
     },
     {
       "name": "A",
       "octave": 2,
-      "frequency": "110",
+      "frequency": 110,
       "wavelength": "3.094m",
       "comment": ""
     },
@@ -294,7 +294,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 3,
-      "frequency": "130.813",
+      "frequency": 130.813,
       "wavelength": "2.601m",
       "comment": ""
     },
@@ -358,14 +358,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Ab",
       "octave": 3,
-      "frequency": "207.652",
+      "frequency": 207.652,
       "wavelength": "1.639m",
       "comment": ""
     },
     {
       "name": "A",
       "octave": 3,
-      "frequency": "220",
+      "frequency": 220,
       "wavelength": "1.547m",
       "comment": ""
     },
@@ -374,7 +374,7 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Bb",
       "octave": 3,
-      "frequency": "233.082",
+      "frequency": 233.082,
       "wavelength": "1.46m",
       "comment": ""
     },
@@ -455,14 +455,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Ab",
       "octave": 4,
-      "frequency": "415.305",
+      "frequency": 415.305,
       "wavelength": "0.819m",
       "comment": ""
     },
     {
       "name": "A",
       "octave": 4,
-      "frequency": "440",
+      "frequency": 440,
       "wavelength": "0.773m",
       "comment": "Tuning reference note"
     },
@@ -552,14 +552,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Ab",
       "octave": 5,
-      "frequency": "830.609",
+      "frequency": 830.609,
       "wavelength": "0.41m",
       "comment": ""
     },
     {
       "name": "A",
       "octave": 5,
-      "frequency": "880",
+      "frequency": 880,
       "wavelength": "0.387m",
       "comment": ""
     },
@@ -585,7 +585,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 6,
-      "frequency": "1046.502",
+      "frequency": 1046.502,
       "wavelength": "0.325m",
       "comment": ""
     },
@@ -594,7 +594,7 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Db",
       "octave": 6,
-      "frequency": "1108.731",
+      "frequency": 1108.731,
       "wavelength": "0.307m",
       "comment": ""
     },
@@ -610,7 +610,7 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Eb",
       "octave": 6,
-      "frequency": "1244.508",
+      "frequency": 1244.508,
       "wavelength": "0.273m",
       "comment": ""
     },
@@ -656,7 +656,7 @@ export const notes = [
     {
       "name": "A",
       "octave": 6,
-      "frequency": "1760",
+      "frequency": 1760,
       "wavelength": "0.193m",
       "comment": ""
     },
@@ -682,7 +682,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 7,
-      "frequency": "2093.005",
+      "frequency": 2093.005,
       "wavelength": "0.163m",
       "comment": ""
     },
@@ -707,14 +707,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Eb",
       "octave": 7,
-      "frequency": "2489.016",
+      "frequency": 2489.016,
       "wavelength": "0.137m",
       "comment": ""
     },
     {
       "name": "E",
       "octave": 7,
-      "frequency": "2637.021",
+      "frequency": 2637.021,
       "wavelength": "0.129m",
       "comment": ""
     },
@@ -753,7 +753,7 @@ export const notes = [
     {
       "name": "A",
       "octave": 7,
-      "frequency": "3520",
+      "frequency": 3520,
       "wavelength": "0.097m",
       "comment": ""
     },
@@ -769,7 +769,7 @@ export const notes = [
     {
       "name": "B",
       "octave": 7,
-      "frequency": "3951.066",
+      "frequency": 3951.066,
       "wavelength": "0.086m",
       "comment": ""
     }
@@ -779,7 +779,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 8,
-      "frequency": "4186.009",
+      "frequency": 4186.009,
       "wavelength": "0.081m",
       "comment": ""
     },
@@ -804,14 +804,14 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Eb",
       "octave": 8,
-      "frequency": "4978.032",
+      "frequency": 4978.032,
       "wavelength": "0.068m",
       "comment": ""
     },
     {
       "name": "E",
       "octave": 8,
-      "frequency": "5274.042",
+      "frequency": 5274.042,
       "wavelength": "0.065m",
       "comment": ""
     },
@@ -850,7 +850,7 @@ export const notes = [
     {
       "name": "A",
       "octave": 8,
-      "frequency": "7040",
+      "frequency": 7040,
       "wavelength": "0.048m",
       "comment": ""
     },
@@ -866,7 +866,7 @@ export const notes = [
     {
       "name": "B",
       "octave": 8,
-      "frequency": "7902.132",
+      "frequency": 7902.132,
       "wavelength": "0.043m",
       "comment": ""
     }
@@ -876,7 +876,7 @@ export const notes = [
     {
       "name": "C",
       "octave": 9,
-      "frequency": "8372.018",
+      "frequency": 8372.018,
       "wavelength": "0.041m",
       "comment": ""
     },
@@ -901,21 +901,21 @@ export const notes = [
       "isSharp" : true,
       "nameFlat" : "Eb",
       "octave": 9,
-      "frequency": "9956.064",
+      "frequency": 9956.064,
       "wavelength": "0.034m",
       "comment": ""
     },
     {
       "name": "E",
       "octave": 9,
-      "frequency": "10548.084",
+      "frequency": 10548.084,
       "wavelength": "0.032m",
       "comment": ""
     },
     {
       "name": "F",
       "octave": 9,
-      "frequency": "11175.304",
+      "frequency": 11175.304,
       "wavelength": "0.03m",
       "comment": ""
     },
@@ -947,7 +947,7 @@ export const notes = [
     {
       "name": "A",
       "octave": 9,
-      "frequency": "14080",
+      "frequency": 14080,
       "wavelength": "0.024m",
       "comment": ""
     },
@@ -963,7 +963,7 @@ export const notes = [
     {
       "name": "B",
       "octave": 9,
-      "frequency": "15804.264",
+      "frequency": 15804.264,
       "wavelength": "0.022m",
       "comment": ""
     }
@@ -1007,7 +1007,7 @@ export const notesPlain = [
   {
     "name": "E",
     "octave": 0,
-    "frequency": "20.601",
+    "frequency": 20.601,
     "wavelength": "16.518m",
     "comment": ""
   },
@@ -1062,21 +1062,14 @@ export const notesPlain = [
   {
     "name": "B",
     "octave": 0,
-    "frequency": "30.868",
+    "frequency": 30.868,
     "wavelength": "11.024m",
     "comment": "Lowest Note of 5 string bass"
   },
   {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
-    "comment": ""
-  },
-  {
     "name": "C",
     "octave": 1,
-    "frequency": "32.703",
+    "frequency": 32.703,
     "wavelength": "10.405m",
     "comment": "Lowest Note of double bass with C extension"
   },
@@ -1092,7 +1085,7 @@ export const notesPlain = [
   {
     "name": "D",
     "octave": 1,
-    "frequency": "36.708",
+    "frequency": 36.708,
     "wavelength": "9.27m",
     "comment": ""
   },
@@ -1108,7 +1101,7 @@ export const notesPlain = [
   {
     "name": "E",
     "octave": 1,
-    "frequency": "41.203",
+    "frequency": 41.203,
     "wavelength": "8.259m",
     "comment": "Lowest Note of Bass"
   },
@@ -1168,16 +1161,9 @@ export const notesPlain = [
     "comment": ""
   },
   {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
-    "comment": ""
-  },
-  {
     "name": "C",
     "octave": 2,
-    "frequency": "65.406",
+    "frequency": 65.406,
     "wavelength": "5.203m",
     "comment": ""
   },
@@ -1209,14 +1195,14 @@ export const notesPlain = [
   {
     "name": "E",
     "octave": 2,
-    "frequency": "82.407",
+    "frequency": 82.407,
     "wavelength": "4.129m",
     "comment": "Lowest Note of Guitar"
   },
   {
     "name": "F",
     "octave": 2,
-    "frequency": "87.307",
+    "frequency": 87.307,
     "wavelength": "3.898m",
     "comment": ""
   },
@@ -1241,14 +1227,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Ab",
     "octave": 2,
-    "frequency": "103.826",
+    "frequency": 103.826,
     "wavelength": "3.278m",
     "comment": ""
   },
   {
     "name": "A",
     "octave": 2,
-    "frequency": "110",
+    "frequency": 110,
     "wavelength": "3.094m",
     "comment": ""
   },
@@ -1269,16 +1255,9 @@ export const notesPlain = [
     "comment": ""
   },
   {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
-    "comment": ""
-  },
-  {
     "name": "C",
     "octave": 3,
-    "frequency": "130.813",
+    "frequency": 130.813,
     "wavelength": "2.601m",
     "comment": ""
   },
@@ -1342,14 +1321,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Ab",
     "octave": 3,
-    "frequency": "207.652",
+    "frequency": 207.652,
     "wavelength": "1.639m",
     "comment": ""
   },
   {
     "name": "A",
     "octave": 3,
-    "frequency": "220",
+    "frequency": 220,
     "wavelength": "1.547m",
     "comment": ""
   },
@@ -1358,7 +1337,7 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Bb",
     "octave": 3,
-    "frequency": "233.082",
+    "frequency": 233.082,
     "wavelength": "1.46m",
     "comment": ""
   },
@@ -1367,13 +1346,6 @@ export const notesPlain = [
     "octave": 3,
     "frequency": 246.942,
     "wavelength": "1.378m",
-    "comment": ""
-  },
-  {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
     "comment": ""
   },
   {
@@ -1443,14 +1415,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Ab",
     "octave": 4,
-    "frequency": "415.305",
+    "frequency": 415.305,
     "wavelength": "0.819m",
     "comment": ""
   },
   {
     "name": "A",
     "octave": 4,
-    "frequency": "440",
+    "frequency": 440,
     "wavelength": "0.773m",
     "comment": "Tuning reference note"
   },
@@ -1468,13 +1440,6 @@ export const notesPlain = [
     "octave": 4,
     "frequency": 493.883,
     "wavelength": "0.689m",
-    "comment": ""
-  },
-  {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
     "comment": ""
   },
   {
@@ -1544,14 +1509,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Ab",
     "octave": 5,
-    "frequency": "830.609",
+    "frequency": 830.609,
     "wavelength": "0.41m",
     "comment": ""
   },
   {
     "name": "A",
     "octave": 5,
-    "frequency": "880",
+    "frequency": 880,
     "wavelength": "0.387m",
     "comment": ""
   },
@@ -1572,16 +1537,9 @@ export const notesPlain = [
     "comment": ""
   },
   {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
-    "comment": ""
-  },
-  {
     "name": "C",
     "octave": 6,
-    "frequency": "1046.502",
+    "frequency": 1046.502,
     "wavelength": "0.325m",
     "comment": ""
   },
@@ -1590,7 +1548,7 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Db",
     "octave": 6,
-    "frequency": "1108.731",
+    "frequency": 1108.731,
     "wavelength": "0.307m",
     "comment": ""
   },
@@ -1606,7 +1564,7 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Eb",
     "octave": 6,
-    "frequency": "1244.508",
+    "frequency": 1244.508,
     "wavelength": "0.273m",
     "comment": ""
   },
@@ -1652,7 +1610,7 @@ export const notesPlain = [
   {
     "name": "A",
     "octave": 6,
-    "frequency": "1760",
+    "frequency": 1760,
     "wavelength": "0.193m",
     "comment": ""
   },
@@ -1673,16 +1631,9 @@ export const notesPlain = [
     "comment": ""
   },
   {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
-    "comment": ""
-  },
-  {
     "name": "C",
     "octave": 7,
-    "frequency": "2093.005",
+    "frequency": 2093.005,
     "wavelength": "0.163m",
     "comment": ""
   },
@@ -1707,14 +1658,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Eb",
     "octave": 7,
-    "frequency": "2489.016",
+    "frequency": 2489.016,
     "wavelength": "0.137m",
     "comment": ""
   },
   {
     "name": "E",
     "octave": 7,
-    "frequency": "2637.021",
+    "frequency": 2637.021,
     "wavelength": "0.129m",
     "comment": ""
   },
@@ -1753,7 +1704,7 @@ export const notesPlain = [
   {
     "name": "A",
     "octave": 7,
-    "frequency": "3520",
+    "frequency": 3520,
     "wavelength": "0.097m",
     "comment": ""
   },
@@ -1769,21 +1720,14 @@ export const notesPlain = [
   {
     "name": "B",
     "octave": 7,
-    "frequency": "3951.066",
+    "frequency": 3951.066,
     "wavelength": "0.086m",
-    "comment": ""
-  },
-  {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
     "comment": ""
   },
   {
     "name": "C",
     "octave": 8,
-    "frequency": "4186.009",
+    "frequency": 4186.009,
     "wavelength": "0.081m",
     "comment": ""
   },
@@ -1808,14 +1752,14 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Eb",
     "octave": 8,
-    "frequency": "4978.032",
+    "frequency": 4978.032,
     "wavelength": "0.068m",
     "comment": ""
   },
   {
     "name": "E",
     "octave": 8,
-    "frequency": "5274.042",
+    "frequency": 5274.042,
     "wavelength": "0.065m",
     "comment": ""
   },
@@ -1854,7 +1798,7 @@ export const notesPlain = [
   {
     "name": "A",
     "octave": 8,
-    "frequency": "7040",
+    "frequency": 7040,
     "wavelength": "0.048m",
     "comment": ""
   },
@@ -1870,21 +1814,14 @@ export const notesPlain = [
   {
     "name": "B",
     "octave": 8,
-    "frequency": "7902.132",
+    "frequency": 7902.132,
     "wavelength": "0.043m",
-    "comment": ""
-  },
-  {
-    "name": "",
-    "octave": "",
-    "frequency": "",
-    "wavelength": "",
     "comment": ""
   },
   {
     "name": "C",
     "octave": 9,
-    "frequency": "8372.018",
+    "frequency": 8372.018,
     "wavelength": "0.041m",
     "comment": ""
   },
@@ -1909,21 +1846,21 @@ export const notesPlain = [
       "isSharp" : true,
       "nameFlat" : "Eb",
     "octave": 9,
-    "frequency": "9956.064",
+    "frequency": 9956.064,
     "wavelength": "0.034m",
     "comment": ""
   },
   {
     "name": "E",
     "octave": 9,
-    "frequency": "10548.084",
+    "frequency": 10548.084,
     "wavelength": "0.032m",
     "comment": ""
   },
   {
     "name": "F",
     "octave": 9,
-    "frequency": "11175.304",
+    "frequency": 11175.304,
     "wavelength": "0.03m",
     "comment": ""
   },
@@ -1955,7 +1892,7 @@ export const notesPlain = [
   {
     "name": "A",
     "octave": 9,
-    "frequency": "14080",
+    "frequency": 14080,
     "wavelength": "0.024m",
     "comment": ""
   },
@@ -1971,7 +1908,7 @@ export const notesPlain = [
   {
     "name": "B",
     "octave": 9,
-    "frequency": "15804.264",
+    "frequency": 15804.264,
     "wavelength": "0.022m",
     "comment": ""
   }

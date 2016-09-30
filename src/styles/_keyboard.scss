@@ -25,9 +25,10 @@ $br: 3px;
     list-style: none;
     border-radius: 0 0 $br $br;
     flex-grow: 1;
-    // flex: 1;
-    // display: inline-flex;
-    // align-items: center;
+
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
     &:first-child {
       border-radius: $br $br $br 10px;
     }
@@ -37,21 +38,15 @@ $br: 3px;
     }
     &.sharp {
       background: #333;
-      // justify-content: center;
-      // position: relative;
-      // height: 70%;
-      // background-color: #474747;
-      // color: white;
-      // width: 8%;
-      // margin: 0 -4%;
+
+      position: relative;
+      height: 70%;
+      background-color: #474747;
+      width: 8%;
+      margin: 0 -7%;
     }
     &:not(.sharp) {
-      // flex-flow: column;
-      // justify-content: flex-end;
-      // outline: 2px solid #474747;
-      // color: #474747;
-      // background-color: #ffffff;
-      // padding-bottom: 1%;
+      flex-flow: column;
     }
   }
 

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 // import { noteOn, noteOff, noteChanged, octaveChanged} from '../actions/synthActions';
 import Keyboard from '../components/Keyboard';
 
-
+let currentKey;
 
 /**
  *
@@ -13,14 +13,18 @@ import Keyboard from '../components/Keyboard';
 
 class SynthKeyboard extends Component {
   constructor(props) {
-      console.log('props.synth', props.synth);
       super(props);
-      this.synth = props.synth;
   }
+  // componentWillReceiveProps(nextProps) {
+      // console.log('componentWillReceiveProps KEYBOARD', nextProps);
+  // }
 
   handleMouseDown(e) {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+    let key = e.target.getAttribute('data-note');
+    this.props.onNoteOn(key);
 
     if (e == 1) {
       this.props.onNoteOn();
@@ -30,6 +34,9 @@ class SynthKeyboard extends Component {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
+    let key = e.target.getAttribute('data-note');
+    this.props.onNoteOff(key);
+
     if (e == 1) {
       this.props.onNoteOff();
     }
@@ -38,28 +45,37 @@ class SynthKeyboard extends Component {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
+    let key = e.target.getAttribute('data-note');
+
+    if (key !== currentKey && this.props.isPlaying) {
+      this.props.onNoteOn(key);
+      this.props.onNoteOff(currentKey);
+      currentKey = key;
+    }
+
     if (e == 1) {
       this.props.onNoteChanged();
     }
   }
 
   render() {
-    console.log('this.synth',this.synth)
-    return (<div>{this.synth.octave}</div>)
-    // return (
-    //     <Keyboard
-    //       onMouseDown={this.handleMouseDown}
-    //       onMouseUp={this.handleMouseUp}
-    //       onMouseMove={this.handleMouseMove}
-    //     />
-    // );
+    // return (<div>{this.props.octave}</div>);
+    return (
+        <Keyboard
+          onMouseDown={this.handleMouseDown.bind(this)}
+          onMouseUp={this.handleMouseUp.bind(this)}
+          onMouseMove={this.handleMouseMove.bind(this)}
+        />
+    );
   }
 }
 
 SynthKeyboard.propTypes = {
   onNoteOn: PropTypes.func.isRequired,
   onNoteOff: PropTypes.func.isRequired,
-  onNoteChanged: PropTypes.func.isRequired
+  onNoteChanged: PropTypes.func.isRequired,
+  octave: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool
 };
 
 export default SynthKeyboard;
