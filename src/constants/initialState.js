@@ -5,6 +5,8 @@ export default {
     notes: [],
     scale: '',
     isPlaying: false,
-    amplitude: 0.5
+    amplitude: 0.5,
+    // octaves: 2
+    octaves: 1
   }
 };

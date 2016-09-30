@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import Keyboard from '../components/Keyboard';
 
 let currentKey;
+let currentOctave;
 
 /**
  *
@@ -62,6 +63,7 @@ class SynthKeyboard extends Component {
     // return (<div>{this.props.octave}</div>);
     return (
         <Keyboard
+          {...this.props}
           onMouseDown={this.handleMouseDown.bind(this)}
           onMouseUp={this.handleMouseUp.bind(this)}
           onMouseMove={this.handleMouseMove.bind(this)}
