@@ -3,19 +3,21 @@ import React, { Component, PropTypes } from 'react';
 import p5 from 'p5';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
 import { notes } from '../constants/notes';
-console.log('p5', p5);
-console.log('p5Sound', p5Sound);
 
-window.p5 = p5;
-window.p5Sound = p5Sound;
+// import OscillatorWave from './OscillatorWave';
+
+p5Sound;
+// OscillatorWave;
 
 class Oscillator extends Component {
   constructor(props) {
       super(props);
 
+      // this.oscillatorWave = new OscillatorWave(props);
+
       this.oscillator = new p5.Oscillator();
       this.oscillator.setType('triangle');
-      this.oscillator.amp(props.amplitude);
+      this.oscillator.amp(0);
       this.oscillator.start();
 
   }

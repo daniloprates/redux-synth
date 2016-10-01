@@ -39,6 +39,7 @@
     "react-router-redux": "4.0.5",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
+    "tone": "0.7.1"
   },
   "devDependencies": {
     "autoprefixer": "6.4.0",
