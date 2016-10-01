@@ -5,7 +5,6 @@ console.log('keyboardCfg', keyboardCfg);
 // let i = 0;
 
 const Keyboard = (props) => {
-    console.log('Keyboard', props);
   return (
     <div className={`Keyboard octaves-${props.octaves}`}>
       <ul

@@ -27,6 +27,7 @@ class Oscillator extends Component {
               : 0;
 
     let note = this.getNote(nextProps);
+    console.log('note', note);
 
     if (!note) {
       amp = 0;
@@ -40,14 +41,27 @@ class Oscillator extends Component {
 
   }
   getNote(props) {
+
+    let { octave } = props;
+    let note = props.notes[0];
+
+    if (note == -1) {
+      note = 11;
+      octave--;
+    }
+    if (note == 12) {
+      note = 0;
+      octave++;
+    }
+
     if (
-      props.octave === 'undefined' ||
-      props.octave === 'undefined' ||
-      !notes[props.octave] ||
-      !notes[props.octave][props.notes[0]]
+      octave === 'undefined' ||
+      octave === 'undefined' ||
+      !notes[octave] ||
+      !notes[octave][note]
     ) {return false;}
 
-    return notes[props.octave][props.notes[0]];
+    return notes[octave][note];
   }
   render() {
     return (
