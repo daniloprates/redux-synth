@@ -27,11 +27,29 @@ export const octaveChanged = (octave) => {
     octave
   };
 };
+export const octavePrev = () => {
+  return {
+    type: types.OCTAVE_PREV
+  };
+};
+export const octaveNext = () => {
+  return {
+    type: types.OCTAVE_NEXT
+  };
+};
+
 
 
 export const amplitudeChange = (amplitude) => {
   return {
     type: types.AMPLITUDE_CHANGE,
     amplitude
+  };
+};
+
+
+export const stopPlaying = () => {
+  return {
+    type: types.STOP_PLAYING
   };
 };

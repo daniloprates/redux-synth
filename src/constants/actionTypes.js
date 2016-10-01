@@ -6,4 +6,9 @@ export const NOTE_CHANGED = 'NOTE_CHANGED';
 export const MOUSE_MOVE = 'MOUSE_MOVE';
 
 export const OCTAVE_CHANGED = 'OCTAVE_CHANGED';
+export const OCTAVE_PREV = 'OCTAVE_PREV';
+export const OCTAVE_NEXT = 'OCTAVE_NEXT';
+
 export const AMPLITUDE_CHANGE = 'AMPLITUDE_CHANGE';
+
+export const STOP_PLAYING = 'STOP_PLAYING';

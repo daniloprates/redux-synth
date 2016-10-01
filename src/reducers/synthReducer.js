@@ -33,6 +33,10 @@ export default function synthReducer(state = initialState.synth, action) {
         }
       );
 
+    case types.STOP_PLAYING:
+      return Object.assign({}, state, {isPlaying: false, notes: []});
+
+
     case types.OCTAVE_CHANGED:
       return Object.assign({}, state, {octave: action.octave, isPlaying: false});
 
