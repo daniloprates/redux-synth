@@ -1024,15 +1024,20 @@ export const notes = [
 
 
 export const letterToNote = {
-  a: 0,
-  s: 1,
+  a: -1,
+  s: 0,
+  e: 1,
   d: 2,
-  f: 3,
-  g: 4,
-  h: 5,
-  j: 6,
-  k: 7,
-  l: 8,
+  r: 3,
+  f: 4,
+  g: 5,
+  y: 6,
+  h: 7,
+  u: 8,
+  j: 9,
+  i: 10,
+  k: 11,
+  l: 12,
   z: "PREV_OCTAVE",
   x: "NEXT_OCTAVE"
 };

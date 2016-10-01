@@ -29,13 +29,15 @@ class SynthKeyboard extends Component {
 
     if (typeof note == 'string') {
       this.props
-      console.log('this.props', this.props);
-      // if ()
+      if (note == 'PREV_OCTAVE') {
+        this.props.onOctavePrev();
+      } else if (note == 'NEXT_OCTAVE') {
+        this.props.onOctaveNext();
+      }
     }
 
     if (note && note !== currentNote) {
       currentNote = note;
-      console.log('KEYD', note);
     }
     if (note !== undefined) {
       this.props.onNoteOn(note);

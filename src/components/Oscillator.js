@@ -3,56 +3,63 @@ import React, { Component, PropTypes } from 'react';
 import p5 from 'p5';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
 import { notes } from '../constants/notes';
-
+notes;
 // import OscillatorWave from './OscillatorWave';
 
+let oscDisplay = [];
+
+// Avoid ESLINT error:
 p5Sound;
-// OscillatorWave;
 
 class Oscillator extends Component {
   constructor(props) {
       super(props);
 
+      this.display = [];
       // this.osc1Wave = new OscillatorWave(props);
+      this.osc = [];
 
-      this.osc1 = new p5.Oscillator();
-      this.osc1.setType('triangle');
-      this.osc1.amp(0);
-      this.osc1.start();
+      [...Array(5)].map((x, i) => {
+        this.osc[i] = new p5.Oscillator();
+        this.osc[i].setType('triangle');
+        this.osc[i].amp(0);
+        this.osc[i].start();
+      });
 
-      // this.osc2 = new p5.Oscillator();
-      // this.osc2.setType('triangle');
-      // this.osc2.amp(0);
-      // this.osc2.start();
-
-      // this.osc3 = new p5.Oscillator();
-      // this.osc3.setType('triangle');
-      // this.osc3.amp(0);
-      // this.osc3.start();
   }
   componentWillReceiveProps(nextProps) {
-    let amp = nextProps.isPlaying
-              ? nextProps.amplitude
-              : 0;
 
-    let note = this.getNote(nextProps);
+    let { notes, amplitude, isPlaying, octave } = nextProps;
 
-    if (!note) {
-      amp = 0;
-    } else {
-      // console.log('note.frequency', note.frequency);
-      // this.osc1.freq(parseInt(note.frequency));
-      this.osc1.freq(note.frequency);
+    if (!isPlaying) {
+      amplitude = 0;
     }
 
-    this.osc1.amp(amp, 0.1);
+    oscDisplay = [];
+
+    notes.forEach((note, i) => {
+
+      if (i >= this.osc.length) {
+        i = 0;
+      }
+
+      note = this.getNote(note, octave);
+
+      if (note) {
+        oscDisplay.push(note);
+        this.osc[i].freq(note.frequency);
+        this.osc[i].amp(amplitude, 0.1);
+      } else {
+        this.osc[i].amp(0, 0.1);
+      }
+    });
+
+    for (let i=notes.length;i<this.osc.length;i++) {
+      this.osc[i].amp(0, 0.1);
+    }
 
   }
-  getNote(props) {
-
-    let { octave } = props;
-    let note = props.notes[props.notes.length-1];
-    console.log('note', note);
+  getNote(note, octave) {
 
     if (note == -1) {
       note = 11;
@@ -75,7 +82,7 @@ class Oscillator extends Component {
   render() {
     return (
       <div className="Oscillator">
-        {this.props.notes.toString()}
+        {oscDisplay.map(note => {return note.name + note.octave + ' ';})}
       </div>
     );
 

@@ -5,6 +5,7 @@ import initialState from '../constants/initialState';
 export default function synthReducer(state = initialState.synth, action) {
   let notes = state.notes.slice();
   let isPlaying = action.isPlaying;
+  let { octave } = state;
 
   switch (action.type) {
     case types.NOTE_CHANGED:
@@ -39,6 +40,14 @@ export default function synthReducer(state = initialState.synth, action) {
 
     case types.OCTAVE_CHANGED:
       return Object.assign({}, state, {octave: action.octave, isPlaying: false});
+
+    case types.OCTAVE_PREV:
+      if (octave == 0) {return state;}
+      return Object.assign({}, state, {octave: octave - 1});
+
+    case types.OCTAVE_NEXT:
+      if (octave == 10) {return state;}
+      return Object.assign({}, state, {octave: octave + 1});
 
     case types.AMPLITUDE_CHANGE:
       return Object.assign({}, state, {amplitude: action.amplitude});
