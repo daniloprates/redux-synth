@@ -3,8 +3,6 @@ import React, { Component, PropTypes } from 'react';
 import p5 from 'p5';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
 import { notes } from '../constants/notes';
-notes;
-// import OscillatorWave from './OscillatorWave';
 
 let oscDisplay = [];
 
@@ -14,9 +12,6 @@ p5Sound;
 class Oscillator extends Component {
   constructor(props) {
       super(props);
-
-      this.display = [];
-      // this.osc1Wave = new OscillatorWave(props);
       this.osc = [];
 
       [...Array(5)].map((x, i) => {
@@ -31,9 +26,7 @@ class Oscillator extends Component {
 
     let { notes, amplitude, isPlaying, octave } = nextProps;
 
-    if (!isPlaying) {
-      amplitude = 0;
-    }
+    if (!isPlaying) {amplitude = 0;}
 
     oscDisplay = [];
 
@@ -88,7 +81,6 @@ class Oscillator extends Component {
 
   }
 }
-
 
 Oscillator.propTypes = {
   notes: PropTypes.array,

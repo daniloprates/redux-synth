@@ -4,7 +4,7 @@ import initialState from '../constants/initialState';
 
 export default function synthReducer(state = initialState.synth, action) {
   let notes = state.notes.slice();
-  let isPlaying = action.isPlaying;
+  let { isPlaying } = action;
   let { octave } = state;
 
   switch (action.type) {
@@ -15,24 +15,14 @@ export default function synthReducer(state = initialState.synth, action) {
       if (notes.indexOf(action.note) < 0) {
         notes.push(action.note);
       }
-      return Object.assign({}, state,
-        {
-          notes,
-          isPlaying: true
-        }
-      );
+      return Object.assign({}, state, {notes, isPlaying: true });
 
     case types.NOTE_OFF:
       if (notes.indexOf(action.note) > -1) {
         notes.splice(notes.indexOf(action.note),1);
       }
       isPlaying = !!notes.length;
-      return Object.assign({}, state,
-        {
-          notes,
-          isPlaying
-        }
-      );
+      return Object.assign({}, state, {notes, isPlaying } );
 
     case types.STOP_PLAYING:
       return Object.assign({}, state, {isPlaying: false, notes: []});
