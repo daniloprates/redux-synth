@@ -7,40 +7,46 @@ console.log('keyboardCfg', keyboardCfg);
 const isPlaying = (props, i, o) => {
   return props.notes.indexOf(parseFloat((props.octave + o) + '' + i)) > -1;
 };
+isPlaying;
+// const Key = (i, o) => {
+//   <li
+//     key={i}
+//     data-note={i}
+//     data-octave={props.octave + o}
+//     className={`is-playing-${isPlaying(props, i, o)}`}
+//   />
+// }
+
+// const Octave = () => {
+//   return (
+//     <ul>{[...Array(11)].map((x, i) => <Key key={i} key={i} /> )}</ul>
+//   );
+// };
 
 const Keyboard = (props) => {
   return (
-    <div className={`Keyboard octaves-${props.octaves}`}>
-      <ul
-        onMouseDown={props.onMouseDown.bind(this)}
-        onMouseUp={props.onMouseUp.bind(this)}
-        onMouseMove={props.onMouseMove.bind(this)}
-        >
-        <li
-          data-note="11"
-          data-octave={props.octave - 1}
-          className={`is-playing-${isPlaying(props, 11, props.octave - 1)}`}
-          />
-        {
-          // LOOP THROUGH THE OCTAVES
-          [...Array(props.octaves)].map((x, o) =>
-            // LOOP THROUGH THE KEYS
-            keyboardCfg.octaveKeys.map((key, i) =>
+    <div
+      className={`Keyboard octaves-${props.octaves}`}
+      onMouseDown={props.onMouseDown.bind(this)}
+      onMouseUp={props.onMouseUp.bind(this)}
+      onMouseMove={props.onMouseMove.bind(this)}
+      >
+      {
+        [...Array(props.octaves)].map((y, o) => (
+          <ul key={o}>
+            {
+              [...Array(12)].map((y, i) => (
                 <li
                   key={i}
                   data-note={i}
                   data-octave={props.octave + o}
-                  className={`is-sharp-${key.isSharp} next-sharp-${key.nextSharp} prev-sharp-${key.prevSharp} is-playing-${isPlaying(props, i, o)}`} />
-            )
-          )
-        }
-        <li
-          data-note="0"
-          data-octave={props.octave + props.octaves}
-          className="next-sharp-true"
-          />
-      </ul>
-
+                  className={`is-playing-${isPlaying(props, i, o)}`}
+                  />
+              ))
+            }
+          </ul>
+        ))
+      }
     </div>
   );
 };

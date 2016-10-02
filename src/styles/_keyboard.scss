@@ -1,80 +1,82 @@
 $br: 3px;
+$grow-margin: -4.9%;
 
+.black-key {
+  background: #333;
+  position: relative;
+  height: 70%;
+  flex-grow: 1;
+  &.is-playing-true {
+    background: #222;
+  }
+}
+.prev-is-black {
+  margin-left: $grow-margin;
+}
+.next-is-black {
+  margin-right: $grow-margin;
+}
 
 .Keyboard {
-
-  background: url(http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png);
+  height: 70vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  background: rgba(0, 0, 0, .3);
+  box-sizing: border-box;
+  padding: 10px;
 
   ul {
-    padding: 0;
-    height: 70vh;
     display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    box-sizing: border-box;
-
-    padding: 10px;
-    // border-radius: 3px;
-      background: rgba(0, 0, 0, .3);
+    flex-grow: 1;
+    padding: 0;
+    margin-left: -1px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
   li {
-    cursor: pointer;
-    // width: 30px;
+    flex-grow: 1.5;
+
     background: white;
     list-style: none;
     border-radius: 0 0 $br $br;
-    flex-grow: 1;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    margin-left: -1px;
+    cursor: pointer;
     &.is-playing-true {
       background: #ccc;
     }
-
-    // flex: 1;
-    // display: inline-flex;
-    // align-items: center;
     &:first-child {
-      border-radius: $br $br $br 10px;
+      margin-left: 0 !important;
     }
     &:last-child {
-      margin-right: 0;
-      border-radius: $br $br 10px $br;
-    }
-    &.is-sharp-true {
-      background: #333;
-      position: relative;
-      height: 70%;
-      &.is-playing-true {
-        background: #222;
-      }
-      // background-color: #474747;
-      // width: 8%;
-      // margin: 0 -7%;
-    }
-    &:not(.is-sharp-true) {
-      // flex-flow: column;
-    }
-  }
-
-  &.octaves-1 {
-    li {
-      margin-right: 3px;
+      margin-right: 0 !important;
     }
 
-    .prev-sharp-true {
-      margin-left: -5.5%;
+
+    // White Keys
+    // 1, 3, 5, 6, 8, 10, 12
+    // &:nth-child(1),&:nth-child(3),&:nth-child(5),&:nth-child(6),&:nth-child(8),&:nth-child(10),&:nth-child(12) {
+    // }
+
+    // Black Keys
+    &:nth-child(2),&:nth-child(4),&:nth-child(7),&:nth-child(9),&:nth-child(11) {
+      @extend .black-key;
     }
-    .next-sharp-true {
-      margin-right: -5.5%;
+
+    // Prev is black
+    // 3, 5, 8, 10, 12
+    &:nth-child(1),&:nth-child(3),&:nth-child(5),&:nth-child(8),&:nth-child(10),&:nth-child(12) {
+      @extend .prev-is-black;
     }
+    // Next is black
+    // 1, 3, 6, 8, 10
+    &:nth-child(1),&:nth-child(3),&:nth-child(6),&:nth-child(8),&:nth-child(10) {
+      @extend .next-is-black;
+    }
+
   }
-  &.octaves-2 {
-    li {
-      margin-right: 3px;
-    }
-    .prev-sharp-true {
-        margin-left: -2.5%;
-    }
-    .next-sharp-true {
-        margin-right: -2.5%;
-    }
-  }
+
 }

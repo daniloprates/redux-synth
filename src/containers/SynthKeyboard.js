@@ -5,7 +5,7 @@ import { letterToNote } from '../constants/keyboard';
 
 let currentKey;
 let currentOctave;
-let currentNote;
+// let currentNote;
 
 /**
  *
@@ -27,21 +27,21 @@ class SynthKeyboard extends Component {
   // @keydown( 'enter' )
   handleKeyDown(e) {
     let note = letterToNote[e.key];
+    console.log('note', note);
     let oct;
 
-    if (typeof note == 'string') {
-      if (note == 'PREV_OCTAVE') {
-        return this.props.onOctavePrev();
-      } else if (note == 'NEXT_OCTAVE') {
-        return this.props.onOctaveNext();
-      }
-    }
-        console.log('note', note);
+    // if (typeof note == 'string') {
+    //   if (note == 'PREV_OCTAVE') {
+    //     return this.props.onOctavePrev();
+    //   } else if (note == 'NEXT_OCTAVE') {
+    //     return this.props.onOctaveNext();
+    //   }
+    // }
 
-    if (note == -1) {
-      note = 11;
-      oct = this.props.octave - 1;
-    }
+    // if (note == -1) {
+    //   note = 11;
+    //   oct = this.props.octave - 1;
+    // }
     if (note >= 24) {
       note = note - 24;
       oct = this.props.octave + 2;
@@ -50,10 +50,8 @@ class SynthKeyboard extends Component {
       note = note - 12;
       oct = this.props.octave + 1;
     }
+    // console.log('note', note, oct);
 
-    if (note && note !== currentNote) {
-      currentNote = note;
-    }
     if (note !== undefined) {
       this.props.onNoteOn(note, oct);
     }
