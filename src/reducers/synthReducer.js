@@ -44,7 +44,7 @@ export default function synthReducer(state = initialState.synth, action) {
       return Object.assign({}, state, {octave: octave - 1, notes});
 
     case types.OCTAVE_NEXT:
-      if (octave == 10) {return state;}
+      if (octave == 9) {return state;}
       notes = updateOctave(notes,octave+1);
       return Object.assign({}, state, {octave: octave + 1, notes});
       // return Object.assign({}, state, {octave: octave + 1, isPlaying: false, notes: []});

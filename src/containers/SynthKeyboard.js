@@ -27,20 +27,35 @@ class SynthKeyboard extends Component {
   // @keydown( 'enter' )
   handleKeyDown(e) {
     let note = letterToNote[e.key];
+    let oct;
 
     if (typeof note == 'string') {
       if (note == 'PREV_OCTAVE') {
-        this.props.onOctavePrev();
+        return this.props.onOctavePrev();
       } else if (note == 'NEXT_OCTAVE') {
-        this.props.onOctaveNext();
+        return this.props.onOctaveNext();
       }
+    }
+        console.log('note', note);
+
+    if (note == -1) {
+      note = 11;
+      oct = this.props.octave - 1;
+    }
+    if (note >= 24) {
+      note = note - 24;
+      oct = this.props.octave + 2;
+    }
+    if (note >= 12) {
+      note = note - 12;
+      oct = this.props.octave + 1;
     }
 
     if (note && note !== currentNote) {
       currentNote = note;
     }
     if (note !== undefined) {
-      this.props.onNoteOn(note);
+      this.props.onNoteOn(note, oct);
     }
 
   }
@@ -48,7 +63,26 @@ class SynthKeyboard extends Component {
   // @keyup( 'enter' )
   handleKeyUp(e) {
     let note = letterToNote[e.key];
-      this.props.onNoteOff(note);
+    let oct;
+
+    if (note === 'undefined') {
+      return false;
+    }
+
+    if (note == -1) {
+      note = 11;
+      oct = this.props.octave - 1;
+    }
+    if (note >= 24) {
+      note = note - 24;
+      oct = this.props.octave + 2;
+    }
+    if (note >= 12) {
+      note = note - 12;
+      oct = this.props.octave + 1;
+    }
+
+    this.props.onNoteOff(note, oct);
       // this.props.stopPlaying(note);
   }
 
@@ -122,6 +156,7 @@ SynthKeyboard.propTypes = {
   onOctavePrev: PropTypes.func.isRequired,
   onOctaveNext: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool,
+  octave: PropTypes.number,
   stopPlaying: PropTypes.func,
 };
 

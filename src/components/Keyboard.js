@@ -3,6 +3,10 @@ import { keyboardCfg } from '../constants/keyboard';
 console.log('keyboardCfg', keyboardCfg);
 
 // let i = 0;
+// const isPlaying = ()
+const isPlaying = (props, i, o) => {
+  return props.notes.indexOf(parseFloat((props.octave + o) + '' + i)) > -1;
+};
 
 const Keyboard = (props) => {
   return (
@@ -15,6 +19,7 @@ const Keyboard = (props) => {
         <li
           data-note="11"
           data-octave={props.octave - 1}
+          className={`is-playing-${isPlaying(props, 11, props.octave - 1)}`}
           />
         {
           // LOOP THROUGH THE OCTAVES
@@ -25,8 +30,7 @@ const Keyboard = (props) => {
                   key={i}
                   data-note={i}
                   data-octave={props.octave + o}
-                  className={`is-sharp-${key.isSharp} next-sharp-${key.nextSharp} prev-sharp-${key.prevSharp}`}
-                  />
+                  className={`is-sharp-${key.isSharp} next-sharp-${key.nextSharp} prev-sharp-${key.prevSharp} is-playing-${isPlaying(props, i, o)}`} />
             )
           )
         }
