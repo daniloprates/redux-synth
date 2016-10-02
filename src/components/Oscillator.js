@@ -45,7 +45,7 @@ class Oscillator extends Component {
         this.osc[i].freq(note.frequency);
         this.osc[i].amp(amplitude, 0.1);
       } else {
-        this.osc[i].amp(0, 0.1);
+        this.osc[i].amp(0, 1);
       }
     });
 

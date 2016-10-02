@@ -12,7 +12,7 @@ class Panel extends Component {
       <div className="Panel">
         <ul
           className={`octaveButtons active-octave-${this.props.octave + 1}`}>
-          {[...Array(panelCfg.octavesLength)].map((x, i) =>
+          {[...Array(panelCfg.oscillator.octavesLength)].map((x, i) =>
             <li
               key={i}
               onClick={this.props.onPanelChange.bind(this,'octave', i)}
@@ -25,7 +25,7 @@ class Panel extends Component {
           onInput={this.props.onPanelChange.bind(this,'amplitude')}
           />
         <ul className="types">
-          {panelCfg.types.map((type, i) =>
+          {panelCfg.oscillator.types.map((type, i) =>
             <li
               key={i}
               onClick={this.props.onPanelChange.bind(this,'type', type)}
