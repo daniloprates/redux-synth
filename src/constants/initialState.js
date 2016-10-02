@@ -7,6 +7,7 @@ export default {
     isPlaying: false,
     amplitude: 0.5,
     // octaves: 2
-    octaves: 1
+    octaves: 2,
+    type: 'sine'
   }
 };

@@ -8,19 +8,19 @@ const { note, octave} = initialState.synth;
 
 describe('Actions', () => {
 
-  it('should create an action to change the current node', () => {
+  // it('should create an action to change the current node', () => {
 
-    const actual = ActionCreators.noteChanged(note, octave);
-    const expected = {
-      type: ActionTypes.NOTE_CHANGED,
-      octave,
-      note,
-      noteObj: notes[4][1],
-      noteOn: false
-    };
+  //   const actual = ActionCreators.noteChanged(note, octave);
+  //   const expected = {
+  //     type: ActionTypes.NOTE_CHANGED,
+  //     octave,
+  //     note,
+  //     noteObj: notes[4][1],
+  //     noteOn: false
+  //   };
 
 
-      expect(actual).to.deep.equal(expected);
-  });
+  //     expect(actual).to.deep.equal(expected);
+  // });
 
 });

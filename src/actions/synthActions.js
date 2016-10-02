@@ -1,30 +1,26 @@
 import * as types from '../constants/actionTypes';
 
-export const noteOn = (note) => {
+export const noteOn = (note, octave) => {
   return {
     type: types.NOTE_ON,
-    note: note
+    note: note,
+    octave: octave
   };
 };
 
-export const noteOff = (note) => {
+export const noteOff = (note, octave) => {
   return {
     type: types.NOTE_OFF,
-    note: note
+    note: note,
+    octave: octave
   };
 };
 
-export const noteChanged = (note) => {
+export const panelChanged = (panelType, value) => {
   return {
-    type: types.NOTE_CHANGED,
-    note
-  };
-};
-
-export const octaveChanged = (octave) => {
-  return {
-    type: types.OCTAVE_CHANGED,
-    octave
+    type: types.PANEL_CHANGED,
+    panelType,
+    value
   };
 };
 export const octavePrev = () => {

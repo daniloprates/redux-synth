@@ -14,28 +14,14 @@ class SynthPanel extends Component {
       this.amp = 0;
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //     console.log('componentWillReceiveProps', nextProps);
-  // }
-
-  handleOctaveClick(octave) {
-    if (octave !== this.props.octave) {
-      this.props.onOctaveChanged(octave);
+  handlePanelChange(type, item) {
+    if (typeof item == 'object' && item.persist) {
+      item.persist();
     }
-  }
-
-  handleAmplitudeChange(ampSlider) {
-    let amp = ampSlider.value;
-    if (amp > 50) {
-      amp = 0.5;
-    } else {
-      amp = 0;
+    if (type === 'amplitude') {
+      item = item.target.value / 100;
     }
-    if (amp != this.amp) {
-        console.log('amp', amp);
-      this.amp = amp;
-      this.props.onAmplitudeChange(amp);
-    }
+    this.props.onPanelChanged(type, item);
   }
 
   render() {
@@ -44,8 +30,7 @@ class SynthPanel extends Component {
         <Panel
           {...this.props}
           octavesLength={this.octavesLength}
-          onOctaveClick={this.handleOctaveClick.bind(this)}
-          onAmplitudeChange={this.handleAmplitudeChange.bind(this)}
+          onPanelChange={this.handlePanelChange}
         />
         <Oscillator
           {...this.props}
@@ -56,8 +41,7 @@ class SynthPanel extends Component {
 }
 
 SynthPanel.propTypes = {
-  onOctaveChanged: PropTypes.func.isRequired,
-  onAmplitudeChange: PropTypes.func.isRequired,
+  onPanelChanged: PropTypes.func.isRequired,
   octave: PropTypes.number
 };
 

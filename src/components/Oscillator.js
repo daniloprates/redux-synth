@@ -16,7 +16,7 @@ class Oscillator extends Component {
 
       [...Array(5)].map((x, i) => {
         this.osc[i] = new p5.Oscillator();
-        this.osc[i].setType('triangle');
+        this.osc[i].setType(props.type);
         this.osc[i].amp(0);
         this.osc[i].start();
       });
@@ -24,19 +24,19 @@ class Oscillator extends Component {
   }
   componentWillReceiveProps(nextProps) {
 
-    let { notes, amplitude, isPlaying, octave } = nextProps;
+    let { notes, amplitude, isPlaying } = nextProps;
 
     if (!isPlaying) {amplitude = 0;}
 
     oscDisplay = [];
 
     notes.forEach((note, i) => {
-
+// oscDisplay.push(note);
       if (i >= this.osc.length) {
         i = 0;
       }
 
-      note = this.getNote(note, octave);
+      note = this.getNote(note);
 
       if (note) {
         oscDisplay.push(note);
@@ -47,20 +47,27 @@ class Oscillator extends Component {
       }
     });
 
+    this.osc.forEach(osc => {
+      osc.setType(nextProps.type);
+    });
+
     for (let i=notes.length;i<this.osc.length;i++) {
       this.osc[i].amp(0, 0.1);
     }
 
   }
-  getNote(note, octave) {
+  getNote(note) {
+    let octave = note.toString().slice(0,1);
+    note = note.toString().slice(1);
 
     if (note == -1) {
       note = 11;
       octave--;
     }
-    if (note == 12) {
-      note = 0;
+    if (note > 25)
+    if (note >= 12) {
       octave++;
+      note = note - 12;
     }
 
     if (
@@ -75,7 +82,7 @@ class Oscillator extends Component {
   render() {
     return (
       <div className="Oscillator">
-        {oscDisplay.map(note => {return note.name + note.octave + ' ';})}
+        {oscDisplay.map(note => {return note.name + note.octave + ' '; })}
       </div>
     );
 
@@ -83,6 +90,7 @@ class Oscillator extends Component {
 }
 
 Oscillator.propTypes = {
+  type: PropTypes.string,
   notes: PropTypes.array,
   amplitude: PropTypes.number
 };

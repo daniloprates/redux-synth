@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 // import keydown from 'react-keydown';
 import Keyboard from '../components/Keyboard';
-import { letterToNote } from '../constants/notes';
+import { letterToNote } from '../constants/keyboard';
 
 let currentKey;
+let currentOctave;
 let currentNote;
 
 /**
@@ -28,7 +29,6 @@ class SynthKeyboard extends Component {
     let note = letterToNote[e.key];
 
     if (typeof note == 'string') {
-      this.props
       if (note == 'PREV_OCTAVE') {
         this.props.onOctavePrev();
       } else if (note == 'NEXT_OCTAVE') {
@@ -57,7 +57,8 @@ class SynthKeyboard extends Component {
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     let key = e.target.getAttribute('data-note');
-    this.props.onNoteOn(key);
+    let oct = e.target.getAttribute('data-octave');
+    this.props.onNoteOn(key, oct);
 
   }
   handleMouseUp(e) {
@@ -65,26 +66,40 @@ class SynthKeyboard extends Component {
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     let key = e.target.getAttribute('data-note');
-    this.props.onNoteOff(key);
+    let oct = e.target.getAttribute('data-octave');
+    if (!key) {
+      this.props.stopPlaying();
+    } else {
+      this.props.onNoteOff(key, oct);
+    }
 
   }
   handleMouseMove(e) {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
-    let key = e.target.getAttribute('data-note');
+    if (!e.buttons) {
+      return this.props.stopPlaying();
+    }
 
-    if (key !== currentKey && this.props.isPlaying) {
-      this.props.onNoteOn(key);
-      this.props.onNoteOff(currentKey);
+    let key = e.target.getAttribute('data-note');
+    let oct = e.target.getAttribute('data-octave');
+
+    if (!currentKey) {
       currentKey = key;
+      currentOctave = oct;
+    }
+
+    if (key && (key !== currentKey || oct !== currentOctave) && this.props.isPlaying) {
+      this.props.onNoteOn(key, oct);
+      this.props.onNoteOff(currentKey, currentOctave);
+      currentKey = key;
+      currentOctave = oct;
     }
 
   }
 
-
   render() {
-    // return (<div>{this.props.octave}</div>);
     return (
       <div
         onKeyDown={this.handleKeyDown}
@@ -104,26 +119,13 @@ class SynthKeyboard extends Component {
 SynthKeyboard.propTypes = {
   onNoteOn: PropTypes.func.isRequired,
   onNoteOff: PropTypes.func.isRequired,
-  onNoteChanged: PropTypes.func.isRequired,
-  octave: PropTypes.number.isRequired,
+  onOctavePrev: PropTypes.func.isRequired,
+  onOctaveNext: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool,
   stopPlaying: PropTypes.func,
 };
 
 export default SynthKeyboard;
-
-// const mapStateToProps = (state={}) => {
-//   return state;
-// };
-
-// export default connect(mapStateToProps, {
-//   noteOn,
-//   noteOff,
-//   noteChanged,
-//   octaveChanged
-// })(SynthKeyboard);
-
-
 
 
 
