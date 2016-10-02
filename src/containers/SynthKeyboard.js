@@ -27,7 +27,7 @@ class SynthKeyboard extends Component {
   // @keydown( 'enter' )
   handleKeyDown(e) {
     let note = letterToNote[e.key];
-    console.log('note', note);
+    // console.log('note', note);
     let oct;
 
     // if (typeof note == 'string') {

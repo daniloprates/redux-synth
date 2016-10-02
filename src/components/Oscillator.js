@@ -4,6 +4,8 @@ import p5 from 'p5';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
 import { notes } from '../constants/notes';
 
+window.p5 = p5;
+
 let oscDisplay = [];
 
 // Avoid ESLINT error:

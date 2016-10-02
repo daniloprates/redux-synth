@@ -32,6 +32,10 @@ class Panel extends Component {
             >{type}</li>
           )}
         </ul>
+        <input
+          type="range"
+          onInput={this.props.onPanelChange.bind(this,'lowPass')}
+          />
       </div>
     );
   }
