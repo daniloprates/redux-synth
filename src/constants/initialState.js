@@ -9,5 +9,10 @@ export default {
     // octaves: 2
     octaves: 2,
     type: 'sine'
+  },
+  synth1: {
+    global: {
+      bpm: 120
+    }
   }
 };
