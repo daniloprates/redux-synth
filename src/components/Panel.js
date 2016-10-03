@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import panelCfg from '../constants/panel';
 
-
 class Panel extends Component {
   constructor(props) {
       super(props);

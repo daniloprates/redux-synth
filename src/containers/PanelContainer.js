@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import Panel from '../components/Panel';
-import Oscillator from '../components/Oscillator';
+// import Panel from '../components/Panel';
+import PanelGlobal from '../components/PanelGlobal';
+import PanelOscillator from '../components/PanelOscillator';
+import PanelFilter from '../components/PanelFilter';
+import PanelDelay from '../components/PanelDelay';
+import PanelReverb from '../components/PanelReverb';
+import PanelFx from '../components/PanelFx';
+import PanelRec from '../components/PanelRec';
 
 /**
  * SynthPanel container
@@ -26,15 +32,29 @@ class SynthPanel extends Component {
 
   render() {
     return (
-      <div>
-        <Panel
+      <div className="Panel">
+        <PanelGlobal
           {...this.props}
-          octavesLength={this.octavesLength}
           onPanelChange={this.handlePanelChange}
         />
-        <Oscillator
+        <PanelOscillator
           {...this.props}
-         />
+        />
+        <PanelFilter
+          {...this.props}
+        />
+        <PanelDelay
+          {...this.props}
+        />
+        <PanelReverb
+          {...this.props}
+        />
+        <PanelFx
+          {...this.props}
+        />
+        <PanelRec
+          {...this.props}
+        />
       </div>
     );
   }
