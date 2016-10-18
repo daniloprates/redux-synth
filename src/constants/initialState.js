@@ -13,6 +13,7 @@ export default {
     // SYNTH
     amplitude: 0.5,
     type: 'sine',
+    bpm: 120,
 
     // MIDI
     channel: 0
