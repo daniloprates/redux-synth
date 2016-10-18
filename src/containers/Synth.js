@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { noteOn, noteOff, panelChanged, amplitudeChange, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';
+import Oscillator from '../components/Oscillator';
 
 class SynthPage extends Component {
   constructor(props) {
@@ -24,6 +25,9 @@ class SynthPage extends Component {
           stopPlaying={this.props.stopPlaying}
           onOctavePrev={this.props.octavePrev}
           onOctaveNext={this.props.octaveNext}
+        />
+        <Oscillator
+          {...this.props.synth}
         />
       </div>
     );

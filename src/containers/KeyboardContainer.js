@@ -4,8 +4,6 @@ import Keyboard from '../components/Keyboard';
 import { letterToNote } from '../constants/keyboard';
 
 let currentKey;
-let currentOctave;
-// let currentNote;
 
 /**
  *
@@ -15,82 +13,36 @@ let currentOctave;
 
 class SynthKeyboard extends Component {
   constructor(props) {
-      super(props);
+    super(props);
 
-      document.onkeydown = this.handleKeyDown.bind(this);
-      document.onkeyup = this.handleKeyUp.bind(this);
-  }
-  // componentWillReceiveProps(nextProps) {
-      // console.log('componentWillReceiveProps KEYBOARD', nextProps);
-  // }
+    /* Bind Keyboard */
+    document.onkeydown = this.handleKeyDown.bind(this);
+    document.onkeyup = this.handleKeyUp.bind(this);
 
-  // @keydown( 'enter' )
-  handleKeyDown(e) {
-    let note = letterToNote[e.key];
-    // console.log('note', note);
-    let oct;
+    this.keyNotes = {};
 
-    // if (typeof note == 'string') {
-    //   if (note == 'PREV_OCTAVE') {
-    //     return this.props.onOctavePrev();
-    //   } else if (note == 'NEXT_OCTAVE') {
-    //     return this.props.onOctaveNext();
-    //   }
-    // }
-
-    // if (note == -1) {
-    //   note = 11;
-    //   oct = this.props.octave - 1;
-    // }
-    if (note >= 24) {
-      note = note - 24;
-      oct = this.props.octave + 2;
-    }
-    if (note >= 12) {
-      note = note - 12;
-      oct = this.props.octave + 1;
-    }
-    // console.log('note', note, oct);
-
-    if (note !== undefined) {
-      this.props.onNoteOn(note, oct);
+    /* Bind Midi */
+    if (navigator.requestMIDIAccess) {
+        navigator.requestMIDIAccess({
+            sysex: false
+        }).then(this.handleMidiSuccess.bind(this), this.handleMidiError);
+    } else {
+        alert("No MIDI support in your browser.");
     }
 
   }
 
-  // @keyup( 'enter' )
-  handleKeyUp(e) {
-    let note = letterToNote[e.key];
-    let oct;
-
-    if (note === 'undefined') {
-      return false;
-    }
-
-    if (note == -1) {
-      note = 11;
-      oct = this.props.octave - 1;
-    }
-    if (note >= 24) {
-      note = note - 24;
-      oct = this.props.octave + 2;
-    }
-    if (note >= 12) {
-      note = note - 12;
-      oct = this.props.octave + 1;
-    }
-
-    this.props.onNoteOff(note, oct);
-      // this.props.stopPlaying(note);
-  }
-
+  /**
+   *
+   * MOUSE ACTIONS
+   *
+   */
   handleMouseDown(e) {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     let key = e.target.getAttribute('data-note');
-    let oct = e.target.getAttribute('data-octave');
-    this.props.onNoteOn(key, oct);
+    this.props.onNoteOn(key);
 
   }
   handleMouseUp(e) {
@@ -98,11 +50,10 @@ class SynthKeyboard extends Component {
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     let key = e.target.getAttribute('data-note');
-    let oct = e.target.getAttribute('data-octave');
     if (!key) {
       this.props.stopPlaying();
     } else {
-      this.props.onNoteOff(key, oct);
+      this.props.onNoteOff(key);
     }
 
   }
@@ -111,25 +62,92 @@ class SynthKeyboard extends Component {
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     if (!e.buttons) {
-      return this.props.stopPlaying();
+      if (Object.keys(this.keyNotes).length) {
+        return false
+      } else {
+        return this.props.stopPlaying();
+      }
     }
 
     let key = e.target.getAttribute('data-note');
-    let oct = e.target.getAttribute('data-octave');
 
     if (!currentKey) {
       currentKey = key;
-      currentOctave = oct;
     }
 
-    if (key && (key !== currentKey || oct !== currentOctave) && this.props.isPlaying) {
-      this.props.onNoteOn(key, oct);
-      this.props.onNoteOff(currentKey, currentOctave);
+    if (key && (key !== currentKey) && this.props.isPlaying) {
+      this.props.onNoteOn(key);
+      this.props.onNoteOff(currentKey);
       currentKey = key;
-      currentOctave = oct;
     }
 
   }
+
+  /**
+   *
+   * KEYBOARD ACTIONS
+   *
+   */
+  handleKeyDown(e) {
+    let note = letterToNote[e.key] + (12 * this.props.octave);
+
+    this.keyNotes[note] = true;
+
+    if (note !== undefined && !isNaN(note)) {
+      this.props.onNoteOn(note);
+    }
+
+  }
+  handleKeyUp(e) {
+    let note = letterToNote[e.key] + (12 * this.props.octave);
+
+    delete this.keyNotes[note];
+
+    if (note !== undefined && !isNaN(note)) {
+      this.props.onNoteOff(note);
+    }
+
+  }
+
+  /**
+   *
+   * MIDI ACTIONS
+   *
+   */
+  handleMidiSuccess(midi) {
+
+    // midi functions
+    // when we get a succesful response, run this code
+    let inputs = midi.inputs.values();
+    // loop over all available inputs and listen for any MIDI input
+    for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
+        // each time there is a midi message call the onMIDIMessage function
+        input.value.onmidimessage = this.handleMidiMessage.bind(this);
+    }
+
+  }
+  handleMidiMessage(e) {
+
+    let [ channel, note, velocity ] = e.data;
+
+    // It's a music note
+    if (channel >= 144 || channel <= 159) {
+
+      channel = channel & 0xf;
+
+      if (velocity === 0) {
+        this.props.onNoteOff(note, velocity, channel);
+      } else {
+        this.props.onNoteOn(note, velocity, channel);
+      }
+    }
+
+  }
+  handleMidiError(err) {
+    console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + err);
+  }
+
+
 
   render() {
     return (

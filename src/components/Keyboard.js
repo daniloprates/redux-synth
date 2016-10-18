@@ -1,28 +1,12 @@
 import React from 'react';
-import { keyboardCfg } from '../constants/keyboard';
-console.log('keyboardCfg', keyboardCfg);
+import { notesMidi } from '../constants/notes';
 
 // let i = 0;
 // const isPlaying = ()
-const isPlaying = (props, i, o) => {
-  return props.notes.indexOf(parseFloat((props.octave + o) + '' + i)) > -1;
+const isPlaying = (props, note) => {
+  return !!props.notes[note];
 };
 isPlaying;
-// const Key = (i, o) => {
-//   <li
-//     key={i}
-//     data-note={i}
-//     data-octave={props.octave + o}
-//     className={`is-playing-${isPlaying(props, i, o)}`}
-//   />
-// }
-
-// const Octave = () => {
-//   return (
-//     <ul>{[...Array(11)].map((x, i) => <Key key={i} key={i} /> )}</ul>
-//   );
-// };
-
 const Keyboard = (props) => {
   return (
     <div
@@ -38,9 +22,9 @@ const Keyboard = (props) => {
               [...Array(12)].map((y, i) => (
                 <li
                   key={i}
-                  data-note={i}
+                  data-note={i + (12 * (props.octave + o))}
                   data-octave={props.octave + o}
-                  className={`is-playing-${isPlaying(props, i, o)}`}
+                  className={`is-playing-${isPlaying(props, i + (12 * (props.octave + o)))} ${notesMidi[i].isSharp ? 'black' : 'white'}-key`}
                   />
               ))
             }

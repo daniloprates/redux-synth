@@ -10,7 +10,7 @@ class PanelDelay extends Component {
           <div className="PanelDelay">
             <h3>Delay</h3>
             <label htmlFor="panel-dly-time">Time</label>
-            <input type="range" onInput={console.log(this.value)} id="panel-dly-time" />
+            <input type="range" onInput={console.log} id="panel-dly-time" />
             <label htmlFor="panel-dly-feedback">Feedback</label>
             <input type="range" defaultValue="120" id="panel-dly-feedback" />
             <div>

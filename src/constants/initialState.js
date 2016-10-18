@@ -1,13 +1,20 @@
 export default {
   synth: {
-     // middle C
-    octave: 4,
-    notes: [],
-    scale: '',
+    // NOTES
+    notes: {},
     isPlaying: false,
-    amplitude: 0.5,
-    // octaves: 2
+
+    // KEYBOARD VIEW
     octaves: 2,
-    type: 'sine'
+    octave: 4,
+    scale: '',
+    velocity: 100,
+
+    // SYNTH
+    amplitude: 0.5,
+    type: 'sine',
+
+    // MIDI
+    channel: 0
   }
 };

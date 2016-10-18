@@ -1,18 +1,20 @@
 import * as types from '../constants/actionTypes';
 
-export const noteOn = (note, octave) => {
+export const noteOn = (note, velocity, channel) => {
   return {
     type: types.NOTE_ON,
-    note: note,
-    octave: octave
+    note,
+    velocity,
+    channel
   };
 };
 
-export const noteOff = (note, octave) => {
+export const noteOff = (note, velocity, channel) => {
   return {
     type: types.NOTE_OFF,
-    note: note,
-    octave: octave
+    note,
+    velocity,
+    channel
   };
 };
 
@@ -34,15 +36,12 @@ export const octaveNext = () => {
   };
 };
 
-
-
 export const amplitudeChange = (amplitude) => {
   return {
     type: types.AMPLITUDE_CHANGE,
     amplitude
   };
 };
-
 
 export const stopPlaying = () => {
   return {

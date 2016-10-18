@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import p5 from 'p5';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
-import { notes } from '../constants/notes';
-
+import { notesMidi } from '../constants/notes';
+import { map } from '../utils';
 window.p5 = p5;
 
 let oscDisplay = [];
@@ -15,6 +15,7 @@ class Oscillator extends Component {
   constructor(props) {
       super(props);
       this.osc = [];
+      this.notes = {};
 
       [...Array(5)].map((x, i) => {
         this.osc[i] = new p5.Oscillator();
@@ -23,64 +24,67 @@ class Oscillator extends Component {
         this.osc[i].start();
       });
 
+      window.osc = this.osc;
   }
+
   componentWillReceiveProps(nextProps) {
+
+    this.osc.forEach(osc => {
+      osc.setType(nextProps.type);
+      osc.isActive = false;
+    });
 
     let { notes, amplitude, isPlaying } = nextProps;
 
     if (!isPlaying) {amplitude = 0;}
 
-    oscDisplay = [];
+    let note, noteNumber, osc;
 
-    notes.forEach((note, i) => {
-// oscDisplay.push(note);
-      if (i >= this.osc.length) {
-        i = 0;
-      }
+    for (noteNumber in notes) {
 
-      note = this.getNote(note);
+      note = Object.assign({}, notes[noteNumber], notesMidi[noteNumber]);
+      osc = this.osc[note.index];
 
-      if (note) {
-        oscDisplay.push(note);
-        this.osc[i].freq(note.frequency);
-        this.osc[i].amp(amplitude, 0.1);
+      if (note.frequency) {
+
+        osc.isActive = true;
+
+        if (osc.note != noteNumber) {
+          osc.note = noteNumber;
+          this.playNote(note,osc, amplitude);
+        }
+
       } else {
-        this.osc[i].amp(0, 1);
+        this.resetOsc(osc);
       }
-    });
+    }
 
     this.osc.forEach(osc => {
-      osc.setType(nextProps.type);
+      if (!osc.isActive) {
+        this.resetOsc(osc);
+      }
     });
 
-    for (let i=notes.length;i<this.osc.length;i++) {
-      this.osc[i].amp(0, 0.1);
+  }
+
+  resetOsc(osc) {
+    osc.amp(0, 0.2);
+    osc.note = null;
+    osc.isActive = false;
+  }
+
+  playNote(note,osc, amplitude) {
+
+    osc.freq(note.frequency);
+
+    amplitude = map(note.velocity, 0, 127, 0, amplitude);
+
+    if (osc.f != amplitude) {
+      osc.amp(amplitude, 0.2);
     }
 
   }
-  getNote(note) {
-    let octave = note.toString().slice(0,1);
-    note = note.toString().slice(1);
 
-    if (note == -1) {
-      note = 11;
-      octave--;
-    }
-    if (note > 25)
-    if (note >= 12) {
-      octave++;
-      note = note - 12;
-    }
-
-    if (
-      octave === 'undefined' ||
-      octave === 'undefined' ||
-      !notes[octave] ||
-      !notes[octave][note]
-    ) {return false;}
-
-    return notes[octave][note];
-  }
   render() {
     return (
       <div className="Oscillator">
@@ -93,7 +97,7 @@ class Oscillator extends Component {
 
 Oscillator.propTypes = {
   type: PropTypes.string,
-  notes: PropTypes.array,
+  notes: PropTypes.object,
   amplitude: PropTypes.number
 };
 
