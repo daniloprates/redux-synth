@@ -20,6 +20,13 @@ class SynthOscVoice {
     this.osc.frequency.value = note.frequency;
     this.gainNode.gain.value = amplitude;
 
+    osc.frequency.value = (note.frequency);
+
+    amplitude = map(note.velocity, 0, 127, 0, amplitude);
+
+    if (osc.f != amplitude) {
+      this.setVolume(osc, amplitude, 0.2);
+    }
 
 
 
