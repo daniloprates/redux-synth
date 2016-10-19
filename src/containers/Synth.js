@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
 import { noteOn, noteOff, panelChanged, amplitudeChange, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';

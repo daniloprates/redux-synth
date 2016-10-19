@@ -7,8 +7,9 @@ export default {
     // KEYBOARD VIEW
     octaves: 2,
     octave: 4,
-    scale: '',
     velocity: 100,
+    scale: 'chromatic',
+    root: 0,
 
     // SYNTH
     amplitude: 0.5,

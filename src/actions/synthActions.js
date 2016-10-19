@@ -48,3 +48,18 @@ export const stopPlaying = () => {
     type: types.STOP_PLAYING
   };
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

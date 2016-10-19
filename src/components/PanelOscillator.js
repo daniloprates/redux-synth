@@ -12,10 +12,10 @@ class PanelOscillator extends Component {
             <label htmlFor="panel-osc-amp">Amplitude</label>
             <input type="range" value="120" id="panel-osc-amp" />
             <label>Type</label>
-            <button>Sine</button>
-            <button>Triangle</button>
-            <button>Sawtooth</button>
-            <button>Square</button>
+            <button onClick={this.props.onPanelChange.bind(this, 'type', 'sine')}>Sine</button>
+            <button onClick={this.props.onPanelChange.bind(this, 'type', 'triangle')}>Triangle</button>
+            <button onClick={this.props.onPanelChange.bind(this, 'type', 'sawtooth')}>Sawtooth</button>
+            <button onClick={this.props.onPanelChange.bind(this, 'type', 'square')}>Square</button>
             <label>Type</label>
           </div>
         );
@@ -23,7 +23,7 @@ class PanelOscillator extends Component {
 }
 
 PanelOscillator.propTypes = {
-    className: PropTypes.string,
+    onPanelChange: PropTypes.func,
 };
 
 export default PanelOscillator;

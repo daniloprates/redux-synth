@@ -19,6 +19,11 @@ class SynthKeyboard extends Component {
     document.onkeydown = this.handleKeyDown.bind(this);
     document.onkeyup = this.handleKeyUp.bind(this);
 
+    window.onNoteOn = this.props.onNoteOn;
+
+    // window.changeScale = this.props.changeScale
+    // window.changeRoot = this.props.changeRoot
+
     this.keyNotes = {};
 
     /* Bind Midi */
@@ -63,7 +68,7 @@ class SynthKeyboard extends Component {
 
     if (!e.buttons) {
       if (Object.keys(this.keyNotes).length) {
-        return false
+        return false;
       } else {
         return this.props.stopPlaying();
       }

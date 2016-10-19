@@ -34,7 +34,17 @@ export default function synthReducer(state = initialState.synth, action) {
     case types.PANEL_CHANGED:{
       let type = action.panelType;
       let newState = Object.assign({}, state);
+
       newState[type] = action.value;
+
+      if (type == 'scale' && action.value == 'chromatic') {
+        newState.root = 0;
+      }
+      if (type == 'octaves' && action.value > state.octaves && state.octave + 0) {
+        // newState.octave = action.value - state.octaves;
+        // newState.octave--;
+      }
+
       return newState;
     }
 

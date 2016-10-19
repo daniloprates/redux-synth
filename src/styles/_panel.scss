@@ -45,6 +45,7 @@
 }
 
 .Oscillator {
+  display: none;
     position: absolute;
     top: 30px;
     right: 30px;
@@ -59,6 +60,36 @@
   margin: 5px 1px;
   padding: 10px;
   box-sizing: border-box;
+
+  * {
+    outline: none;
+  }
+
+  label {
+    width: 100%;
+    display: block;
+    font-size: 11px;
+    padding: 4px 0 1px;
+  }
+
+  select {
+    min-width: 50%;
+    max-width: 100%;
+    border: none;
+  }
+  button {
+    background: white;
+    border: none;
+    margin-right: 1px;
+    &:last-child{
+      margin-right: 0;
+    }
+    &.active-true, &:active {
+      background: #333333;
+      border: none;
+      color: white;
+    }
+  }
 }
 
 .PanelGlobal,
@@ -67,7 +98,19 @@
 .PanelDelay,
 .PanelReverb,
 .PanelFx,
-.PanelRec
+.PanelRec,
+.PanelKeyboard,
 {
   @extend .panel-item;
 }
+
+
+
+
+
+
+
+
+
+
+

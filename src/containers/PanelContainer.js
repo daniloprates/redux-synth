@@ -7,6 +7,7 @@ import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
 import PanelFx from '../components/PanelFx';
 import PanelRec from '../components/PanelRec';
+import PanelKeyboard from '../components/PanelKeyboard';
 
 /**
  * SynthPanel container
@@ -18,16 +19,26 @@ class SynthPanel extends Component {
       super(props);
       this.octavesLength = 10;
       this.amp = 0;
+
+      window.onPanelChanged = this.props.onPanelChanged;
   }
 
-  handlePanelChange(type, item) {
-    if (typeof item == 'object' && item.persist) {
-      item.persist();
+  handlePanelChange(type, value) {
+    if (typeof item == 'object' && value.persist) {
+      value.persist();
     }
     if (type === 'amplitude') {
-      item = item.target.value / 100;
+      value = value.target.value / 100;
     }
-    this.props.onPanelChanged(type, item);
+    if (typeof this.refs == 'object' && this.refs[type]) {
+      let newValue = this.refs[type].value;
+      if (value === 'int') {
+        newValue = parseInt(newValue);
+      }
+      value = newValue;
+      this.refs[type].blur();
+    }
+    this.props.onPanelChanged(type, value);
   }
 
   render() {
@@ -39,21 +50,31 @@ class SynthPanel extends Component {
         />
         <PanelOscillator
           {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
         <PanelFilter
           {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
         <PanelDelay
           {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
         <PanelReverb
           {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
         <PanelFx
           {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
         <PanelRec
           {...this.props}
+          onPanelChange={this.handlePanelChange}
+        />
+        <PanelKeyboard
+          {...this.props}
+          onPanelChange={this.handlePanelChange}
         />
       </div>
     );
