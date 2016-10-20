@@ -10,16 +10,22 @@ class PanelGlobal extends Component {
           <div className="PanelGlobal">
             <h1>RDX</h1>
             <label htmlFor="panel-global-bpm">BPM</label>
-            <input type="text" value="120" id="panel-global-bpm" />
-            <label htmlFor="panel-global-amplitude">Amplitude</label>
-            <input type="range" value="120" min="0" max="1" id="panel-global-amplitude" />
+            <input type="text" defaultValue="120" id="panel-global-bpm" />
+            <label>Volume</label>
+            <input
+              type="range"
+              defaultValue={this.props.amplitude*100}
+              ref="amplitude"
+              onInput={this.props.onPanelChange.bind(this, 'amplitude', 'decimal')}
+            />
           </div>
         );
     }
 }
 
 PanelGlobal.propTypes = {
-    className: PropTypes.string,
+  amplitude: PropTypes.number,
+  onPanelChange: PropTypes.func
 };
 
 export default PanelGlobal;

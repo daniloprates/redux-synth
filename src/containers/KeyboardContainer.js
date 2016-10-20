@@ -90,9 +90,8 @@ class SynthKeyboard extends Component {
   handleKeyDown(e) {
     let note = letterToNote[e.key] + (12 * this.props.octave);
 
-    this.keyNotes[note] = true;
-
-    if (note !== undefined && !isNaN(note)) {
+    if (note !== undefined && !isNaN(note) && !this.keyNotes[note]) {
+      this.keyNotes[note] = true;
       this.props.onNoteOn(note);
     }
 

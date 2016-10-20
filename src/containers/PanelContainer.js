@@ -27,17 +27,21 @@ class SynthPanel extends Component {
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
-    if (type === 'amplitude') {
-      value = value.target.value / 100;
-    }
+
     if (typeof this.refs == 'object' && this.refs[type]) {
       let newValue = this.refs[type].value;
       if (value === 'int') {
         newValue = parseInt(newValue);
       }
+      if (value === 'decimal') {
+        newValue = newValue/100;
+      }
       value = newValue;
-      this.refs[type].blur();
+      if (this.refs[type].blur) {
+        this.refs[type].blur();
+      }
     }
+
     this.props.onPanelChanged(type, value);
   }
 
