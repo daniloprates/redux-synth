@@ -1,8 +1,10 @@
 export default {
   synth: {
-    // NOTES
+    // GLOBAL
     notes: {},
     isPlaying: false,
+    bpm: 120,
+    amplitude: 0.7,
 
     // KEYBOARD VIEW
     octaves: 2,
@@ -12,9 +14,16 @@ export default {
     root: 0,
 
     // SYNTH
-    amplitude: 0.5,
-    type: 'sine',
-    bpm: 120,
+    synths: [
+      {
+        amplitude: 0.75,
+        type: 'sine',
+      },
+      {
+        amplitude: 0.25,
+        type: 'triangle',
+      }
+    ],
 
     // MIDI
     channel: 0

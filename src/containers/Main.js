@@ -3,11 +3,17 @@ import {connect} from 'react-redux';
 import { noteOn, noteOff, panelChanged, amplitudeChange, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';
-import Oscillator from '../components/Oscillator';
+// import Oscillator from '../components/Oscillator';
+import Synth from '../audio/Synth';
 
 class SynthPage extends Component {
   constructor(props) {
-      super(props);
+    super(props);
+    this.synth = new Synth(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.synth.update(nextProps.synth);
   }
 
   render() {
@@ -25,9 +31,7 @@ class SynthPage extends Component {
           onOctavePrev={this.props.octavePrev}
           onOctaveNext={this.props.octaveNext}
         />
-        <Oscillator
-          {...this.props.synth}
-        />
+
       </div>
     );
   }
