@@ -2,11 +2,11 @@ $br: 3px;
 $grow-margin: -4.9%;
 
 .Keyboard {
-  height: 70vh;
+  // height: 60vh;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  background: rgba(0, 0, 0, .3);
+  // background: #e57351;
   box-sizing: border-box;
   padding: 10px;
 
@@ -17,6 +17,16 @@ $grow-margin: -4.9%;
     margin-left: -1px;
     &:first-child {
       margin-left: 0;
+      li:first-child{
+        border-radius: 3px 0 0 3px;
+        border-left: none;
+      }
+    }
+    &:last-child {
+      li:last-child{
+        border-radius: 0 3px 3px 0;
+        border-right: none;
+      }
     }
   }
   li {
@@ -25,8 +35,9 @@ $grow-margin: -4.9%;
     background: white;
     list-style: none;
     border-radius: 0 0 $br $br;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+    // border-right: 1px solid black;
+    // border-left: 1px solid black;
+    border-left: 1px solid #999;
     margin-left: -1px;
     cursor: pointer;
     position: relative;

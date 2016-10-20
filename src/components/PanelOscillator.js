@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import {Button, Led} from './PanelComps';
 
 class PanelOscillator extends Component {
     constructor(props) {
@@ -8,15 +9,14 @@ class PanelOscillator extends Component {
     render() {
         return (
           <div className="PanelOscillator">
-            <button>o</button>
-            <label htmlFor="panel-osc-amp">Amplitude</label>
-            <input type="range" value="120" id="panel-osc-amp" />
-            <label>Type</label>
+            <Led
+              {...this.props}
+              on={true}
+            />
+            <Button
+              onClick={this.props.onPanelChange.bind(this, 'type', 'sine')}
+            >Test</Button>
             <button onClick={this.props.onPanelChange.bind(this, 'type', 'sine')}>Sine</button>
-            <button onClick={this.props.onPanelChange.bind(this, 'type', 'triangle')}>Triangle</button>
-            <button onClick={this.props.onPanelChange.bind(this, 'type', 'sawtooth')}>Sawtooth</button>
-            <button onClick={this.props.onPanelChange.bind(this, 'type', 'square')}>Square</button>
-            <label>Type</label>
           </div>
         );
     }

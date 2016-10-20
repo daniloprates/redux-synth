@@ -1,19 +1,40 @@
+// $bg: #472445;
+// $bg: #2980b9;
+$bg: #fbf9ec;
+$color-light: #cccabb;
+$color-dark: #929086;
+$border-radius-small: 0;
+
 @import 'reset';
+@import 'fonts';
 @import 'panel';
 @import 'keyboard';
 
-
-
-/* Variables */
-$vin-blue: #5bb7db;
-$vin-green: #60b044;
-$vin-red: #ff0000;
-
 /* Styles */
 body {
-  background: url(http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png);
+  // background: url(http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png);
+  background: $bg;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-smoothing: antialiased;
   padding: 0;
   margin: 0;
+}
+
+.Keyboard {
+  height: 60vh;
+}
+.Panel {
+  height: 40vh;
+  // min-width: 200px;
+}
+
+@media (max-height: 500px) {
+  .Keyboard {
+    // height: 20vh;
+  }
+  .Panel {
+    height: auto;
+    // height: 80vh;
+  }
+
 }

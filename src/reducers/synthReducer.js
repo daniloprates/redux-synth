@@ -15,6 +15,9 @@ export default function synthReducer(state = initialState.synth, action) {
   switch (action.type) {
 
     case types.NOTE_ON:
+      if (Object.keys(notes).length === 5) {
+        delete notes[Object.keys(notes)[4]];
+      }
       notes[action.note] = {
         index: Object.keys(notes).length,
         velocity: action.velocity || initialState.synth.velocity,
