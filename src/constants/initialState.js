@@ -14,14 +14,16 @@ export default {
     root: 0,
 
     // SYNTH
-    synths: [
+    oscs: [
       {
         amplitude: 0.75,
         type: 'sine',
+        octave: -1
       },
       {
         amplitude: 0.25,
-        type: 'triangle',
+        type: 'sawtooth',
+        octave: 1
       }
     ],
 

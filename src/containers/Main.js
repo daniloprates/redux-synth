@@ -9,10 +9,11 @@ import Synth from '../audio/Synth';
 class SynthPage extends Component {
   constructor(props) {
     super(props);
-    this.synth = new Synth(props);
+    this.synth = new Synth(props.synth);
   }
 
   componentWillReceiveProps(nextProps) {
+      console.log('nextProps.synth.notes', nextProps.synth.notes);
     this.synth.update(nextProps.synth);
   }
 

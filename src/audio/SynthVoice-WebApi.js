@@ -1,27 +1,25 @@
 import { map } from '../utils';
 import { notesMidi } from '../constants/notes';
 
-import p5 from 'p5';
-import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
-
-window.p5 = p5;
-// Avoid ESLINT error:
-p5Sound;
-
 class SynthOscVoice {
   constructor(ctx, props) {
     this.ctx = ctx;
 
-    this.osc = new p5.Oscillator();
+    this.gainNode = ctx.createGain();
+    this.gainNode.connect(ctx.destination);
+    this.gainNode.gain.value = 0;
 
-    this.osc.setType(props.type);
+    this.osc = ctx.createOscillator();
 
+    // Voice props from initialState
     this.osc.type = props.type;
     this.osc.amplitude = props.amplitude;
     this.osc.octave = props.octave;
 
-    this.osc.amp(0);
-    this.osc.start();
+    this.osc.detune.value = 0;
+    this.osc.connect(this.gainNode);
+    this.osc.start(0);
+    // this.osc.start(ctx.currentTime);
 
   }
 
@@ -32,9 +30,7 @@ class SynthOscVoice {
 
     note = Object.assign({}, note, notesMidi[noteNumber]);
 
-    /**/
-    this.osc.freq(note.frequency);
-    // this.osc.frequency.value = note.frequency;
+    this.osc.frequency.value = note.frequency;
 
     // Merge the note velocity with the osc amplitude
     let gain = map(note.velocity, 0, 127, 0, this.osc.amplitude);
@@ -42,16 +38,11 @@ class SynthOscVoice {
     // Merge it again with the main synth amplitude
     gain = map(amplitude, 0, 1, 0, amplitude);
 
-    /**/
-    this.osc.amp(gain, 0.2);
-    // this.gainNode.gain.value = gain;
-
+    this.gainNode.gain.value = gain;
   }
 
   stop() {
-    /**/
-    this.osc.amp(0, 0.2);
-    // this.gainNode.gain.value = 0;
+    this.gainNode.gain.value = 0;
   }
 
   setParam(param, value, object='osc') {

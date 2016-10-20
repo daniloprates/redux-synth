@@ -14,7 +14,6 @@ class Keyboard extends Component {
         // this.getLiStyle(props);
 
         window.scales = scales;
-        console.log('scales', scales);
     }
 
     componentWillReceiveProps(nextProps) {

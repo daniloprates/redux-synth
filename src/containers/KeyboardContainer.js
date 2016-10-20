@@ -125,10 +125,8 @@ class SynthKeyboard extends Component {
 
   }
   handleMidiMessage(e) {
-      // console.log('e', e);
 
     let [ channel, note, velocity ] = e.data;
-    console.log('channel, note, velocity', channel, note, velocity);
 
     // It's a music note
     if (channel >= 144 || channel <= 159) {

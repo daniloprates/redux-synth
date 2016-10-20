@@ -1,4 +1,4 @@
-export const oscCfg = {
+export const synthCfg = {
   // number of oscillators
   osc: 2,
   // number of voices per osc
@@ -8,6 +8,6 @@ export const oscCfg = {
   // osc type
   type: 'sine',
   // max amp in relation to the other osc
-  amplitude: .5
+  amplitude: .50
 };
 

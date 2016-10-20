@@ -1,5 +1,5 @@
-import { notesMidi } from '../constants/notes';
-import { oscCfg } from '../constants/oscillator';
+// import { notesMidi } from '../constants/notes';
+import { synthCfg } from '../constants/synth';
 import SynthVoice from './SynthVoice';
 
 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -8,33 +8,35 @@ class Synth {
 
   constructor(props) {
     this.notes = [];
-    this.osc = [];
+    this.oscs = [];
     this.props = props;
     this.createOscs();
-
   }
 
   createOscs() {
 
     let osc;
+    let oscCfg;
 
-    [...Array(oscCfg.osc)].map((x, o) => {
+    [...Array(synthCfg.osc)].map((x, o) => {
 
       osc = {};
+      oscCfg = this.props.oscs[o];
 
-      this.osc[o] = {};
-
+      osc.voices = new Array(synthCfg.voices);
+      osc.type = oscCfg.type;
       osc.octave = oscCfg.octave;
-      osc.voices = new Array(oscCfg.voices);
       osc.amplitude = oscCfg.amplitude;
 
-      [...Array(oscCfg.voices)].map((x, v) => {
-        osc.voices[v] = new SynthVoice(ctx, this.props);
+      [...Array(synthCfg.voices)].map((x, v) => {
+        osc.voices[v] = new SynthVoice(ctx, oscCfg);
       });
 
-      this.osc[o] = osc;
+      this.oscs.push(osc);
 
     });
+
+    window.setVoiceParam = this.setVoiceParam.bind(this);
 
   }
 
@@ -48,20 +50,20 @@ class Synth {
       }
     }
 
-    this.notes = new Array(oscCfg.voices);
+    this.checkParam('type', nextProps.oscs);
+    this.checkParam('octave', nextProps.oscs);
+    this.checkParam('amplitude', nextProps.oscs);
+
+    this.notes = new Array(synthCfg.voices);
     let { notes, amplitude, isPlaying } = nextProps;
     let note, noteNumber;
 
     if (!isPlaying) {amplitude = 0;}
 
     for (noteNumber in notes) {
-
-      note = Object.assign({}, notes[noteNumber], notesMidi[noteNumber]);
-
-      if (note.frequency) {
-        this.notes[note.index] = note;
-      }
-
+      note = Object.assign({}, notes[noteNumber]);
+      note.number = noteNumber;
+      this.notes[note.index] = note;
     }
 
     this.playVoices(this.notes, amplitude);
@@ -69,7 +71,9 @@ class Synth {
   }
 
   playVoices(notes, amplitude) {
-    [...Array(oscCfg.voices)].map((x, i) => {
+
+    [...Array(synthCfg.voices)].map((x, i) => {
+          // console.log('notes', notes);
       if (notes[i]) {
         this.playVoice(i, notes[i], amplitude);
       } else {
@@ -79,24 +83,39 @@ class Synth {
   }
 
   playVoice(i, note, amplitude) {
-    this.osc.map((osc) => {
+    this.oscs.map((osc) => {
       osc.voices[i].play(note, amplitude);
     });
   }
 
   stopVoices() {
-    [...Array(oscCfg.voices)].map((x, i) => {
+    [...Array(synthCfg.voices)].map((x, i) => {
       this.stopVoice(i);
     });
   }
 
   stopVoice(i) {
-    this.osc.map((osc) => {
+    this.oscs.map((osc) => {
       osc.voices[i].stop();
     });
   }
 
-}
+  checkParam(param, props) {
+    this.oscs.map((osc,i) => {
+      let value = props[i][param];
+      if (osc[param] !== value) {
+        osc[param] = value;
+        this.setVoiceParam(i, param, value);
+      }
+    });
+  }
 
+  setVoiceParam(oscIndex, param, value) {
+    this.oscs[oscIndex].voices.map((voice) => {
+      voice.setParam(param, value);
+    });
+  }
+
+}
 
 export default Synth;
