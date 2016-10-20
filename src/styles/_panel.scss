@@ -1,46 +1,57 @@
 
 .Panel {
-    height: 30vh;
-    display: flex;
-    flex-direction: row;
+    // height: 40vh;
+    padding: 10px;
     box-sizing: border-box;
-    background: url('http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png');
+    // display: flex;
+    // flex-direction: row;
+    // box-sizing: border-box;
 
-
-    .octaveButtons {
-      padding: 0;
+    .panel-content {
+      // background: #55a2d4;
+      background: rgba(0, 0, 0, 0.05);
+      width: 100%;
       display: flex;
+      flex-direction: row;
       box-sizing: border-box;
+      border-radius: 6px;
+      // border-width: 1px 1px 0 0;
+      // border-style: solid;
+      // border-color: white;
+      // padding: 10px;
+      box-sizing: border-box;
+      height: 100%;
 
-      li {
-        width: 50px;
-        height: 50px;
-        background: #820b24;
-        margin-right: 1px;
-
-      }
-
-      &.active-octave-1 :nth-child(1),
-      &.active-octave-2 :nth-child(2),
-      &.active-octave-3 :nth-child(3),
-      &.active-octave-4 :nth-child(4),
-      &.active-octave-5 :nth-child(5),
-      &.active-octave-6 :nth-child(6),
-      &.active-octave-7 :nth-child(7),
-      &.active-octave-8 :nth-child(8),
-      &.active-octave-9 :nth-child(9),
-      &.active-octave-10 :nth-child(10)
-      {
-        background: green;
-      }
-
-      .octaveButtons li {
-          width: 50px;
-          height: 50px;
-          background: #820b24;
-          margin-right: 1px;
-      }
+      // border: 1px inset #509cce;
+      // box-shadow: 0 2px 2px rgb(33, 95, 136) inset;
     }
+
+    h1 {
+      font-size: 55px;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'OAF 300';
+      line-height: 19px;
+      height: 40px;
+      margin-bottom: 5px;
+    }
+
+    h3 {
+      // text-align: center;
+      // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      // padding: 0 5px 5px;
+      // color: white;
+      // font-weight: bold;
+      // font-size: 16px;
+      // margin-bottom: 5px;
+
+      text-align: left;
+      padding: 3px 5px 5px 15px;
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
 
 }
 
@@ -56,10 +67,21 @@
 
 .panel-item {
   width: 13%;
-  background-color: rgba(255,255,255,0.2);
-  margin: 5px 1px;
+  // background-color: rgba(255,255,255,0.2);
+  // margin: 5px 1px;
   padding: 10px;
   box-sizing: border-box;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: 10px;
+    height: 23px;
+    background: #d2cfc1;
+    text-align: left;
+    position: absolute;
+    left: 11px;
+  }
 
   * {
     outline: none;
@@ -76,6 +98,10 @@
     min-width: 50%;
     max-width: 100%;
     border: none;
+    -webkit-appearance: button;
+    padding: 5px;
+    border-radius: 2px;
+    background: $color-light;
   }
   button {
     background: white;
@@ -93,7 +119,7 @@
 }
 
 .PanelGlobal,
-.PanelOscillator,
+.PanelOscillators,
 .PanelFilter,
 .PanelDelay,
 .PanelReverb,
@@ -104,12 +130,126 @@
   @extend .panel-item;
 }
 
+.PanelOscillator {
+  width: 50%;
+  text-align: center;
+  float: left;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+
+.PanelCompsLed {
+  width: 10px;
+  height: 10px;
+  background: #ad2525;
+  text-align: center;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  box-shadow: -1px -1px 2px #921515 inset;
+  &.is-on-true {
+    background: red;
+    box-shadow: -1px -1px 2px #921515 inset, 0px 0px 5px 2px rgba(255, 255, 255, 0.2);
+  }
+}
 
 
 
 
+input#panel-global-bpm {
+  font-family: 'Orbitron';
+  background: gray;
+  border: 1px inset;
+  padding: 5px;
+  text-align: center;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  color: white;
+}
 
 
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: $color-light;
+  border-radius: 2px;
+  border: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 2px;
+  background: $color-dark;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $color-light;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: $color-light;
+  border-radius: 2px;
+  border: none;
+}
+input[type=range]::-moz-range-thumb {
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 2px;
+  background: $color-dark;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: $color-light;
+  border: none;
+  border-radius: 4px;
+}
+input[type=range]::-ms-fill-upper {
+  background: $color-light;
+  border: none;
+  border-radius: 4px;
+}
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 2px;
+  background: $color-dark;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: $color-light;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: $color-light;
+}
 
 
 

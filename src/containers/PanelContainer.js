@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 // import Panel from '../components/Panel';
 import PanelGlobal from '../components/PanelGlobal';
-import PanelOscillator from '../components/PanelOscillator';
+import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
@@ -44,38 +44,40 @@ class SynthPanel extends Component {
   render() {
     return (
       <div className="Panel">
-        <PanelGlobal
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelOscillator
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelFilter
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelDelay
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelReverb
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelFx
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelRec
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
-        <PanelKeyboard
-          {...this.props}
-          onPanelChange={this.handlePanelChange}
-        />
+        <div className="panel-content">
+          <PanelGlobal
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelOscillators
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelFilter
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelDelay
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelReverb
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelFx
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelRec
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+          <PanelKeyboard
+            {...this.props}
+            onPanelChange={this.handlePanelChange}
+          />
+        </div>
       </div>
     );
   }

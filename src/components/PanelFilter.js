@@ -15,13 +15,6 @@ class PanelFilter extends Component {
               <button>h</button>
             </div>
             <label htmlFor="panel-osc-amp">Amplitude</label>
-            <input type="range" value="120" id="panel-osc-amp" />
-            <label>Type</label>
-            <button>Sine</button>
-            <button>Triangle</button>
-            <button>Sawtooth</button>
-            <button>Square</button>
-            <label>Type</label>
           </div>
         );
     }
