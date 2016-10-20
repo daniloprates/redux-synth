@@ -8,9 +8,8 @@ let currentKey;
 /**
  *
  * SynthKeyboard container
- * handles the mouse events
+ * handles the mouse, keyboard and midi events
  */
-
 class SynthKeyboard extends Component {
   constructor(props) {
     super(props);
@@ -18,14 +17,6 @@ class SynthKeyboard extends Component {
     /* Bind Keyboard */
     document.onkeydown = this.handleKeyDown.bind(this);
     document.onkeyup = this.handleKeyUp.bind(this);
-
-    window.onNoteOn = this.props.onNoteOn;
-
-    // window.changeScale = this.props.changeScale
-    // window.changeRoot = this.props.changeRoot
-
-    this.keyNotes = {};
-    this.midiNotes = {};
 
     /* Bind Midi */
     if (navigator.requestMIDIAccess) {
@@ -36,6 +27,8 @@ class SynthKeyboard extends Component {
         alert("No MIDI support in your browser.");
     }
 
+    this.keyNotes = {};
+    this.midiNotes = {};
   }
 
   /**
