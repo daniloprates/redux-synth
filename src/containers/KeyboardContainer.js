@@ -25,6 +25,7 @@ class SynthKeyboard extends Component {
     // window.changeRoot = this.props.changeRoot
 
     this.keyNotes = {};
+    this.midiNotes = {};
 
     /* Bind Midi */
     if (navigator.requestMIDIAccess) {
@@ -132,18 +133,22 @@ class SynthKeyboard extends Component {
 
   }
   handleMidiMessage(e) {
+      // console.log('e', e);
 
     let [ channel, note, velocity ] = e.data;
+    console.log('channel, note, velocity', channel, note, velocity);
 
     // It's a music note
     if (channel >= 144 || channel <= 159) {
 
       channel = channel & 0xf;
 
-      if (velocity === 0) {
+      if (velocity === 0 || !!this.midiNotes[note]) {
         this.props.onNoteOff(note, velocity, channel);
+        delete this.midiNotes[note];
       } else {
         this.props.onNoteOn(note, velocity, channel);
+        this.midiNotes[note] = true;
       }
     }
 

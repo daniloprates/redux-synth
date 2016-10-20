@@ -44,6 +44,12 @@ class Oscillator extends Component {
 
       note = Object.assign({}, notes[noteNumber], notesMidi[noteNumber]);
       osc = this.osc[note.index];
+      if (!osc) {
+        console.log('this.osc', this.osc);
+        console.log('osc', osc);
+        console.log('note.index', note.index);
+        console.log('note', note);
+      }
 
       if (note.frequency) {
 
