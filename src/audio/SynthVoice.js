@@ -2,16 +2,13 @@ import { map } from '../utils';
 import { notesMidi } from '../constants/notes';
 
 class SynthOscVoice {
-  constructor(ctx, props) {
-    this.ctx = ctx;
+  constructor(ctx, cfg) {
+
+    window.v = this;
 
     this.osc = new ctx.Oscillator();
 
-    this.osc.setType(props.type);
-
-    this.osc.type = props.type;
-    this.osc.amplitude = props.amplitude;
-    this.osc.octave = props.octave;
+    this.update(cfg);
 
     this.osc.amp(0);
     this.osc.start();
@@ -33,7 +30,7 @@ class SynthOscVoice {
     let gain = map(note.velocity, 0, 127, 0, this.osc.amplitude);
 
     // Merge it again with the main synth amplitude
-    gain = map(amplitude, 0, 1, 0, amplitude);
+    gain = map(gain, 0, 1, 0, amplitude);
 
     /**/
     this.osc.amp(gain, 0.2);
@@ -47,8 +44,16 @@ class SynthOscVoice {
     // this.gainNode.gain.value = 0;
   }
 
-  setParam(param, value, object='osc') {
-    this[object][param] = value;
+  // setParam(param, value, object='osc') {
+  //   this[object][param] = value;
+  // }
+
+  update(cfg) {
+
+    this.osc.setType(cfg.type);
+    this.osc.amplitude = cfg.amplitude;
+    this.osc.octave = cfg.octave;
+
   }
 
 }

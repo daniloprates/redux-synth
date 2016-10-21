@@ -16,20 +16,19 @@ import PanelKeyboard from '../components/PanelKeyboard';
  */
 class SynthPanel extends Component {
   constructor(props) {
-      super(props);
-      this.octavesLength = 10;
-      this.amp = 0;
-
-      window.onPanelChanged = this.props.onPanelChanged;
+    super(props);
+    this.octavesLength = 10;
+    this.amp = 0;
   }
 
-  handlePanelChange(type, value) {
+  handleParamChanged(type, param, value) {
+
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
 
-    if (typeof this.refs == 'object' && this.refs[type]) {
-      let newValue = this.refs[type].value;
+    if (typeof this.refs == 'object' && this.refs[param]) {
+      let newValue = this.refs[param].value;
       if (value === 'int') {
         newValue = parseInt(newValue);
       }
@@ -37,12 +36,13 @@ class SynthPanel extends Component {
         newValue = newValue/100;
       }
       value = newValue;
-      if (this.refs[type].blur) {
-        this.refs[type].blur();
+      if (this.refs[param].blur) {
+        this.refs[param].blur();
       }
     }
 
-    this.props.onPanelChanged(type, value);
+    this.props.onParamChanged(type, param, value);
+
   }
 
   render() {
@@ -51,35 +51,37 @@ class SynthPanel extends Component {
         <div className="panel-content">
           <PanelGlobal
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelOscillators
             {...this.props}
-            onPanelChange={this.handlePanelChange}
-          />
-          <PanelFilter
-            {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelDelay
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
+          />
+          {/*
+          <PanelFilter
+            {...this.props}
+            onParamChanged={this.handleParamChanged}
           />
           <PanelReverb
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onParamChanged={this.handleParamChanged}
           />
           <PanelFx
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onParamChanged={this.handleParamChanged}
           />
           <PanelRec
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onParamChanged={this.handleParamChanged}
           />
+          */}
           <PanelKeyboard
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
         </div>
       </div>
@@ -88,7 +90,7 @@ class SynthPanel extends Component {
 }
 
 SynthPanel.propTypes = {
-  onPanelChanged: PropTypes.func.isRequired,
+  onParamChanged: PropTypes.func.isRequired,
   octave: PropTypes.number
 };
 

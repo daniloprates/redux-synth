@@ -1,25 +1,19 @@
-// import { map } from '../utils';
-// import { notesMidi } from '../constants/notes';
 
 class SynthOscVoice {
   constructor(ctx, props) {
     props;
     this.dly = new ctx.Delay();
-
   }
 
-  update(delay, feedback, filter) {
-    this.dly.delayTime(delay);
+  update(amp, time, feedback, filter) {
+    this.dly.amp(amp);
+    this.dly.delayTime(time);
     this.dly.feedback(feedback);
     this.dly.filter(filter);
   }
 
   connect(voice) {
-    this.dly.process(voice, .1, .1, 2300);
-  }
-
-  setParam(param, value, object='osc') {
-    this[object][param] = value;
+    this.dly.process(voice, .11, .7, 2300);
   }
 
 }

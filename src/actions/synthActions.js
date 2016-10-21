@@ -18,13 +18,14 @@ export const noteOff = (note, velocity, channel) => {
   };
 };
 
-export const panelChanged = (panelType, value) => {
+export const paramChanged = (type, param, value) => {
   return {
-    type: types.PANEL_CHANGED,
-    panelType,
+    type,
+    param,
     value
   };
 };
+
 export const octavePrev = () => {
   return {
     type: types.OCTAVE_PREV
@@ -33,13 +34,6 @@ export const octavePrev = () => {
 export const octaveNext = () => {
   return {
     type: types.OCTAVE_NEXT
-  };
-};
-
-export const amplitudeChange = (amplitude) => {
-  return {
-    type: types.AMPLITUDE_CHANGE,
-    amplitude
   };
 };
 
