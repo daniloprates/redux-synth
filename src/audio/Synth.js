@@ -4,7 +4,6 @@ import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
 import ctx from 'p5';
-console.log('ctx', ctx);
 window.ctx = ctx;
 window.so = ctx.soundOut;
 window.p5Sound = p5Sound;
