@@ -30,7 +30,12 @@ class SynthOscVoice {
 
     note = Object.assign({}, note, notesMidi[noteNumber]);
 
-    this.osc.frequency.value = note.frequency;
+    // this.osc.frequency.value = note.frequency;
+    // this.osc.frequency.setValueAtTime( note.frequency, 0 );
+    // this.osc.frequency.exponentialRampToValueAtTime( note.frequency, 0 );
+
+    this.osc.frequency.cancelScheduledValues(0);
+    this.osc.frequency.setValueAtTime(note.frequency, 0.2);
 
     // Merge the note velocity with the osc amplitude
     let gain = map(note.velocity, 0, 127, 0, this.osc.amplitude);
@@ -39,10 +44,12 @@ class SynthOscVoice {
     gain = map(amplitude, 0, 1, 0, amplitude);
 
     this.gainNode.gain.value = gain;
+    // this.gainNode.gain.setValueAtTime(gain, 1);
   }
 
   stop() {
     this.gainNode.gain.value = 0;
+    // this.gainNode.gain.setValueAtTime(0, 1);
   }
 
   setParam(param, value, object='osc') {

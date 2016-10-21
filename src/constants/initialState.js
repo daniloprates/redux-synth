@@ -22,7 +22,7 @@ export default {
       },
       {
         amplitude: 0.25,
-        type: 'sawtooth',
+        type: 'triangle',
         octave: 1
       }
     ],

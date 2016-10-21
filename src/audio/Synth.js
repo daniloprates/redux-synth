@@ -1,8 +1,15 @@
 // import { notesMidi } from '../constants/notes';
 import { synthCfg } from '../constants/synth';
 import SynthVoice from './SynthVoice';
+import SynthDelay from './SynthDelay';
+import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
+import ctx from 'p5';
+console.log('ctx', ctx);
+window.ctx = ctx;
+window.so = ctx.soundOut;
+window.p5Sound = p5Sound;
 
-const ctx = new (window.AudioContext || window.webkitAudioContext)();
+// const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
 class Synth {
 
@@ -10,7 +17,14 @@ class Synth {
     this.notes = [];
     this.oscs = [];
     this.props = props;
+    this.delay = new SynthDelay(ctx);
     this.createOscs();
+
+    window.d = this.delay;
+
+    // this.delay.process(ctx.soundOut, .12, .7, 2300);
+
+    window.s = this;
   }
 
   createOscs() {
@@ -30,6 +44,7 @@ class Synth {
 
       [...Array(synthCfg.voices)].map((x, v) => {
         osc.voices[v] = new SynthVoice(ctx, oscCfg);
+        this.delay.connect(osc.voices[v].osc);
       });
 
       this.oscs.push(osc);

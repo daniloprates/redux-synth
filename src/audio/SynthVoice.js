@@ -1,18 +1,11 @@
 import { map } from '../utils';
 import { notesMidi } from '../constants/notes';
 
-import p5 from 'p5';
-import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
-
-window.p5 = p5;
-// Avoid ESLINT error:
-p5Sound;
-
 class SynthOscVoice {
   constructor(ctx, props) {
     this.ctx = ctx;
 
-    this.osc = new p5.Oscillator();
+    this.osc = new ctx.Oscillator();
 
     this.osc.setType(props.type);
 

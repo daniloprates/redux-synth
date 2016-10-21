@@ -13,7 +13,6 @@ class SynthPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      console.log('nextProps.synth.notes', nextProps.synth.notes);
     this.synth.update(nextProps.synth);
   }
 
