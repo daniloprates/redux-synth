@@ -1,9 +1,10 @@
 import * as types from '../constants/actionTypes';
 // import objectAssign from 'object-assign';
 import initialState from '../constants/initialState';
+console.log('initialState', initialState);
 import { updateOctave } from '../utils/index';
 
-export default function synthReducer(state = initialState.synth, action) {
+export default function synthReducer(state = initialState, action) {
 
   let notes = Object.assign({}, state.notes);
   // let note = parseFloat((action.octave || state.octave)+''+action.note);
@@ -20,11 +21,15 @@ export default function synthReducer(state = initialState.synth, action) {
       }
       notes[action.note] = {
         index: Object.keys(notes).length,
-        velocity: action.velocity || initialState.synth.velocity,
-        channel: action.channel || initialState.synth.channel
+        velocity: action.velocity || initialState.keyboard.velocity,
+        channel: action.channel || initialState.midi.channel
       };
+      let newState = Object.assign({}, state);
 
-      return Object.assign({}, state, {notes, isPlaying: true });
+      newState.global.notes = notes;
+      newState.global.isPlaying = true;
+
+      return newState;
 
     case types.NOTE_OFF:
       delete notes[action.note];
@@ -32,7 +37,7 @@ export default function synthReducer(state = initialState.synth, action) {
       return Object.assign({}, state, {notes, isPlaying } );
 
     case types.STOP_PLAYING:
-      return Object.assign({}, state, {isPlaying: false, notes: initialState.synth.notes});
+      return Object.assign({}, state, {isPlaying: false, notes: initialState.global.notes});
 
     case types.PANEL_CHANGED:{
       let type = action.panelType;

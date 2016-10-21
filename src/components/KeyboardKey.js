@@ -5,6 +5,7 @@ import { scales } from '../constants/scales';
 class KeyboardKey extends Component {
   constructor(props) {
     super(props);
+    console.log('props', props);
 
     let { index, octave, note } = this.getScaleInfo(props, scales[this.props.scale]);
 
@@ -16,7 +17,6 @@ class KeyboardKey extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.scale !== this.props.scale || nextProps.root !== this.props.root) {
       let { index, octave, note } = this.getScaleInfo(nextProps, scales[nextProps.scale]);
       this.setState({

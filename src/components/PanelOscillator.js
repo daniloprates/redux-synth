@@ -14,16 +14,16 @@ class PanelOscillator extends Component {
               on={true}
             />
             <Button
-              onClick={this.props.onPanelChange.bind(this, 'type', 'sine')}
+              onClick={this.props.onPanelChanged.bind(this, 'type', 'sine')}
             >Test</Button>
-            <button onClick={this.props.onPanelChange.bind(this, 'type', 'sine')}>Sine</button>
+            <button onClick={this.props.onPanelChanged.bind(this, 'type', 'sine')}>Sine</button>
           </div>
         );
     }
 }
 
 PanelOscillator.propTypes = {
-    onPanelChange: PropTypes.func,
+    onPanelChanged: PropTypes.func,
 };
 
 export default PanelOscillator;

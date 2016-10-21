@@ -1,5 +1,5 @@
 export default {
-  synth: {
+  // synth: {
     // GLOBAL
     notes: {},
     isPlaying: false,
@@ -28,13 +28,14 @@ export default {
     ],
 
     // MIDI
-    channel: 0
-  },
+    channel: 0,
+  // },
 
   global: {
     notes: {},
     isPlaying: false,
-    bpm: 120
+    bpm: 120,
+    amplitude: 0.1,
   },
 
   keyboard: {
@@ -45,7 +46,21 @@ export default {
     root: 0,
   },
 
-  synths: [],
+  synth: {
+    delay: [],
+    oscs: [
+      {
+        amplitude: 0.75,
+        type: 'sine',
+        octave: -1
+      },
+      {
+        amplitude: 0.25,
+        type: 'triangle',
+        octave: 1
+      }
+    ]
+  },
 
   midi: {
     channel: 0

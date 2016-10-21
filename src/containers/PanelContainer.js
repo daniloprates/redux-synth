@@ -20,10 +20,10 @@ class SynthPanel extends Component {
       this.octavesLength = 10;
       this.amp = 0;
 
-      window.onPanelChanged = this.props.onPanelChanged;
+      // window.onPanelChange = this.props.onPanelChange;
   }
 
-  handlePanelChange(type, value) {
+  handlePanelChanged(type, value) {
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
@@ -50,36 +50,37 @@ class SynthPanel extends Component {
       <div className="Panel">
         <div className="panel-content">
           <PanelGlobal
-            {...this.props}
-            onPanelChange={this.handlePanelChange}
+            {...this.props.global}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelOscillators
-            {...this.props}
-            onPanelChange={this.handlePanelChange}
+            {...this.props.synth}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelFilter
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelDelay
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelReverb
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelFx
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelRec
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handlePanelChanged}
           />
           <PanelKeyboard
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            {...this.props.notes}
+            onPanelChanged={this.handlePanelChanged}
           />
         </div>
       </div>
@@ -89,6 +90,7 @@ class SynthPanel extends Component {
 
 SynthPanel.propTypes = {
   onPanelChanged: PropTypes.func.isRequired,
+  global: PropTypes.object,
   octave: PropTypes.number
 };
 

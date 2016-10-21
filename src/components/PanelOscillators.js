@@ -27,7 +27,7 @@ class PanelOscillators extends Component {
 }
 
 PanelOscillators.propTypes = {
-    onPanelChange: PropTypes.func,
+    onPanelChanged: PropTypes.func,
 };
 
 export default PanelOscillators;

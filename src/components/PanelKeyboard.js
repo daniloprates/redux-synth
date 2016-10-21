@@ -16,7 +16,7 @@ class PanelKeyboard extends Component {
                 id="panel-kb-root"
                 value={this.props.root}
                 ref="root"
-                onChange={this.props.onPanelChange.bind(this, 'root', 'int')}
+                onChange={this.props.onPanelChanged.bind(this, 'root', 'int')}
               >
                 <option value="0">C</option>
                 <option value="1">C#</option>
@@ -46,7 +46,7 @@ class PanelKeyboard extends Component {
           id="panel-kb-scale"
           value={this.props.scale}
           ref="scale"
-          onChange={this.props.onPanelChange.bind(this, 'scale')}
+          onChange={this.props.onPanelChanged.bind(this, 'scale')}
         >
           {
               Object.keys(scales).map((scale,i) => (
@@ -64,7 +64,7 @@ class PanelKeyboard extends Component {
           [...Array(5)].map((x, i) => (
             <button
               key={i}
-              onClick={this.props.onPanelChange.bind(this, 'octaves', i+1)}
+              onClick={this.props.onPanelChanged.bind(this, 'octaves', i+1)}
               className={`active-${this.props.octaves == i+1}`}
             >
               {i+1}
@@ -80,7 +80,7 @@ class PanelKeyboard extends Component {
 PanelKeyboard.propTypes = {
     scale: PropTypes.string,
     root: PropTypes.number,
-    onPanelChange: PropTypes.func,
+    onPanelChanged: PropTypes.func,
     octaves: PropTypes.number,
 };
 

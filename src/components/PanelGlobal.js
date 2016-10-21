@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 class PanelGlobal extends Component {
     constructor(props) {
         super(props);
+        console.log('props', props);
     }
 
     render() {
@@ -16,7 +17,7 @@ class PanelGlobal extends Component {
               type="range"
               defaultValue={this.props.amplitude*100}
               ref="amplitude"
-              onInput={this.props.onPanelChange.bind(this, 'amplitude', 'decimal')}
+              onInput={this.props.onPanelChanged.bind(this, 'amplitude', 'decimal')}
             />
           </div>
         );
@@ -25,7 +26,7 @@ class PanelGlobal extends Component {
 
 PanelGlobal.propTypes = {
   amplitude: PropTypes.number,
-  onPanelChange: PropTypes.func
+  onPanelChanged: PropTypes.func
 };
 
 export default PanelGlobal;

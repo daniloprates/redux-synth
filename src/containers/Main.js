@@ -20,6 +20,7 @@ class SynthPage extends Component {
     return (
       <div>
         <PanelContainer
+          {...this.props}
           {...this.props.synth}
           onPanelChanged={this.props.panelChanged}
          />
