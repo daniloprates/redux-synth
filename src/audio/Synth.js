@@ -26,7 +26,7 @@ class Synth {
     this.setOsc(1);
     this.delay.connect(this.voices, this.settings);
     this.reverb.connect(this.voices);
-    this.filter.connect(this.voices, this.settings);
+    // this.filter.connect(this.voices, this.settings);
     window.s = this;
   }
 
