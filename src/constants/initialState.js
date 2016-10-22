@@ -42,11 +42,12 @@ export const initSynth = {
   rev_amp: 0.5,
   rev_seconds: 3,
   rev_decay: 2,
+  rev_reverse: false,
 
   // FILTER
   flt_type: 'lowpass',
-  flt_param1: 10000,
-  flt_param2: 20
+  flt_frequency: 10000,
+  flt_resonance: 20
 
 };
 

@@ -3,6 +3,7 @@
 import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
 import SynthReverb from './SynthReverb';
+import SynthFilter from './SynthFilter';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
 import ctx from 'p5';
 
@@ -16,13 +17,17 @@ class Synth {
     this.settings = props.synth;
     this.notes = [];
     this.oscs = [];
+    this.voices = [];
 
-    // DELAY
-    this.delay = new SynthDelay(ctx);
-    this.reverb = new SynthReverb(ctx);
+    this.delay = new SynthDelay(ctx, this.settings);
+    this.reverb = new SynthReverb(ctx, this.settings);
+    this.filter = new SynthFilter(ctx, this.settings);
     this.setOsc(0);
     this.setOsc(1);
-    this.delay.update(.5, .11, .7, 2300);
+    this.delay.connect(this.voices, this.settings);
+    this.reverb.connect(this.voices);
+    this.filter.connect(this.voices, this.settings);
+    window.s = this;
   }
 
   update(nextProps) {
@@ -65,8 +70,7 @@ class Synth {
 
     [...Array(cfg.voices)].map((x, v) => {
       osc.voices[v] = new SynthVoice(ctx, osc);
-      this.delay.connect(osc.voices[v].osc);
-      this.reverb.connect(osc.voices[v].osc);
+      this.voices.push(osc.voices[v]);
     });
 
     this.oscs.push(osc);
@@ -93,25 +97,18 @@ class Synth {
 
     this.settings = settings;
 
-    // for (let param in settings) {
-    //   // console.log('param', param);
-    // }
-
     this.updateOsc(0);
     this.updateOsc(1);
-    this.delay.update(
-      settings.dly_amp,
-      settings.dly_time,
-      settings.dly_feedback,
-      settings.dly_filter
-    );
+    this.delay.update(this.settings);
+    this.reverb.update(this.settings);
+    this.filter.update(this.settings);
 
     /**
       TODO:
       - UPDATE:
-      - Reverb
       - Filter
      */
+
   }
 
 

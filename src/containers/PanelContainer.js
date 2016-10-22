@@ -5,9 +5,10 @@ import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
-import PanelFx from '../components/PanelFx';
-import PanelRec from '../components/PanelRec';
+// import PanelFx from '../components/PanelFx';
+// import PanelRec from '../components/PanelRec';
 import PanelKeyboard from '../components/PanelKeyboard';
+import { map } from '../utils';
 
 /**
  * SynthPanel container
@@ -22,19 +23,42 @@ class SynthPanel extends Component {
   }
 
   handleParamChanged(type, param, value) {
-
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
 
     if (typeof this.refs == 'object' && this.refs[param]) {
+        // console.log('param', param);
       let newValue = this.refs[param].value;
+      // Generic param types
       if (value === 'int') {
         newValue = parseInt(newValue);
       }
       if (value === 'decimal') {
         newValue = newValue/100;
       }
+      if (value === 'boolean') {
+        newValue = this.refs[param].checked;
+      }
+      // max rev_seconds is 10
+      // max rev_seconds is 100, but it's reduced to 10 as more than that doesn't make sense musicaly
+      if (param === 'rev_seconds' || param === 'rev_decay') {
+        newValue = parseInt(newValue/10);
+        if (newValue === 0) {
+          newValue = 0.001;
+        }
+      }
+      // Reduce max feedback to .7 to avoid infinite loop
+      if (param === 'dly_feedback') {
+        newValue = newValue * 0.7;
+      }
+      if (param === 'flt_frequency') {
+        newValue = map(newValue, 0, 100, 10, 22050);
+      }
+      if (param === 'flt_resonance') {
+        newValue = map(newValue, 0, 100, 0, 1000);
+      }
+
       value = newValue;
       if (this.refs[param].blur) {
         this.refs[param].blur();

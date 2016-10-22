@@ -33,14 +33,14 @@ class SynthOscVoice {
     gain = map(gain, 0, 1, 0, amplitude);
 
     /**/
-    this.osc.amp(gain, 0.2);
+    this.osc.amp(gain, 0.01);
     // this.gainNode.gain.value = gain;
 
   }
 
   stop() {
     /**/
-    this.osc.amp(0, 0.2);
+    this.osc.amp(0, 0.01);
     // this.gainNode.gain.value = 0;
   }
 

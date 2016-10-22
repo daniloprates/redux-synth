@@ -1,19 +1,28 @@
 
 class SynthOscDelay {
-  constructor(ctx, props) {
-    props;
+  constructor(ctx, settings) {
     this.dly = new ctx.Delay();
+    this.update(settings);
   }
 
-  update(amp, time, feedback, filter) {
-    this.dly.amp(amp);
-    this.dly.delayTime(time);
-    this.dly.feedback(feedback);
-    this.dly.filter(filter);
+  connect(voices, settings) {
+
+    // this.dly.amp(settings.dly_amp);
+    voices.forEach(voice => {
+      this.dly.process(
+        voice.osc,
+        settings.dly_time,
+        settings.dly_feedback,
+        settings.dly_filter
+      );
+    });
   }
 
-  connect(voice) {
-    this.dly.process(voice, .11, .7, 2300);
+  update(settings) {
+    this.dly.amp(settings.dly_amp);
+    this.dly.delayTime(settings.dly_time);
+    this.dly.feedback(settings.dly_feedback);
+    this.dly.filter(settings.dly_filter);
   }
 
 }

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { map } from '../utils';
 
 class PanelFilter extends Component {
     constructor(props) {
@@ -26,15 +27,15 @@ class PanelFilter extends Component {
             <label>Frequency</label>
             <input
               type="range"
-              ref="flt_requency"
-              defaultValue={this.props.synth.flt_requency*100}
-              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_requency', 'decimal')}
+              ref="flt_frequency"
+              defaultValue={map(this.props.synth.flt_requency, 10, 22050, 0, 100)}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_frequency')}
             />
             <label>Resonance</label>
             <input
               type="range"
               ref="flt_resonance"
-              defaultValue={this.props.synth.flt_resonance}
+              defaultValue={map(this.props.synth.flt_resonance, 0.001, 1000, 0, 100)}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_resonance')}
             />
           </div>

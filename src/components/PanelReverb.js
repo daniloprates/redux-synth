@@ -20,23 +20,23 @@ class PanelReverb extends Component {
             <input
               type="range"
               ref="rev_seconds"
-              defaultValue={this.props.synth.rev_seconds*100}
-              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_seconds', 'decimal')}
+              defaultValue={this.props.synth.rev_seconds*10}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_seconds')}
             />
             <label>Decay</label>
             <input
               type="range"
               ref="rev_decay"
-              defaultValue={this.props.synth.rev_decay}
+              defaultValue={this.props.synth.rev_decay*10}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_decay')}
             />
             <label>Reverse</label>
             <input
               type="checkbox"
-              defaultValue={this.props.synth.rev_decay}
+              defaultValue={this.props.synth.rev_reverse}
               ref="rev_reverse"
-              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_reverse')}
-              selected={this.props.synth.rev_reverse === true}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_reverse', 'boolean')}
+              defaultChecked={this.props.synth.rev_reverse === true}
             />
           </div>
         );
