@@ -23,6 +23,7 @@ export default function synthReducer(state = initSynth, action) {
     case types.FX_CHANGED: {
       let newState = Object.assign({}, state);
       newState[action.param] = action.value;
+      console.log('action.value', action.value);
       return newState;
     }
 

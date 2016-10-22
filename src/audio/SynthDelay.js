@@ -1,5 +1,5 @@
 
-class SynthOscVoice {
+class SynthOscDelay {
   constructor(ctx, props) {
     props;
     this.dly = new ctx.Delay();
@@ -18,4 +18,4 @@ class SynthOscVoice {
 
 }
 
-export default SynthOscVoice;
+export default SynthOscDelay;

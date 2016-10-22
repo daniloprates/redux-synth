@@ -2,6 +2,7 @@
 // import { synthCfg } from '../constants/synth';
 import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
+import SynthReverb from './SynthReverb';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
 import ctx from 'p5';
 
@@ -18,6 +19,7 @@ class Synth {
 
     // DELAY
     this.delay = new SynthDelay(ctx);
+    this.reverb = new SynthReverb(ctx);
     this.setOsc(0);
     this.setOsc(1);
     this.delay.update(.5, .11, .7, 2300);
@@ -64,6 +66,7 @@ class Synth {
     [...Array(cfg.voices)].map((x, v) => {
       osc.voices[v] = new SynthVoice(ctx, osc);
       this.delay.connect(osc.voices[v].osc);
+      this.reverb.connect(osc.voices[v].osc);
     });
 
     this.oscs.push(osc);

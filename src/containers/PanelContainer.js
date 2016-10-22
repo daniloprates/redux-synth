@@ -61,22 +61,22 @@ class SynthPanel extends Component {
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
+          <PanelReverb
+            {...this.props}
+            onPanelChanged={this.handleParamChanged}
+          />
           {/*
           <PanelFilter
             {...this.props}
-            onParamChanged={this.handleParamChanged}
-          />
-          <PanelReverb
-            {...this.props}
-            onParamChanged={this.handleParamChanged}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelFx
             {...this.props}
-            onParamChanged={this.handleParamChanged}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelRec
             {...this.props}
-            onParamChanged={this.handleParamChanged}
+            onPanelChanged={this.handleParamChanged}
           />
           */}
           <PanelKeyboard

@@ -39,6 +39,7 @@ export const initSynth = {
   dly_filter: 2300,
 
   // REVERB
+  rev_amp: 0.5,
   rev_seconds: 3,
   rev_decay: 2,
 
