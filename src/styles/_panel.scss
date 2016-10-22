@@ -66,12 +66,13 @@
 }
 
 .panel-item {
-  width: 13%;
+  width: 10px;
   // background-color: rgba(255,255,255,0.2);
   // margin: 5px 1px;
   padding: 10px;
   box-sizing: border-box;
   position: relative;
+  flex-grow: 1;
 
   &:before {
     content: "";
@@ -128,6 +129,10 @@
 .PanelKeyboard,
 {
   @extend .panel-item;
+}
+
+.PanelOscillators {
+  flex-grow: 1.5;
 }
 
 .PanelOscillator {

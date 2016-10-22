@@ -57,6 +57,10 @@ class SynthPanel extends Component {
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
+          <PanelFilter
+            {...this.props}
+            onPanelChanged={this.handleParamChanged}
+          />
           <PanelDelay
             {...this.props}
             onPanelChanged={this.handleParamChanged}
@@ -66,10 +70,6 @@ class SynthPanel extends Component {
             onPanelChanged={this.handleParamChanged}
           />
           {/*
-          <PanelFilter
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
           <PanelFx
             {...this.props}
             onPanelChanged={this.handleParamChanged}
