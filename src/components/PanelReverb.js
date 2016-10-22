@@ -9,22 +9,44 @@ class PanelReverb extends Component {
         return (
           <div className="PanelReverb">
             <h3>Reverb</h3>
-            <label htmlFor="panel-verb-time">Secs</label>
-            <input type="range" id="panel-verb-time" />
-            <label htmlFor="panel-verb-feedback">Decay</label>
-            <input type="range" id="panel-verb-feedback" />
-            <div>
-              <label htmlFor="panel-verb-type">Reverse</label>
-              <input type="radio" name="delay-type" value="b" /> b
-              <input type="radio" name="delay-type" value="h" /> h
-            </div>
+            <label>Amp</label>
+            <input
+              type="range"
+              ref="rev_amp"
+              defaultValue={this.props.synth.rev_amp*100}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_amp', 'decimal')}
+            />
+            <label>Seconds</label>
+            <input
+              type="range"
+              ref="rev_seconds"
+              defaultValue={this.props.synth.rev_seconds*10}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_seconds')}
+            />
+            <label>Decay</label>
+            <input
+              type="range"
+              ref="rev_decay"
+              defaultValue={this.props.synth.rev_decay*10}
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_decay')}
+            />
+            <label>Reverse</label>
+            <input
+              type="checkbox"
+              defaultValue={this.props.synth.rev_reverse}
+              ref="rev_reverse"
+              onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'rev_reverse', 'boolean')}
+              defaultChecked={this.props.synth.rev_reverse === true}
+            />
           </div>
         );
     }
 }
 
 PanelReverb.propTypes = {
-    className: PropTypes.string,
+  synth: PropTypes.object,
+  onPanelChanged: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default PanelReverb;

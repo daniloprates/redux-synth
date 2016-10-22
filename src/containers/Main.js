@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { noteOn, noteOff, panelChanged, amplitudeChange, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
+import { noteOn, noteOff, paramChanged, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';
-// import Oscillator from '../components/Oscillator';
 import Synth from '../audio/Synth';
 
 class SynthPage extends Component {
@@ -13,38 +12,38 @@ class SynthPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.synth.update(nextProps.synth);
+    this.synth.update(nextProps);
   }
 
   render() {
     return (
       <div>
         <PanelContainer
-          {...this.props.synth}
-          onPanelChanged={this.props.panelChanged}
-         />
+          {...this.props}
+          onParamChanged={this.props.paramChanged}
+        />
         <KeyboardContainer
-          {...this.props.synth}
+          {...this.props}
           onNoteOn={this.props.noteOn}
           onNoteOff={this.props.noteOff}
           stopPlaying={this.props.stopPlaying}
           onOctavePrev={this.props.octavePrev}
           onOctaveNext={this.props.octaveNext}
         />
-
       </div>
     );
   }
 }
 
 SynthPage.propTypes = {
+  global: PropTypes.object,
+  keyboard: PropTypes.object,
   noteOn: PropTypes.func.isRequired,
   noteOff: PropTypes.func.isRequired,
-  panelChanged: PropTypes.func.isRequired,
+  paramChanged: PropTypes.func.isRequired,
   stopPlaying: PropTypes.func.isRequired,
   octavePrev: PropTypes.func.isRequired,
   octaveNext: PropTypes.func.isRequired,
-  synth: PropTypes.object
 };
 
 const mapStateToProps = (state={}) => {
@@ -54,8 +53,7 @@ const mapStateToProps = (state={}) => {
 export default connect(mapStateToProps, {
   noteOn,
   noteOff,
-  panelChanged,
-  amplitudeChange,
+  paramChanged,
   stopPlaying,
   octavePrev,
   octaveNext

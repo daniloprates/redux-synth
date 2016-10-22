@@ -5,9 +5,10 @@ import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
-import PanelFx from '../components/PanelFx';
-import PanelRec from '../components/PanelRec';
+// import PanelFx from '../components/PanelFx';
+// import PanelRec from '../components/PanelRec';
 import PanelKeyboard from '../components/PanelKeyboard';
+import { map } from '../utils';
 
 /**
  * SynthPanel container
@@ -16,33 +17,56 @@ import PanelKeyboard from '../components/PanelKeyboard';
  */
 class SynthPanel extends Component {
   constructor(props) {
-      super(props);
-      this.octavesLength = 10;
-      this.amp = 0;
-
-      window.onPanelChanged = this.props.onPanelChanged;
+    super(props);
+    this.octavesLength = 10;
+    this.amp = 0;
   }
 
-  handlePanelChange(type, value) {
+  handleParamChanged(type, param, value) {
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
 
-    if (typeof this.refs == 'object' && this.refs[type]) {
-      let newValue = this.refs[type].value;
+    if (typeof this.refs == 'object' && this.refs[param]) {
+        // console.log('param', param);
+      let newValue = this.refs[param].value;
+      // Generic param types
       if (value === 'int') {
         newValue = parseInt(newValue);
       }
       if (value === 'decimal') {
         newValue = newValue/100;
       }
+      if (value === 'boolean') {
+        newValue = this.refs[param].checked;
+      }
+      // max rev_seconds is 10
+      // max rev_seconds is 100, but it's reduced to 10 as more than that doesn't make sense musicaly
+      if (param === 'rev_seconds' || param === 'rev_decay') {
+        newValue = parseInt(newValue/10);
+        if (newValue === 0) {
+          newValue = 0.001;
+        }
+      }
+      // Reduce max feedback to .7 to avoid infinite loop
+      if (param === 'dly_feedback') {
+        newValue = newValue * 0.7;
+      }
+      if (param === 'flt_frequency') {
+        newValue = map(newValue, 0, 100, 10, 22050);
+      }
+      if (param === 'flt_resonance') {
+        newValue = map(newValue, 0, 100, 0, 1000);
+      }
+
       value = newValue;
-      if (this.refs[type].blur) {
-        this.refs[type].blur();
+      if (this.refs[param].blur) {
+        this.refs[param].blur();
       }
     }
 
-    this.props.onPanelChanged(type, value);
+    this.props.onParamChanged(type, param, value);
+
   }
 
   render() {
@@ -51,35 +75,37 @@ class SynthPanel extends Component {
         <div className="panel-content">
           <PanelGlobal
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelOscillators
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelFilter
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelDelay
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelReverb
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
+          {/*
           <PanelFx
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
           <PanelRec
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
+          */}
           <PanelKeyboard
             {...this.props}
-            onPanelChange={this.handlePanelChange}
+            onPanelChanged={this.handleParamChanged}
           />
         </div>
       </div>
@@ -88,7 +114,7 @@ class SynthPanel extends Component {
 }
 
 SynthPanel.propTypes = {
-  onPanelChanged: PropTypes.func.isRequired,
+  onParamChanged: PropTypes.func.isRequired,
   octave: PropTypes.number
 };
 

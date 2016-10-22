@@ -1,14 +1,24 @@
 import { map } from '../utils';
 import { notesMidi } from '../constants/notes';
 
+import p5 from 'p5';
+import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';
+
+// window.p5 = p5;
+// Avoid ESLINT error:
+p5Sound;
+
 class SynthOscVoice {
-  constructor(ctx, cfg) {
+  constructor(ctx, props) {
+    this.ctx = ctx;
 
-    window.v = this;
+    this.osc = new p5.Oscillator();
 
-    this.osc = new ctx.Oscillator();
+    this.osc.setType(props.type);
 
-    this.update(cfg);
+    this.osc.type = props.type;
+    this.osc.amplitude = props.amplitude;
+    this.osc.octave = props.octave;
 
     this.osc.amp(0);
     this.osc.start();
@@ -30,30 +40,22 @@ class SynthOscVoice {
     let gain = map(note.velocity, 0, 127, 0, this.osc.amplitude);
 
     // Merge it again with the main synth amplitude
-    gain = map(gain, 0, 1, 0, amplitude);
+    gain = map(amplitude, 0, 1, 0, amplitude);
 
     /**/
-    this.osc.amp(gain, 0.01);
+    this.osc.amp(gain, 0.2);
     // this.gainNode.gain.value = gain;
 
   }
 
   stop() {
     /**/
-    this.osc.amp(0, 0.01);
+    this.osc.amp(0, 0.2);
     // this.gainNode.gain.value = 0;
   }
 
-  // setParam(param, value, object='osc') {
-  //   this[object][param] = value;
-  // }
-
-  update(cfg) {
-
-    this.osc.setType(cfg.type);
-    this.osc.amplitude = cfg.amplitude;
-    this.osc.octave = cfg.octave;
-
+  setParam(param, value, object='osc') {
+    this[object][param] = value;
   }
 
 }

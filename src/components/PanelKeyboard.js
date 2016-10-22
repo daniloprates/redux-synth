@@ -8,15 +8,15 @@ class PanelKeyboard extends Component {
 
   rootSelect() {
 
-    if (this.props.scale !== 'chromatic') {
+    if (this.props.keyboard.scale !== 'chromatic') {
       return (
           <div>
             <label htmlFor="panel-kb-root">Root</label>
               <select
                 id="panel-kb-root"
-                value={this.props.root}
+                value={this.props.keyboard.root}
                 ref="root"
-                onChange={this.props.onPanelChange.bind(this, 'root', 'int')}
+                onChange={this.props.onPanelChanged.bind(this, 'KEYBOARD_CHANGED','root', 'int')}
               >
                 <option value="0">C</option>
                 <option value="1">C#</option>
@@ -44,9 +44,9 @@ class PanelKeyboard extends Component {
         <label htmlFor="panel-kb-scale">Scale</label>
         <select
           id="panel-kb-scale"
-          value={this.props.scale}
+          value={this.props.keyboard.scale}
           ref="scale"
-          onChange={this.props.onPanelChange.bind(this, 'scale')}
+          onChange={this.props.onPanelChanged.bind(this, 'KEYBOARD_CHANGED','scale')}
         >
           {
               Object.keys(scales).map((scale,i) => (
@@ -64,24 +64,35 @@ class PanelKeyboard extends Component {
           [...Array(5)].map((x, i) => (
             <button
               key={i}
-              onClick={this.props.onPanelChange.bind(this, 'octaves', i+1)}
-              className={`active-${this.props.octaves == i+1}`}
+              onClick={this.props.onPanelChanged.bind(this, 'KEYBOARD_CHANGED','octaves', i+1)}
+              className={`active-${this.props.keyboard.octaves == i+1}`}
             >
               {i+1}
             </button>
           ))
         }
         {this.rootSelect()}
+        <label>Octave</label>
+        <button
+          onClick={this.props.onPanelChanged.bind(this, 'OCTAVE_PREV', null, null)}
+          className="btn-keyboard-oct-prev"
+        >&#8637;</button>
+        <button
+          onClick={this.props.onPanelChanged.bind(this, 'OCTAVE_NEXT', null, null)}
+          className="btn-keyboard-oct-prev"
+        >&#8640;</button>
+
       </div>
     );
   }
 }
 
 PanelKeyboard.propTypes = {
-    scale: PropTypes.string,
-    root: PropTypes.number,
-    onPanelChange: PropTypes.func,
-    octaves: PropTypes.number,
+  keyboard: PropTypes.object,
+  scale: PropTypes.string,
+  root: PropTypes.number,
+  onPanelChanged: PropTypes.func,
+  octaves: PropTypes.number,
 };
 
 export default PanelKeyboard;

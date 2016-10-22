@@ -24,7 +24,7 @@ class SynthKeyboard extends Component {
             sysex: false
         }).then(this.handleMidiSuccess.bind(this), this.handleMidiError);
     } else {
-        alert("No MIDI support in your browser.");
+        console.log("No MIDI support in your browser.");
     }
 
     this.keyNotes = {};
@@ -63,7 +63,7 @@ class SynthKeyboard extends Component {
     if (!e.buttons) {
       if (Object.keys(this.keyNotes).length) {
         return false;
-      } else {
+      } else if (!this.props.global.notes || Object.keys(this.props.global.notes).length) {
         return this.props.stopPlaying();
       }
     }
@@ -74,7 +74,7 @@ class SynthKeyboard extends Component {
       currentKey = key;
     }
 
-    if (key && (key !== currentKey) && this.props.isPlaying) {
+    if (key && (key !== currentKey) && this.props.global.isPlaying) {
       this.props.onNoteOn(key);
       this.props.onNoteOff(currentKey);
       currentKey = key;
@@ -88,16 +88,19 @@ class SynthKeyboard extends Component {
    *
    */
   handleKeyDown(e) {
-    let note = letterToNote[e.key] + (12 * this.props.octave);
 
-    if (note !== undefined && !isNaN(note) && !this.keyNotes[note]) {
-      this.keyNotes[note] = true;
-      this.props.onNoteOn(note);
+    if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
+      let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
+
+      if (note !== undefined && !isNaN(note) && !this.keyNotes[note]) {
+        this.keyNotes[note] = true;
+        this.props.onNoteOn(note);
+      }
     }
 
   }
   handleKeyUp(e) {
-    let note = letterToNote[e.key] + (12 * this.props.octave);
+    let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
 
     delete this.keyNotes[note];
 
@@ -125,10 +128,8 @@ class SynthKeyboard extends Component {
 
   }
   handleMidiMessage(e) {
-      // console.log('e', e);
 
     let [ channel, note, velocity ] = e.data;
-    console.log('channel, note, velocity', channel, note, velocity);
 
     // It's a music note
     if (channel >= 144 || channel <= 159) {
@@ -149,8 +150,6 @@ class SynthKeyboard extends Component {
     console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + err);
   }
 
-
-
   render() {
     return (
       <div
@@ -169,6 +168,8 @@ class SynthKeyboard extends Component {
 }
 
 SynthKeyboard.propTypes = {
+  global: PropTypes.object,
+  keyboard: PropTypes.object,
   onNoteOn: PropTypes.func.isRequired,
   onNoteOff: PropTypes.func.isRequired,
   onOctavePrev: PropTypes.func.isRequired,
