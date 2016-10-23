@@ -10,7 +10,7 @@ class SynthOscVoice {
 
     this.update(cfg);
 
-    this.osc.amp(0);
+    this.osc.amp(this.envelope.env);
     this.osc.start();
 
   }

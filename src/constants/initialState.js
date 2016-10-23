@@ -33,10 +33,12 @@ export const initSynth = {
   osc_octave1: 0,
 
   // ENVELOPE
-  env_attackTime: 0.00,
-  env_decayTime: 0.2,
-  env_susPercent: 0.2,
-  env_releaseTime: 0.5,
+  env_attackLevel: 1,
+  env_releaseLevel: 0,
+  env_attackTime: .5,
+  env_decayTime: .2,
+  env_susPercent: .2,
+  env_releaseTime: .5,
 
   // FILTER
   flt_type: 'lowpass',

@@ -4,6 +4,10 @@ export const getParam = (paramName, props) => {
   return props.synth[`osc_${paramName}${props.i}`];
 };
 
+export const getValueFromType = (value, type) => {
+
+}
+
 /* Led light on/off */
 export const Led = (props) => {
   return (<div className={`PanelCompsLed is-on-${props.on}`} />);
@@ -47,10 +51,17 @@ OscTypeButton.propTypes = {
   onPanelChanged: PropTypes.func
 };
 
-
-export const tst = () => console.log('foi');
-
-
-export const Slider = () => {
-  return (<div className="PanelButton" />);
+export const SynthSlider = (props, actionType, param, valueType) => {
+  let defaultValue = props.synth[param];
+  if (valueType == 'decimal') {
+    valueType = valueType * 100;
+  }
+  return (
+    <input
+      type="range"
+      ref="env_releasetime"
+      defaultValue={defaultValue}
+      onClick={this.props.onPanelChanged.bind(this, actionType, param, valueType)}
+    />
+  );
 };

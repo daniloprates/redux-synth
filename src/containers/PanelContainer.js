@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 // import Panel from '../components/Panel';
 import PanelGlobal from '../components/PanelGlobal';
+import PanelEnvelope from '../components/PanelEnvelope';
 import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
@@ -78,6 +79,10 @@ class SynthPanel extends Component {
             onPanelChanged={this.handleParamChanged}
           />
           <PanelOscillators
+            {...this.props}
+            onPanelChanged={this.handleParamChanged}
+          />
+          <PanelEnvelope
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />

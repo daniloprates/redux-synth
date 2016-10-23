@@ -2,6 +2,7 @@
 // import { synthCfg } from '../constants/synth';
 import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
+import SynthEnvelope from './SynthEnvelope';
 import SynthReverb from './SynthReverb';
 import SynthFilter from './SynthFilter';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
@@ -19,6 +20,7 @@ class Synth {
     this.oscs = [];
     this.voices = [];
 
+    this.envelope = new SynthEnvelope(ctx, this.settings);
     this.delay = new SynthDelay(ctx, this.settings);
     this.reverb = new SynthReverb(ctx, this.settings);
     this.filter = new SynthFilter(ctx, this.settings);
@@ -69,7 +71,7 @@ class Synth {
     osc.amplitude = cfg[`osc_amplitude${i}`];
 
     [...Array(cfg.voices)].map((x, v) => {
-      osc.voices[v] = new SynthVoice(ctx, osc);
+      osc.voices[v] = new SynthVoice(ctx, osc, this.envelope);
       this.voices.push(osc.voices[v]);
     });
 
@@ -125,9 +127,10 @@ class Synth {
   }
 
   playVoice(i, note, amplitude) {
-    this.oscs.map((osc) => {
-      osc.voices[i].play(note, amplitude);
-    });
+    // this.oscs.map((osc) => {
+    //   osc.voices[i].play(note, amplitude);
+    // });
+    this.envelope.play();
   }
 
   stopVoices() {
