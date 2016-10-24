@@ -41,6 +41,7 @@ class SynthKeyboard extends Component {
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
     let key = e.target.getAttribute('data-note');
+    currentKey = key;
     this.props.onNoteOn(key);
 
   }
@@ -74,9 +75,10 @@ class SynthKeyboard extends Component {
       currentKey = key;
     }
 
-    if (key && (key !== currentKey) && this.props.global.isPlaying) {
-      this.props.onNoteOn(key);
+
+    if (!!key && (key !== currentKey) && this.props.global.isPlaying) {
       this.props.onNoteOff(currentKey);
+      this.props.onNoteOn(key);
       currentKey = key;
     }
 

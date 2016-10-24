@@ -5,7 +5,7 @@ export default function keyboardReducer(state = initGlobal, action) {
 
   let notes = Object.assign({}, state.notes);
   // let note = parseFloat((action.octave || state.octave)+''+action.note);
-  let newState;newState;
+  let newState;
 
   let { isPlaying } = action;
 

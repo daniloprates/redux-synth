@@ -1,6 +1,5 @@
 import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
-import SynthEnvelope from './SynthEnvelope';
 import SynthReverb from './SynthReverb';
 import SynthFilter from './SynthFilter';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
@@ -11,73 +10,61 @@ const VOICES = 5;
 
 class Synth {
 
-  constructor(props, theme) {
-    this.props = props;
-    this.theme = theme;
+  constructor(cfg) {
 
-    this.cfg = props.synth;
+    this.cfg = cfg;
 
     this.notes = [];
-    this.envs = [];
     this.voices = [];
 
-    this.delay = new SynthDelay(ctx, this.cfg);
-    this.reverb = new SynthReverb(ctx, this.cfg);
-    this.filter = new SynthFilter(ctx, this.cfg);
+    this.delay = new SynthDelay(ctx, this.cfg.synth);
+    this.reverb = new SynthReverb(ctx, this.cfg.synth);
+    this.filter = new SynthFilter(ctx, this.cfg.synth);
 
-    this.setEnvs();
     this.setVoices();
 
-    this.delay.connect(this.voices, this.cfg);
+    this.delay.connect(this.voices, this.cfg.synth);
     this.reverb.connect(this.voices);
-    // this.filter.connect(this.voices, this.cfg);
+    // this.filter.connect(this.voices, this.cfg.synth);
 
     window.s = this;
 
   }
 
-  update(nextProps, theme) {
+  update(newCfg) {
+
+    let { notes, isPlaying, preset, amplitude } = newCfg.global;
+    let { global } = this.cfg;
+
 
     if (
-      JSON.stringify(nextProps.synth) !== JSON.stringify(this.cfg) ||
-      theme !== this.theme
+      JSON.stringify(newCfg.synth) !== JSON.stringify(this.cfg.synth) ||
+      preset !== global.preset ||
+      amplitude !== global.amplitude
     ) {
-      return this.updateSettings(nextProps.synth);
-    } else if (!nextProps.global.isPlaying) {
-      if (!this.notes.length) {
-        return false;
-      } else {
-        return this.stopNotes();
+      return this.updateSettings(newCfg);
+    } else if (!isPlaying && this.notes.length) {
+      return this.stopNotes();
+    } else {
+
+      this.notes = new Array(VOICES);
+      let note, noteNumber;
+
+      for (noteNumber in notes) {
+        note = Object.assign({}, notes[noteNumber]);
+        note.number = noteNumber;
+        this.notes[note.index] = note;
       }
+
+      this.cfg = newCfg;
+      this.playNotes(this.notes);
     }
-
-    this.notes = new Array(VOICES);
-    let { notes, amplitude, isPlaying } = nextProps.global;
-    let note, noteNumber;
-
-    if (!isPlaying) {amplitude = 0;}
-
-    for (noteNumber in notes) {
-      note = Object.assign({}, notes[noteNumber]);
-      note.number = noteNumber;
-      this.notes[note.index] = note;
-    }
-
-    this.playNotes(this.notes, amplitude);
-
-  }
-
-  setEnvs() {
-    [].each(VOICES,() => {
-      this.envs.push(new SynthEnvelope(ctx, this.cfg));
-    });
   }
 
   setVoices() {
-
-    [].each(OSCS, (o) => {
-      [].each(VOICES, (v) => {
-        this.voices.push(new SynthVoice(ctx, o, this.cfg, this.envs[v].env));
+    [].each(OSCS, (oscIndex) => {
+      [].each(VOICES, () => {
+        this.voices.push(new SynthVoice(ctx, oscIndex, this.cfg));
       });
     });
 
@@ -85,38 +72,36 @@ class Synth {
 
   updateSettings(cfg) {
     this.cfg = cfg;
-    this.theme = this.props.global.theme;
-    this.envs.forEach(env => env.update(this.cfg));
     this.voices.forEach(voice => voice.update(this.cfg));
-    this.delay.update(this.cfg);
-    this.reverb.update(this.cfg);
-    this.filter.update(this.cfg);
+    this.delay.update(this.cfg.synth);
+    this.reverb.update(this.cfg.synth);
+    this.filter.update(this.cfg.synth);
   }
 
-  playNotes(notes, amplitude) {
+  playNotes(notes) {
     [].each(VOICES,(i) => {
       if (notes[i]) {
-        this.playNote(i, notes[i], amplitude);
+        this.playNote(i, notes[i]);
       } else {
         this.stopNote(i);
       }
     });
   }
 
-  playNote(i, note, amplitude) {
+  playNote(i, note) {
     [].each( OSCS , (o) => {
       let v = i + (o * VOICES);
       this.voices[v].play(note);
     });
-    this.envs[i].play(amplitude);
   }
 
   stopNotes() {
-    this.envs.forEach(env => env.stop());
+    this.notes = [];
+    this.voices.forEach(voice => voice.stop());
   }
 
   stopNote(i) {
-    this.envs[i].stop();
+    this.voices[i].stop();
   }
 
 }

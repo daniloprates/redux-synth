@@ -6,12 +6,6 @@ class PanelOscillators extends Component {
         super(props);
     }
 
-            // <input
-            //   type="range"
-            //   defaultValue={this.props.synth.osc_amplitude1*100}
-            //   ref="amplitude"
-            //   onInput={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', 'amplitude', 'decimal')}
-            // />
     render() {
         return (
           <div className="PanelOscillators">
@@ -19,6 +13,12 @@ class PanelOscillators extends Component {
             <h3>Oscillators</h3>
 
 
+            <input
+              type="range"
+              value={this.props.synth.osc_amplitude1*100}
+              ref="amplitude"
+              onChange={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', 'amplitude', 'decimal')}
+            />
             <PanelOscillator
               {...this.props}
               onPanelChanged={this.props.onPanelChanged.bind(this)}
