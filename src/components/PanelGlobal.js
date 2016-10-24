@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import presets from '../constants/presets';
 
 class PanelGlobal extends Component {
     constructor(props) {
@@ -24,6 +25,30 @@ class PanelGlobal extends Component {
             ref="amplitude"
             onInput={this.props.onPanelChanged.bind(this, 'GLOBAL_CHANGED', 'amplitude', 'decimal')}
           />
+
+
+          <select
+            value={this.props.global.presets}
+            ref="presets"
+            onChange={this.props.onPanelChanged.bind(this, 'GLOBAL_CHANGED','presets')}
+            style={{width: "100%"}}
+          >
+            {
+                Object.keys(presets).map((presets,i) => (
+                    <option
+                        key={i}
+                        value={presets}
+                    >
+                    {presets}
+                    </option>
+                ))
+            }
+          </select>
+
+
+
+
+
         </div>
       );
     }

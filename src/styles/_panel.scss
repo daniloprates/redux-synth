@@ -132,9 +132,19 @@
   @extend .panel-item;
 }
 
-.PanelOscillators {
+.PanelGlobal {
   flex-grow: 1.5;
 }
+.PanelOscillators {
+  flex-grow: 2;
+}
+.PanelFx {
+  flex-grow: .75;
+}
+.PanelRec {
+  flex-grow: .5;
+}
+
 
 .PanelOscillator {
   width: 50%;
@@ -159,9 +169,6 @@
   }
 }
 
-
-
-
 input#panel-global-bpm {
   font-family: 'Orbitron';
   background: gray;
@@ -174,90 +181,20 @@ input#panel-global-bpm {
   color: white;
 }
 
-
-
-input[type=range] {
-  -webkit-appearance: none;
-  margin: 10px 0;
-  width: 100%;
-  margin: 0;
+.PanelRec button {
+  width: 0;
+  height: 0;
+  background: #929086;
+  border-radius: 100%;
+  box-sizing: border-box;
+  border: 20px solid #cccabb;
+  padding: 7px;
+  &.is-recording-true {
+    background: red;
+  }
+  &:active {
+    background: #cccabb;
+    border: 20px solid #929086;
+  }
 }
-input[type=range]:focus {
-  outline: none;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 20px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: $color-light;
-  border-radius: $border-radius-small;
-  border: none;
-}
-input[type=range]::-webkit-slider-thumb {
-  border: none;
-  height: 20px;
-  width: 20px;
-  border-radius: $border-radius-small;
-  background: $color-dark;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: 0px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: $color-light;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 20px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: $color-light;
-  border-radius: $border-radius-small;
-  border: none;
-}
-input[type=range]::-moz-range-thumb {
-  border: 0px solid #000000;
-  height: 20px;
-  width: 20px;
-  border-radius: $border-radius-small;
-  background: $color-dark;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 20px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: $color-light;
-  border: none;
-  border-radius: $border-radius-small
-}
-input[type=range]::-ms-fill-upper {
-  background: $color-light;
-  border: none;
-  border-radius: $border-radius-small
-}
-input[type=range]::-ms-thumb {
-  border: none;
-  height: 20px;
-  width: 20px;
-  border-radius: $border-radius-small;
-  background: $color-dark;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: $color-light;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: $color-light;
-}
-
-
-
 

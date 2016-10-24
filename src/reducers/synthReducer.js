@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes';
-import { initSynth } from '../constants/initialState';
+import { initGlobal } from '../constants/initialState';
+import presets from '../constants/presets';
 
-export default function synthReducer(state = initSynth, action) {
+export default function synthReducer(state = presets[initGlobal.preset], action) {
 
   let newState;
 
@@ -24,6 +25,13 @@ export default function synthReducer(state = initSynth, action) {
       let newState = Object.assign({}, state);
       newState[action.param] = action.value;
       return newState;
+    }
+
+    case types.GLOBAL_CHANGED: {
+      if (action.param === 'presets') {
+        return presets[action.value];
+      }
+      return state;
     }
 
     default:

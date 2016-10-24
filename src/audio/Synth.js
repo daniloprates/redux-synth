@@ -6,10 +6,15 @@ import SynthFilter from './SynthFilter';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
 import ctx from 'p5';
 
+const OSCS = 2;
+const VOICES = 5;
+
 class Synth {
 
-  constructor(props) {
+  constructor(props, theme) {
     this.props = props;
+    this.theme = theme;
+
     this.cfg = props.synth;
 
     this.notes = [];
@@ -28,11 +33,15 @@ class Synth {
     // this.filter.connect(this.voices, this.cfg);
 
     window.s = this;
+
   }
 
-  update(nextProps) {
+  update(nextProps, theme) {
 
-    if (JSON.stringify(nextProps.synth) !== JSON.stringify(this.cfg)) {
+    if (
+      JSON.stringify(nextProps.synth) !== JSON.stringify(this.cfg) ||
+      theme !== this.theme
+    ) {
       return this.updateSettings(nextProps.synth);
     } else if (!nextProps.global.isPlaying) {
       if (!this.notes.length) {
@@ -42,7 +51,7 @@ class Synth {
       }
     }
 
-    this.notes = new Array(this.cfg.voices);
+    this.notes = new Array(VOICES);
     let { notes, amplitude, isPlaying } = nextProps.global;
     let note, noteNumber;
 
@@ -59,15 +68,15 @@ class Synth {
   }
 
   setEnvs() {
-    [].each(this.cfg.voices,() => {
+    [].each(VOICES,() => {
       this.envs.push(new SynthEnvelope(ctx, this.cfg));
     });
   }
 
   setVoices() {
 
-    [].each(this.cfg.oscs, (o) => {
-      [].each(this.cfg.voices, (v) => {
+    [].each(OSCS, (o) => {
+      [].each(VOICES, (v) => {
         this.voices.push(new SynthVoice(ctx, o, this.cfg, this.envs[v].env));
       });
     });
@@ -76,6 +85,7 @@ class Synth {
 
   updateSettings(cfg) {
     this.cfg = cfg;
+    this.theme = this.props.global.theme;
     this.envs.forEach(env => env.update(this.cfg));
     this.voices.forEach(voice => voice.update(this.cfg));
     this.delay.update(this.cfg);
@@ -84,7 +94,7 @@ class Synth {
   }
 
   playNotes(notes, amplitude) {
-    [].each(this.cfg.voices,(i) => {
+    [].each(VOICES,(i) => {
       if (notes[i]) {
         this.playNote(i, notes[i], amplitude);
       } else {
@@ -94,8 +104,8 @@ class Synth {
   }
 
   playNote(i, note, amplitude) {
-    [].each( this.cfg.oscs , (o) => {
-      let v = i + (o * this.cfg.voices);
+    [].each( OSCS , (o) => {
+      let v = i + (o * VOICES);
       this.voices[v].play(note);
     });
     this.envs[i].play(amplitude);

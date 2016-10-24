@@ -9,14 +9,16 @@ class PanelRec extends Component {
         return (
           <div className="PanelRec">
             <h3>Rec</h3>
-            <button>o</button>
+            <button
+              className={`is-recording-${this.props.global.rec_active === true}`}
+            />
           </div>
         );
     }
 }
 
 PanelRec.propTypes = {
-    className: PropTypes.string,
+    global: PropTypes.object,
 };
 
 export default PanelRec;

@@ -8,11 +8,11 @@ import Synth from '../audio/Synth';
 class SynthPage extends Component {
   constructor(props) {
     super(props);
-    this.synth = new Synth(props);
+    this.synth = new Synth(props, props.global.theme);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.synth.update(nextProps);
+  componentWillReceiveProps(nextProps ) {
+    this.synth.update(nextProps, nextProps.global.theme);
   }
 
   render() {

@@ -43,7 +43,6 @@ class PanelKeyboard extends Component {
         <h3>Keyboard</h3>
         <label htmlFor="panel-kb-scale">Scale</label>
         <select
-          id="panel-kb-scale"
           value={this.props.keyboard.scale}
           ref="scale"
           onChange={this.props.onPanelChanged.bind(this, 'KEYBOARD_CHANGED','scale')}

@@ -6,8 +6,8 @@ import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
-// import PanelFx from '../components/PanelFx';
-// import PanelRec from '../components/PanelRec';
+import PanelFx from '../components/PanelFx';
+import PanelRec from '../components/PanelRec';
 import PanelKeyboard from '../components/PanelKeyboard';
 import { map } from '../utils';
 
@@ -37,6 +37,13 @@ class SynthPanel extends Component {
       }
       if (value === 'decimal') {
         newValue = newValue/100;
+        if (newValue < 0.1) {
+          if (param === 'env_susPercent') {
+            newValue = 0;
+          } else {
+            newValue = 0.01;
+          }
+        }
       }
       if (value === 'boolean') {
         newValue = this.refs[param].checked;
@@ -59,10 +66,6 @@ class SynthPanel extends Component {
       if (param === 'flt_resonance') {
         newValue = map(newValue, 0, 100, 0, 1000);
       }
-      if (param === 'env_attackTime' && newValue === 0) {
-        newValue = 0.01;
-      }
-
       value = newValue;
       if (this.refs[param].blur) {
         this.refs[param].blur();
@@ -101,7 +104,6 @@ class SynthPanel extends Component {
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
-          {/*
           <PanelFx
             {...this.props}
             onPanelChanged={this.handleParamChanged}
@@ -110,7 +112,6 @@ class SynthPanel extends Component {
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
-          */}
           <PanelKeyboard
             {...this.props}
             onPanelChanged={this.handleParamChanged}

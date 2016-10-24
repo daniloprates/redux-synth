@@ -6,10 +6,11 @@ class SynthOscVoice {
 
     this.osc = new ctx.Oscillator();
     this.osc.amp(env);
+    // p5 sound bug that starts the osc amp != env amp
+    this.osc.output.gain.value = 0;
     this.oscIndex = i;
     this.update(cfg);
     this.osc.start();
-
   }
 
   play(note) {
