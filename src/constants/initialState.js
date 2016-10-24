@@ -33,7 +33,8 @@ export const initSynth = {
   osc_octave1: 0,
 
   // ENVELOPE
-  env_attackLevel: 1,
+  env_attackLevel: 0,
+  // env_attackLevel: 1,
   env_releaseLevel: 0,
   env_attackTime: .5,
   env_decayTime: .2,

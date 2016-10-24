@@ -9,6 +9,7 @@ class PanelEnvelope extends Component {
         return (
           <div className="PanelEnvelope">
             <h3>Envelope</h3>
+            {/*
             <label>Attack/Release Level</label>
             <input
               type="range"
@@ -22,7 +23,8 @@ class PanelEnvelope extends Component {
               defaultValue={this.props.synth.env_releaseLevel*100}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'env_releaseLevel', 'decimal')}
             />
-            <label>ADSR Time</label>
+            */}
+            <label>ADSR</label>
             <input
               type="range"
               ref="env_attackTime"

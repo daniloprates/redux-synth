@@ -59,6 +59,9 @@ class SynthPanel extends Component {
       if (param === 'flt_resonance') {
         newValue = map(newValue, 0, 100, 0, 1000);
       }
+      if (param === 'env_attackTime' && newValue === 0) {
+        newValue = 0.01;
+      }
 
       value = newValue;
       if (this.refs[param].blur) {

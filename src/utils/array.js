@@ -28,4 +28,12 @@ export default (() => {
     };
     // Hide method from for-in loops
     Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
+    Array.prototype.each = function(n, cb) {
+      let i;
+      for (i = 0;i<n;i++) {
+        cb.call(this, i);
+      }
+    };
+
 })();

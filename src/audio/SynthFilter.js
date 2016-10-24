@@ -16,7 +16,7 @@ class SynthOscFilter {
   }
 
   update(settings) {
-      console.log('settings', settings);
+      // console.log('settings', settings);
     this.flt.setType(settings.flt_type);
     this.flt.set(
       settings.flt_frequency,

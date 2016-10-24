@@ -4,10 +4,6 @@ export const getParam = (paramName, props) => {
   return props.synth[`osc_${paramName}${props.i}`];
 };
 
-export const getValueFromType = (value, type) => {
-
-}
-
 /* Led light on/off */
 export const Led = (props) => {
   return (<div className={`PanelCompsLed is-on-${props.on}`} />);
@@ -64,4 +60,7 @@ export const SynthSlider = (props, actionType, param, valueType) => {
       onClick={this.props.onPanelChanged.bind(this, actionType, param, valueType)}
     />
   );
+};
+SynthSlider.propTypes = {
+  synth: PropTypes.object,
 };

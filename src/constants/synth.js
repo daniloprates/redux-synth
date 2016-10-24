@@ -10,5 +10,3 @@ export const synthCfg = {
   // max amp in relation to the other osc
   amplitude: .50
 };
-
-};

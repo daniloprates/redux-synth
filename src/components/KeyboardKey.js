@@ -45,7 +45,7 @@ class KeyboardKey extends Component {
   }
 
   getClassName() {
-    let notes = (this.props.global.notes && this.props.global.notes[this.note])
+    let notes = (this.props.global.notes && this.props.global.notes[this.note]);
     let isPlaying = `is-playing-${!!notes}`;
     let keyColor = `${notesMidi[this.state.note].isSharp ? 'black' : 'white'}-key`;
     let isRoot = `is-root-${this.props.i === 0}`;

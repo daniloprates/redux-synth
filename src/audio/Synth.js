@@ -1,5 +1,3 @@
-// import { notesMidi } from '../constants/notes';
-// import { synthCfg } from '../constants/synth';
 import SynthVoice from './SynthVoice';
 import SynthDelay from './SynthDelay';
 import SynthEnvelope from './SynthEnvelope';
@@ -8,43 +6,43 @@ import SynthFilter from './SynthFilter';
 import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
 import ctx from 'p5';
 
-// const OSCS = 2;
-const VOICES = 5;
-
 class Synth {
 
   constructor(props) {
     this.props = props;
-    this.settings = props.synth;
+    this.cfg = props.synth;
+
     this.notes = [];
-    this.oscs = [];
+    this.envs = [];
     this.voices = [];
 
-    this.envelope = new SynthEnvelope(ctx, this.settings);
-    this.delay = new SynthDelay(ctx, this.settings);
-    this.reverb = new SynthReverb(ctx, this.settings);
-    this.filter = new SynthFilter(ctx, this.settings);
-    this.setOsc(0);
-    this.setOsc(1);
-    this.delay.connect(this.voices, this.settings);
+    this.delay = new SynthDelay(ctx, this.cfg);
+    this.reverb = new SynthReverb(ctx, this.cfg);
+    this.filter = new SynthFilter(ctx, this.cfg);
+
+    this.setEnvs();
+    this.setVoices();
+
+    this.delay.connect(this.voices, this.cfg);
     this.reverb.connect(this.voices);
-    // this.filter.connect(this.voices, this.settings);
+    // this.filter.connect(this.voices, this.cfg);
+
     window.s = this;
   }
 
   update(nextProps) {
 
-    if (JSON.stringify(nextProps.synth) !== JSON.stringify(this.settings)) {
+    if (JSON.stringify(nextProps.synth) !== JSON.stringify(this.cfg)) {
       return this.updateSettings(nextProps.synth);
     } else if (!nextProps.global.isPlaying) {
       if (!this.notes.length) {
         return false;
       } else {
-        return this.stopVoices();
+        return this.stopNotes();
       }
     }
 
-    this.notes = new Array(VOICES);
+    this.notes = new Array(this.cfg.voices);
     let { notes, amplitude, isPlaying } = nextProps.global;
     let note, noteNumber;
 
@@ -56,109 +54,59 @@ class Synth {
       this.notes[note.index] = note;
     }
 
-    this.playVoices(this.notes, amplitude);
+    this.playNotes(this.notes, amplitude);
 
   }
 
-  setOsc(i) {
-
-    let cfg = this.settings;
-    let osc = {};
-
-    osc.voices = new Array(VOICES);
-    osc.type = cfg[`osc_type${i}`];
-    osc.octave = cfg[`osc_octave${i}`];
-    osc.amplitude = cfg[`osc_amplitude${i}`];
-
-    [...Array(cfg.voices)].map((x, v) => {
-      osc.voices[v] = new SynthVoice(ctx, osc, this.envelope);
-      this.voices.push(osc.voices[v]);
+  setEnvs() {
+    [].each(this.cfg.voices,() => {
+      this.envs.push(new SynthEnvelope(ctx, this.cfg));
     });
-
-    this.oscs.push(osc);
-
   }
 
-  updateOsc(i) {
+  setVoices() {
 
-    let cfg = this.settings;
-    let osc = this.oscs[i];
-
-    osc.type = cfg[`osc_type${i}`];
-    osc.octave = cfg[`osc_octave${i}`];
-    osc.amplitude = cfg[`osc_amplitude${i}`];
-
-    [...Array(cfg.voices)].map((x, v) => {
-      osc.voices[v].update(osc);
-      // this.delay.connect(osc.voices[v].osc);
+    [].each(this.cfg.oscs, (o) => {
+      [].each(this.cfg.voices, (v) => {
+        this.voices.push(new SynthVoice(ctx, o, this.cfg, this.envs[v].env));
+      });
     });
 
   }
 
-  updateSettings(settings) {
-
-    this.settings = settings;
-
-    this.updateOsc(0);
-    this.updateOsc(1);
-    this.delay.update(this.settings);
-    this.reverb.update(this.settings);
-    this.filter.update(this.settings);
-
-    /**
-      TODO:
-      - UPDATE:
-      - Filter
-     */
-
+  updateSettings(cfg) {
+    this.cfg = cfg;
+    this.envs.forEach(env => env.update(this.cfg));
+    this.voices.forEach(voice => voice.update(this.cfg));
+    this.delay.update(this.cfg);
+    this.reverb.update(this.cfg);
+    this.filter.update(this.cfg);
   }
 
-
-  playVoices(notes, amplitude) {
-
-    [...Array(VOICES)].map((x, i) => {
-          // console.log('notes', notes);
+  playNotes(notes, amplitude) {
+    [].each(this.cfg.voices,(i) => {
       if (notes[i]) {
-        this.playVoice(i, notes[i], amplitude);
+        this.playNote(i, notes[i], amplitude);
       } else {
-        this.stopVoice(i);
+        this.stopNote(i);
       }
     });
   }
 
-  playVoice(i, note, amplitude) {
-    // this.oscs.map((osc) => {
-    //   osc.voices[i].play(note, amplitude);
-    // });
-    this.envelope.play();
+  playNote(i, note, amplitude) {
+    [].each( this.cfg.oscs , (o) => {
+      let v = i + (o * this.cfg.voices);
+      this.voices[v].play(note);
+    });
+    this.envs[i].play(amplitude);
   }
 
-  stopVoices() {
-    [...Array(VOICES)].map((x, i) => {
-      this.stopVoice(i);
-    });
+  stopNotes() {
+    this.envs.forEach(env => env.stop());
   }
 
-  stopVoice(i) {
-    this.oscs.map((osc) => {
-      osc.voices[i].stop();
-    });
-  }
-
-  checkParam(param, props) {
-    this.oscs.map((osc,i) => {
-      let value = props[i][param];
-      if (osc[param] !== value) {
-        osc[param] = value;
-        this.setVoiceParam(i, param, value);
-      }
-    });
-  }
-
-  setVoiceParam(oscIndex, param, value) {
-    this.oscs[oscIndex].voices.map((voice) => {
-      voice.setParam(param, value);
-    });
+  stopNote(i) {
+    this.envs[i].stop();
   }
 
 }

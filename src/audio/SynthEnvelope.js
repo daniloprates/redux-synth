@@ -2,38 +2,33 @@
 class SynthOscDelay {
   constructor(ctx, settings) {
     this.env = new ctx.Env();
+    window.env = this.env;
     this.update(settings);
+    this.isPlaying = false;
   }
 
-  // connect(voices, settings) {
-
-  //   // this.env.amp(settings.env_amp);
-  //   voices.forEach(voice => {
-  //     this.env.process(
-  //       voice.osc,
-  //       env_attackLevel,
-  //       env_releaseLevel,
-  //       env_attackTime,
-  //       env_decayTime,
-  //       env_susPercent,
-  //       env_releaseTime
-  //     );
-  //   });
-  // }
-
   update(settings) {
-    this.env.set(
-      settings.attackLevel,
-      settings.releaseLevel,
-      settings.attackTime,
-      settings.decayTime,
-      settings.susPercent,
-      settings.releaseTime
+    this.env.setADSR(
+      settings.env_attackTime,
+      settings.env_decayTime,
+      settings.env_susPercent,
+      settings.env_releaseTime
     );
+    // this.env.setRange(
+    //   settings.env_attackLevel,
+    //   settings.env_releaseLevel
+    // );
   }
 
   play() {
-    this.env.play();
+    if (!this.isPlaying) {
+      this.isPlaying = true;
+      this.env.triggerAttack();
+    }
+  }
+  stop() {
+    this.isPlaying = false;
+    this.env.triggerRelease();
   }
 
 }
