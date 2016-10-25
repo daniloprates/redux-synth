@@ -37,7 +37,7 @@ class SynthPanel extends Component {
       }
       if (value === 'decimal') {
         newValue = newValue/100;
-        if (newValue < 0.1) {
+        if (newValue < 0.05) {
           if (param === 'env_susPercent') {
             newValue = 0;
           } else {

@@ -1,10 +1,14 @@
 import * as types from '../constants/actionTypes';
 import { initKeyboard } from '../constants/initialState';
+import Keyboard from '../containers/KeyboardContainer';
 // import { updateOctave } from '../utils/index';
 
-export default function keyboardReducer(state = initKeyboard, action) {
+let newState = initKeyboard;
+newState.keys = Keyboard.getKeys(initKeyboard);
 
-  let newState;
+export default function keyboardReducer(state = newState, action) {
+
+  let newState, keys, keyIndex;
 
   // let { octave } = state;
 
@@ -19,17 +23,28 @@ export default function keyboardReducer(state = initKeyboard, action) {
       if (type == 'scale' && action.value == 'chromatic') {
         newState.root = 0;
       }
-      if (type == 'octaves' && action.value > state.octaves && state.octave + 0) {
-        // newState.octave = action.value - state.octaves;
-        // newState.octave--;
-      }
+      newState.keys = Keyboard.getKeys(newState);
 
       return newState;
     }
 
-    case types.OCTAVE_PREV:
-      console.log('OCTAVE_PREV');
-      return state;
+    case types.NOTE_ON:
+      keyIndex = action.note;
+      keys = Object.assign({}, state.keys);
+      keys[`playing${keyIndex}`] = true;
+      return  Object.assign({}, state, {keys});
+
+    case types.NOTE_OFF:
+      keyIndex = action.note;
+      keys = Object.assign({}, state.keys);
+      keys[`playing${keyIndex}`] = false;
+      return  Object.assign({}, state, {keys});
+
+
+    // case types.OCTAVE_PREV:
+    //   console.log('OCTAVE_PREV');
+
+    //   return state;
 
     //   if (octave == 0) {return state;}
     //   notes = updateOctave(notes,octave-1);

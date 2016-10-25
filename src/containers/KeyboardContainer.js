@@ -1,9 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-// import keydown from 'react-keydown';
+import { notesMidi } from '../constants/notes';
+import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
 import { letterToNote } from '../constants/keyboard';
+// import midi from '../audio/Midi';
 
 let currentKey;
+
+Array.prototype.each = function(n, cb) {
+  let i;
+  for (i = 0;i<n;i++) {
+    cb.call(this, i);
+  }
+};
 
 /**
  *
@@ -11,6 +20,33 @@ let currentKey;
  * handles the mouse, keyboard and midi events
  */
 class SynthKeyboard extends Component {
+
+static getKeys(props) {
+    const nOfKeys = 12;
+    let keys = {}, scale = scales[props.scale], keyIndex;
+
+    [].each(props.octaves, (oct) => {
+      [].each(nOfKeys, (i) => {
+
+        keyIndex = (i + (oct * nOfKeys));
+
+        if (scale.indexOf(i) > -1) {
+
+          keys[`className${keyIndex}`] =
+            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
+            ` is-root-${i === 0}`;
+          keys[`octave${keyIndex}`] = oct;
+          keys[`active${keyIndex}`] = false;
+          keys[`note${keyIndex}`] = (i + props.root) + (nOfKeys * oct);
+
+        }
+
+      });
+    });
+
+    return keys;
+  }
+
   constructor(props) {
     super(props);
 

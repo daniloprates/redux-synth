@@ -36,4 +36,11 @@ export default (() => {
       }
     };
 
+    Array.prototype.eachR = function(n, cb) {
+      let i;
+      for (i = 0;i<n;i++) {
+        return cb.call(this, i);
+      }
+    };
+
 })();
