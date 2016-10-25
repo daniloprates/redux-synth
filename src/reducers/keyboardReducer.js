@@ -10,8 +10,6 @@ export default function keyboardReducer(state = newState, action) {
 
   let newState, keys, keyIndex;
 
-  // let { octave } = state;
-
   switch (action.type) {
 
     case types.KEYBOARD_CHANGED: {
@@ -40,21 +38,19 @@ export default function keyboardReducer(state = newState, action) {
       keys[`playing${keyIndex}`] = false;
       return  Object.assign({}, state, {keys});
 
+    case types.OCTAVE_PREV:
+      if (state.octave == 0) {return state;}
+      newState = Object.assign({}, state);
+      newState.octave = newState.octave - 1;
+      newState.keys = Keyboard.getKeys(newState);
+      return newState;
 
-    // case types.OCTAVE_PREV:
-    //   console.log('OCTAVE_PREV');
-
-    //   return state;
-
-    //   if (octave == 0) {return state;}
-    //   notes = updateOctave(notes,octave-1);
-    //   return Object.assign({}, state, {octave: octave - 1, notes});
-
-    // case types.OCTAVE_NEXT:
-    //   if (octave == 9) {return state;}
-    //   notes = updateOctave(notes,octave+1);
-    //   return Object.assign({}, state, {octave: octave + 1, notes});
-    //   // return Object.assign({}, state, {octave: octave + 1, isPlaying: false, notes: []});
+    case types.OCTAVE_NEXT:
+      if (state.octave == 9) {return state;}
+      newState = Object.assign({}, state);
+      newState.octave = newState.octave + 1;
+      newState.keys = Keyboard.getKeys(newState);
+      return newState;
 
     default:
       return state;

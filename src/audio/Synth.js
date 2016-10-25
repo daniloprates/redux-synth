@@ -1,9 +1,7 @@
 import SynthVoice from './SynthVoice';
-import SynthDelay from './SynthDelay';
-import SynthReverb from './SynthReverb';
-import SynthFilter from './SynthFilter';
-import p5Sound from '../../node_modules/p5/lib/addons/p5.sound.js';p5Sound;
-import ctx from 'p5';
+import SynthFx from './SynthFx';
+let p5Sound =  require('../utils/p5.sound.js');p5Sound;
+import p5 from 'p5';
 
 const OSCS = 2;
 const VOICES = 5;
@@ -17,15 +15,9 @@ class Synth {
     this.notes = [];
     this.voices = [];
 
-    this.delay = new SynthDelay(ctx, this.cfg.synth);
-    this.reverb = new SynthReverb(ctx, this.cfg.synth);
-    this.filter = new SynthFilter(ctx, this.cfg.synth);
-
+    this.fx = new SynthFx(p5, this.cfg.synth);
     this.setVoices();
-
-    this.delay.connect(this.voices, this.cfg.synth);
-    this.reverb.connect(this.voices);
-    // this.filter.connect(this.voices, this.cfg.synth);
+    this.fx.connect(this.voices, this.cfg.synth);
 
     window.s = this;
 
@@ -35,7 +27,6 @@ class Synth {
 
     let { notes, isPlaying, preset, amplitude } = newCfg.global;
     let { global } = this.cfg;
-
 
     if (
       JSON.stringify(newCfg.synth) !== JSON.stringify(this.cfg.synth) ||
@@ -64,18 +55,15 @@ class Synth {
   setVoices() {
     [].each(OSCS, (oscIndex) => {
       [].each(VOICES, () => {
-        this.voices.push(new SynthVoice(ctx, oscIndex, this.cfg));
+        this.voices.push(new SynthVoice(p5, oscIndex, this.cfg));
       });
     });
-
   }
 
   updateSettings(cfg) {
     this.cfg = cfg;
     this.voices.forEach(voice => voice.update(this.cfg));
-    this.delay.update(this.cfg.synth);
-    this.reverb.update(this.cfg.synth);
-    this.filter.update(this.cfg.synth);
+    this.fx.update(this.cfg.synth);
   }
 
   playNotes(notes) {
