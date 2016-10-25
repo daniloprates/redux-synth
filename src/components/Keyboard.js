@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import Key from './KeyboardKey';
 
 const Keyboard = (props) => {
-    console.log('Keyboard', props);
-  let { keys, octaves, scale } = props.keyboard;
+  let { keys, octaves, scale, octave } = props.keyboard;
+
   return (
 
       <div
@@ -12,17 +12,24 @@ const Keyboard = (props) => {
         onMouseUp={props.onMouseUp.bind(this)}
         onMouseMove={props.onMouseMove.bind(this)}
         >
-          <ul>
-            {Object.keys(keys).map(function(key, i) {
-                return (
-                  <Key
-                    key={i}
-                    keyInfo={keys[key]}
-                    i={i}
+          {
+            [...Array(octaves)].map((y, o) => (
+              <ul key={o}>
+                {
+                  [...Array(12)].map((x, i) => (
+                    <Key
+                      key={i}
+                      i={i}
+                      o={octave + o}
+                      data-octave={keys[`octave${i}`]}
+                      className={keys[`className${i}`]}
+                      keys={keys}
                     />
-                );
-            })}
-          </ul>
+                  ))
+                }
+              </ul>
+            ))
+          }
       </div>
 
     );

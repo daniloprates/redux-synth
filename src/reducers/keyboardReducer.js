@@ -5,11 +5,10 @@ import Keyboard from '../containers/KeyboardContainer';
 
 let newState = initKeyboard;
 newState.keys = Keyboard.getKeys(initKeyboard);
-newState.keysArr = Keyboard.getKeysArr(initKeyboard);
 
 export default function keyboardReducer(state = newState, action) {
 
-  let newState, keys;
+  let newState, keys, keyIndex;
 
   // let { octave } = state;
 
@@ -29,24 +28,23 @@ export default function keyboardReducer(state = newState, action) {
       return newState;
     }
 
-    case types.OCTAVE_PREV:
-      console.log('OCTAVE_PREV');
-
-      return state;
-
     case types.NOTE_ON:
+      keyIndex = action.note;
       keys = Object.assign({}, state.keys);
-      console.log('keys', keys);
-      keys[action.note].isPlaying = true;
-      newState = Object.assign({}, state, {keys});
-      // newState = Object.assign({}, state);
-      newState.keys[action.note].isPlaying = true;
-      return newState;
+      keys[`playing${keyIndex}`] = true;
+      return  Object.assign({}, state, {keys});
 
-    // case types.NOTE_OFF:
-    //   delete notes[action.note];
-    //   isPlaying = !!Object.keys(notes).length;
-    //   return Object.assign({}, state, {notes, isPlaying } );
+    case types.NOTE_OFF:
+      keyIndex = action.note;
+      keys = Object.assign({}, state.keys);
+      keys[`playing${keyIndex}`] = false;
+      return  Object.assign({}, state, {keys});
+
+
+    // case types.OCTAVE_PREV:
+    //   console.log('OCTAVE_PREV');
+
+    //   return state;
 
     //   if (octave == 0) {return state;}
     //   notes = updateOctave(notes,octave-1);

@@ -3,6 +3,7 @@ import { notesMidi } from '../constants/notes';
 import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
 import { letterToNote } from '../constants/keyboard';
+// import midi from '../audio/Midi';
 
 let currentKey;
 
@@ -20,58 +21,14 @@ Array.prototype.each = function(n, cb) {
  */
 class SynthKeyboard extends Component {
 
-  static getKeys(props) {
-    props;
-    notesMidi;
-    scales;
+static getKeys(props) {
     const nOfKeys = 12;
-    let keys = {},
-        scale = scales[props.scale],
-        keyIndex, key; //, data, className;
+    let keys = {}, scale = scales[props.scale], keyIndex;
 
     [].each(props.octaves, (oct) => {
-
       [].each(nOfKeys, (i) => {
 
         keyIndex = (i + (oct * nOfKeys));
-        // console.log('keyIndex', keyIndex);
-        key = {};
-
-        if (scale.indexOf(i) > -1) {
-
-          key.className =
-            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
-            ` is-root-${i === 0}`;
-          key.octave = oct;
-          key.note = (i + props.root) + (nOfKeys * oct);
-
-        }
-
-        keys[keyIndex] = key;
-
-      });
-
-    });
-
-    return keys;
-  }
-
-static getKeysArr(props) {
-    props;
-    notesMidi;
-    scales;
-    const nOfKeys = 12;
-    let keys = {},
-        scale = scales[props.scale],
-        keyIndex, key; //, data, className;
-
-    [].each(props.octaves, (oct) => {
-
-      [].each(nOfKeys, (i) => {
-
-        keyIndex = (i + (oct * nOfKeys));
-        // console.log('keyIndex', keyIndex);
-        key = {};
 
         if (scale.indexOf(i) > -1) {
 
@@ -79,17 +36,14 @@ static getKeysArr(props) {
             (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
             ` is-root-${i === 0}`;
           keys[`octave${keyIndex}`] = oct;
+          keys[`active${keyIndex}`] = false;
           keys[`note${keyIndex}`] = (i + props.root) + (nOfKeys * oct);
 
         }
 
-        // keys[keyIndex] = key;
-
       });
-
     });
 
-    console.log('keys', keys);
     return keys;
   }
 
