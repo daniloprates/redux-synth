@@ -15,7 +15,8 @@ export const initKeyboard = {
   velocity: 100,
   scale: 'chromatic',
   root: 0,
-  showNotes: false
+  showNotes: false,
+  keys: []
 };
 
 export const initMidi = {

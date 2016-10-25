@@ -1,7 +1,38 @@
 import React, { Component, PropTypes } from 'react';
+import { notesMidi } from '../constants/notes';
+import { scales } from '../constants/scales';
 import Key from './KeyboardKey';
 
 class Keyboard extends Component {
+  static getKeys(props) {
+    props;
+    notesMidi;
+    scales;
+    return [
+      {
+        className : 'white-key',
+
+      },
+      {
+        className : 'black-key',
+
+      },
+      {
+        className : 'white-key',
+
+      },
+      {
+        className : 'black-key',
+
+      },
+      {
+        className : 'white-key'
+
+      },
+
+    ];
+  }
+
   constructor(props) {
     super(props);
   }
@@ -15,7 +46,41 @@ class Keyboard extends Component {
         onMouseUp={this.props.onMouseUp.bind(this)}
         onMouseMove={this.props.onMouseMove.bind(this)}
         >
-        {
+          {
+          [...Array(this.props.keyboard.octaves)].map((y, o) => (
+            <ul key={o}>
+              {
+                this.props.keyboard.keys.map((keyInfo, i) => (
+                  <Key
+                    key={i}
+                    keyInfo={keyInfo}
+                    {...this.props}
+                    i={i}
+                    o={o}
+                    />
+                ))
+              }
+            </ul>
+          ))
+        }
+
+          {/*
+            [].eachR(this.props.keyboard.octaves, o => (
+                <ul key={o}>
+                  {
+                    [].eachR(12, (i) => (
+                      <Key
+                        key={i}
+                        {...this.props}
+                        i={i}
+                        o={o}
+                        />
+                    ))
+                  }
+                </ul>
+            ))
+          */}
+        {/*
           [...Array(this.props.keyboard.octaves)].map((y, o) => (
             <ul key={o}>
               {
@@ -30,7 +95,7 @@ class Keyboard extends Component {
               }
             </ul>
           ))
-        }
+        */}
       </div>
 
     );

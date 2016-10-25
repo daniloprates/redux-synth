@@ -1,8 +1,14 @@
 import * as types from '../constants/actionTypes';
 import { initKeyboard } from '../constants/initialState';
+import Keyboard from '../components/Keyboard';
 // import { updateOctave } from '../utils/index';
 
-export default function keyboardReducer(state = initKeyboard, action) {
+let newState = initKeyboard;
+newState.keys = Keyboard.getKeys();
+console.log('state', newState);
+
+
+export default function keyboardReducer(state = newState, action) {
 
   let newState;
 
