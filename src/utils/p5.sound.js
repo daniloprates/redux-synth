@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 /*! p5.sound.js v0.3.1 2016-09-29 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
