@@ -37,16 +37,14 @@ class SynthOscVoice {
 
   play(note) {
 
-    if (this.isPlaying) {
+    // console.log('this.noteNumber', this.noteNumber, note.number, this.isPlaying);
+
+    if (this.isPlaying && this.noteNumber === note.number) {
       return false;
     }
 
-    if (this.noteNumber !== note.number) {
-      this.env.triggerRelease();
-      this.noteNumber = note.number;
-    }
-
     this.isPlaying = true;
+    this.noteNumber = note.number;
 
     // Get the note acording to the osc octave
     let noteNumber = parseInt(note.number) + (12 * this.octave);
