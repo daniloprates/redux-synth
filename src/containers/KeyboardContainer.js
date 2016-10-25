@@ -1,9 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-// import keydown from 'react-keydown';
+import { notesMidi } from '../constants/notes';
+import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
 import { letterToNote } from '../constants/keyboard';
 
 let currentKey;
+
+Array.prototype.each = function(n, cb) {
+  let i;
+  for (i = 0;i<n;i++) {
+    cb.call(this, i);
+  }
+};
 
 /**
  *
@@ -11,6 +19,80 @@ let currentKey;
  * handles the mouse, keyboard and midi events
  */
 class SynthKeyboard extends Component {
+
+  static getKeys(props) {
+    props;
+    notesMidi;
+    scales;
+    const nOfKeys = 12;
+    let keys = {},
+        scale = scales[props.scale],
+        keyIndex, key; //, data, className;
+
+    [].each(props.octaves, (oct) => {
+
+      [].each(nOfKeys, (i) => {
+
+        keyIndex = (i + (oct * nOfKeys));
+        // console.log('keyIndex', keyIndex);
+        key = {};
+
+        if (scale.indexOf(i) > -1) {
+
+          key.className =
+            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
+            ` is-root-${i === 0}`;
+          key.octave = oct;
+          key.note = (i + props.root) + (nOfKeys * oct);
+
+        }
+
+        keys[keyIndex] = key;
+
+      });
+
+    });
+
+    return keys;
+  }
+
+static getKeysArr(props) {
+    props;
+    notesMidi;
+    scales;
+    const nOfKeys = 12;
+    let keys = {},
+        scale = scales[props.scale],
+        keyIndex, key; //, data, className;
+
+    [].each(props.octaves, (oct) => {
+
+      [].each(nOfKeys, (i) => {
+
+        keyIndex = (i + (oct * nOfKeys));
+        // console.log('keyIndex', keyIndex);
+        key = {};
+
+        if (scale.indexOf(i) > -1) {
+
+          keys[`className${keyIndex}`] =
+            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
+            ` is-root-${i === 0}`;
+          keys[`octave${keyIndex}`] = oct;
+          keys[`note${keyIndex}`] = (i + props.root) + (nOfKeys * oct);
+
+        }
+
+        // keys[keyIndex] = key;
+
+      });
+
+    });
+
+    console.log('keys', keys);
+    return keys;
+  }
+
   constructor(props) {
     super(props);
 

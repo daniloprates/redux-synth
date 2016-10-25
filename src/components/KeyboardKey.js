@@ -1,10 +1,33 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 // import { notesMidi } from '../constants/notes';
 // import { scales } from '../constants/scales';
 
-class KeyboardKey extends Component {
-  constructor(props) {
-    super(props);
+const KeyboardKey = (props) => {
+    // console.log('KeyboardKey', props);
+  let { note, octave, className, isPlaying } = props.keyInfo;
+
+  if (props.keyInfo) {
+    return (
+        <li
+          data-note={note}
+          data-octave={octave}
+          className={`${className} is-playing-${isPlaying}`}
+          />
+    );
+  } else {
+    return false;
+  }
+};
+
+KeyboardKey.propTypes = {
+  keyInfo: PropTypes.object.isRequired
+};
+
+export default KeyboardKey;
+
+// class KeyboardKey extends Component {
+//   constructor(props) {
+//     super(props);
 
     // let { index, octave, note } = this.getScaleInfo(props, scales[this.props.keyboard.scale]);
 
@@ -13,7 +36,7 @@ class KeyboardKey extends Component {
     //   index, octave, note
     // };
 
-  }
+  // }
 
   // componentWillReceiveProps(nextProps) {
 
@@ -52,34 +75,24 @@ class KeyboardKey extends Component {
   //   return `${isPlaying} ${keyColor} ${isRoot}`;
   // }
 
-  render() {
+//   render() {
 
-    if (this.props.keyInfo) {
-        console.log('this.props.keyInfo', this.props.keyInfo);
-      return (
-        <li
-          data-note={this.props.keyInfo.note}
-          data-octave={this.props.keyInfo.octave}
-          className={this.props.keyInfo.className}
-          />
-      );
-    } else {
-      return false;
-    }
 
-  }
-}
 
-KeyboardKey.propTypes = {
-  global: PropTypes.object.isRequired,
-  keyboard: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  i: PropTypes.number,
-  o: PropTypes.number,
-  octave: PropTypes.number,
-  scale: PropTypes.string,
-  root: PropTypes.number,
-  notes: PropTypes.object
-};
+//     if (this.props.keyInfo) {
+//         console.log('this.props.keyInfo', this.props.keyInfo);
+//       return (
+//         <li
+//           data-note={this.props.keyInfo.note}
+//           data-octave={this.props.keyInfo.octave}
+//           className={this.props.keyInfo.className}
+//           />
+//       );
+//     } else {
+//       return false;
+//     }
 
-export default KeyboardKey;
+//   }
+// }
+
+
