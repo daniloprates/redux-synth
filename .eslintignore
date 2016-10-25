@@ -1,4 +1,5 @@
-./src/components/OscillatorWave.js
-src/components/OscillatorWave.js
+./src/utils/p5.sound.js
+/src/utils/p5.sound.js
 
-**/OscillatorWave.js
+./tools/build.js
+/tools/build.js
