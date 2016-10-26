@@ -88,34 +88,40 @@ class SynthPanel extends Component {
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
-          <PanelOscillators
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelEnvelope
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelFilter
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelDelay
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelReverb
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelFx
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
-          <PanelRec
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
+          <div className="panel-tabs">
+            <div className="panel-tab tab-active">
+              <PanelOscillators
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelEnvelope
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelFilter
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelDelay
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelReverb
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelFx
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+            </div>
+            <div className="panel-tab">
+              <PanelRec
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+            </div>
+          </div>
           <PanelKeyboard
             {...this.props}
             onPanelChanged={this.handleParamChanged}

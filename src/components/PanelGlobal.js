@@ -10,7 +10,8 @@ class PanelGlobal extends Component {
     render() {
       return (
         <div className="PanelGlobal">
-          <h1>RDX</h1>
+          {/*<h1>RDX</h1>*/}
+          <h3>Delay</h3>
           <label htmlFor="panel-global-bpm">BPM</label>
           <input
             type="text"
