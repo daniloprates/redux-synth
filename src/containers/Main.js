@@ -3,16 +3,17 @@ import {connect} from 'react-redux';
 import { noteOn, noteOff, paramChanged, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';
-import Synth from '../audio/Synth';
+import synth from '../audio/Synth';
 
 class SynthPage extends Component {
   constructor(props) {
     super(props);
-    this.synth = new Synth(props);
+    synth.init(props);
+    // this.synth = new Synth(props);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.synth.update(nextProps);
+    synth.update(nextProps);
   }
 
   render() {

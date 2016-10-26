@@ -8,9 +8,10 @@ const VOICES = 5;
 
 class Synth {
 
-  constructor(cfg) {
+  init(cfg) {
 
     this.cfg = cfg;
+    this.nextOsc = 0;
 
     this.notes = [];
     this.voices = [];
@@ -38,17 +39,17 @@ class Synth {
       return this.stopNotes();
     } else {
 
-      this.notes = new Array(VOICES);
-      let note, noteNumber;
+      // this.notes = new Array(VOICES);
+      // let note, noteNumber;
 
-      for (noteNumber in notes) {
-        note = Object.assign({}, notes[noteNumber]);
-        note.number = noteNumber;
-        this.notes[note.index] = note;
-      }
+      // for (noteNumber in notes) {
+      //   note = Object.assign({}, notes[noteNumber]);
+      //   note.number = noteNumber;
+      //   this.notes[note.index] = note;
+      // }
 
-      this.cfg = newCfg;
-      this.playNotes(this.notes);
+      // this.cfg = newCfg;
+      // this.playNotes(this.notes);
     }
   }
 
@@ -88,10 +89,21 @@ class Synth {
     this.voices.forEach(voice => voice.stop());
   }
 
+  play(note, velocity, channel) {
+    console.log('play', note);
+  }
+
+  stop(note, velocity, channel) {
+    console.log('stop', note);
+  }
+
+
   stopNote(i) {
     this.voices[i].stop();
   }
 
 }
 
-export default Synth;
+let synth = new Synth();
+
+export default synth;
