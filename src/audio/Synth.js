@@ -6,51 +6,35 @@ import p5 from 'p5';
 const OSCS = 2;
 const VOICES = 5;
 
+window.p5 = p5;
+
 class Synth {
+
+  constructor() {
+
+    this.notes = [];
+    this.voices = [];
+    this.notesPlaying = {};
+    this.oscsPlaying = {};
+
+    this.availableOscs = [];
+    this.unavailableOscs = [];
+
+    [...Array(VOICES)].map((x,i) => {
+      this.availableOscs[i] = i;
+    });
+
+  }
 
   init(cfg) {
 
     this.cfg = cfg;
-    this.nextOsc = 0;
-
-    this.notes = [];
-    this.voices = [];
-
     this.fx = new SynthFx(p5, this.cfg.synth);
     this.setVoices();
     this.fx.connect(this.voices, this.cfg.synth);
 
     window.s = this;
 
-  }
-
-  update(newCfg) {
-
-    let { notes, isPlaying, preset, amplitude } = newCfg.global;
-    let { global } = this.cfg;
-
-    if (
-      JSON.stringify(newCfg.synth) !== JSON.stringify(this.cfg.synth) ||
-      preset !== global.preset ||
-      amplitude !== global.amplitude
-    ) {
-      return this.updateSettings(newCfg);
-    } else if (!isPlaying && this.notes.length) {
-      return this.stopNotes();
-    } else {
-
-      // this.notes = new Array(VOICES);
-      // let note, noteNumber;
-
-      // for (noteNumber in notes) {
-      //   note = Object.assign({}, notes[noteNumber]);
-      //   note.number = noteNumber;
-      //   this.notes[note.index] = note;
-      // }
-
-      // this.cfg = newCfg;
-      // this.playNotes(this.notes);
-    }
   }
 
   setVoices() {
@@ -61,45 +45,88 @@ class Synth {
     });
   }
 
-  updateSettings(cfg) {
-    this.cfg = cfg;
-    this.voices.forEach(voice => voice.update(this.cfg));
-    this.fx.update(this.cfg.synth);
+  update(cfg) {
+
+    if (this.unavailableOscs.length) {
+      return false;
+    }
+
+    if (!cfg.global) {
+      console.warn('no global');
+      return false;
+    }
+
+    let { preset, amplitude } = cfg.global;
+    let { global } = this.cfg;
+
+    if (
+      JSON.stringify(cfg.synth) !== JSON.stringify(this.cfg.synth) ||
+      preset !== global.preset ||
+      amplitude !== global.amplitude
+    ) {
+      this.cfg = cfg;
+      this.voices.forEach(voice => voice.update(this.cfg));
+      this.fx.update(this.cfg.synth);
+    }
   }
 
-  playNotes(notes) {
-    [].each(VOICES,(i) => {
-      if (notes[i]) {
-        this.playNote(i, notes[i]);
-      } else {
-        this.stopNote(i);
-      }
-    });
+  /**
+   * Get the next available OSC for the new note
+   * Set it unavailable
+   */
+  getAvailableOsc() {
+
+    if (this.unavailableOscs.length === VOICES) {
+      this.stop(Object.keys(this.notesPlaying)[0]);
+    }
+
+    let osc = this.availableOscs.splice(0,1)[0];
+    this.unavailableOscs.push(osc);
+    return osc;
+
   }
 
-  playNote(i, note) {
-    [].each( OSCS , (o) => {
-      let v = i + (o * VOICES);
-      this.voices[v].play(note);
-    });
+  /**
+   * Set the stopped note's OSC available again
+   */
+  setAvailableOsc(osc) {
+    let pos = this.unavailableOscs.indexOf(osc);
+    osc = this.unavailableOscs.splice(pos,1)[0];
+    this.availableOscs.push(osc);
   }
 
-  stopNotes() {
-    this.notes = [];
-    this.voices.forEach(voice => voice.stop());
+  /**
+   * Play a note
+   */
+  play(note, velocity=100, channel=0) {
+
+    let osc = this.getAvailableOsc();
+
+    // OSC 1
+    this.voices[osc].play(note, velocity, channel);
+    // OSC 2
+    this.voices[osc+VOICES].play(note, velocity, channel);
+    this.notesPlaying[note] = osc;
+
   }
 
-  play(note, velocity, channel) {
-    console.log('play', note);
-  }
+  /**
+   * Stop a note
+   * Makes its OSC available again
+   */
+  stop(note) {
 
-  stop(note, velocity, channel) {
-    console.log('stop', note);
-  }
+    // Note that has already being taken by a new note
+    // when more than `VOICES` notes are playing at same time
+    if (typeof this.notesPlaying[note] === 'undefined') {
+      return false;
+    }
 
-
-  stopNote(i) {
-    this.voices[i].stop();
+    let osc = this.notesPlaying[note];
+    delete this.notesPlaying[note];
+    this.setAvailableOsc(osc);
+    this.voices[osc].stop();
+    this.voices[osc+VOICES].stop();
   }
 
 }

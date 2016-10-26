@@ -28,14 +28,14 @@ class PanelFilter extends Component {
             <input
               type="range"
               ref="flt_frequency"
-              defaultValue={map(this.props.synth.flt_requency, 10, 22050, 0, 100)}
+              defaultValue={map(this.props.synth.flt_requency, 5, 12000, 0, 100)}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_frequency')}
             />
             <label>Resonance</label>
             <input
               type="range"
               ref="flt_resonance"
-              defaultValue={map(this.props.synth.flt_resonance, 0.001, 1000, 0, 100)}
+              defaultValue={map(this.props.synth.flt_resonance, 0.001, 25, 0, 100)}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_resonance')}
             />
           </div>

@@ -52,3 +52,10 @@ export const map = (n, start1, stop1, start2, stop2) => {
 export const updateOctave = (notes,octave) => {
   return notes.map(note => parseFloat(octave + '' + note.toString().slice(1)));
 };
+
+
+export const getDelayTime = (bpm, divBy) => {
+  divBy;
+  return (bpm/2*1000)/120/2;
+
+};
