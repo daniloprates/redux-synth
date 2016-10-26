@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import presets from '../constants/presets';
+import { map } from '../utils';
 
 class PanelGlobal extends Component {
     constructor(props) {
@@ -13,11 +14,17 @@ class PanelGlobal extends Component {
           <label htmlFor="panel-global-bpm">BPM</label>
           <input
             type="text"
-            defaultValue={this.props.global.bpm}
-            ref="bpm"
-            onChange={this.props.onPanelChanged.bind(this, 'GLOBAL_CHANGED', 'bpm')}
+            readOnly="true"
+            value={this.props.global.bpm}
             id="panel-global-bpm"
           />
+          <input
+            type="range"
+            value={map(this.props.global.bpm, 60, 240, 0, 100)}
+            ref="bpm"
+            onChange={this.props.onPanelChanged.bind(this, 'GLOBAL_CHANGED', 'bpm')}
+          />
+
           <label>Volume</label>
           <input
             type="range"

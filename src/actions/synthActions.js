@@ -1,6 +1,8 @@
 import * as types from '../constants/actionTypes';
+import synth from '../audio/Synth';
 
 export const noteOn = (note, velocity, channel) => {
+  synth.play(note, velocity, channel);
   return {
     type: types.NOTE_ON,
     note,
@@ -10,6 +12,7 @@ export const noteOn = (note, velocity, channel) => {
 };
 
 export const noteOff = (note, velocity, channel) => {
+  synth.stop(note, velocity, channel);
   return {
     type: types.NOTE_OFF,
     note,

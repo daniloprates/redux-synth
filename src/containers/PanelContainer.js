@@ -49,7 +49,7 @@ class SynthPanel extends Component {
         newValue = this.refs[param].checked;
       }
       // max rev_seconds is 10
-      // max rev_seconds is 100, but it's reduced to 10 as more than that doesn't make sense musicaly
+      // max rev_decay is 100, but it's reduced to 10 as more than that doesn't make sense musicaly
       if (param === 'rev_seconds' || param === 'rev_decay') {
         newValue = parseInt(newValue/10);
         if (newValue === 0) {
@@ -58,14 +58,18 @@ class SynthPanel extends Component {
       }
       // Reduce max feedback to .7 to avoid infinite loop
       if (param === 'dly_feedback') {
-        newValue = newValue * 0.7;
+        newValue = map(newValue, 0, 100, 0, 0.8);
       }
       if (param === 'flt_frequency') {
-        newValue = map(newValue, 0, 100, 10, 22050);
+        newValue = map(newValue, 0, 100, 5, 12000);
       }
       if (param === 'flt_resonance') {
-        newValue = map(newValue, 0, 100, 0, 1000);
+        newValue = map(newValue, 0, 100, 0.001, 25);
       }
+      if (param === 'bpm') {
+        newValue = parseInt(map(newValue, 0, 100, 59, 241));
+      }
+
       value = newValue;
       if (this.refs[param].blur) {
         this.refs[param].blur();

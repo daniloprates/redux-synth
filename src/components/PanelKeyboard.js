@@ -64,7 +64,7 @@ class PanelKeyboard extends Component {
             <button
               key={i}
               onClick={this.props.onPanelChanged.bind(this, 'KEYBOARD_CHANGED','octaves', i+1)}
-              className={`active-${this.props.keyboard.octaves == i+1}`}
+              className={`btn-octaves active-${this.props.keyboard.octaves == i+1}`}
             >
               {i+1}
             </button>

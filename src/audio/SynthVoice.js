@@ -3,10 +3,12 @@ import { map } from '../utils';
 
 
 class SynthOscVoice {
-  constructor(ctx, oscIndex, cfg) {
+  constructor(p5, oscIndex, cfg) {
 
-    this.osc = new ctx.Oscillator();
-    this.env = new ctx.Env();
+    this.osc = new p5.Oscillator();
+    this.env = new p5.Env();
+    this.osc.disconnect();
+    // this.env.disconnect();
 
     this.osc.amp(this.env);
     // p5 sound bug that starts the osc amp != env amp
@@ -35,31 +37,22 @@ class SynthOscVoice {
     this.octave = cfg.synth[`osc_octave${this.oscIndex}`];
   }
 
-  play(note) {
-
-    // console.log('this.noteNumber', this.noteNumber, note.number, this.isPlaying);
-
-    if (this.isPlaying && this.noteNumber === note.number) {
-      return false;
-    }
-
-    this.isPlaying = true;
-    this.noteNumber = note.number;
+  play(note, velocity) {
 
     // Get the note acording to the osc octave
-    let noteNumber = parseInt(note.number) + (12 * this.octave);
-    let gain = map(note.velocity, 0, 127, 0, this.amplitude);
+    note = parseInt(note) + (12 * this.octave);
 
-    note = Object.assign({}, note, notesMidi[noteNumber]);
+    let gain = map(velocity, 0, 127, 0, this.amplitude);
+    let frequency = notesMidi[note].frequency;
 
-    this.osc.freq(note.frequency);
+    this.osc.freq(frequency);
     this.env.mult(gain);
     this.env.triggerAttack();
 
   }
 
   stop() {
-    this.isPlaying = false;
+    // this.isPlaying = false;
     this.env.triggerRelease();
   }
 

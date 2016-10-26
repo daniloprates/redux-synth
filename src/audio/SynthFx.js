@@ -1,25 +1,41 @@
+import { getDelayTime } from '../utils';
+
 
 class SynthFx {
-  constructor(ctx, cfg) {
+  constructor(p5, cfg) {
 
-    this.ctx = ctx;
+    this.p5 = p5;
 
-    this.dly = new ctx.Delay();
-    this.rev = new ctx.Reverb();
-    this.flt = new ctx.Filter();
-    // this.dst = new ctx.Distortion(cfg.dst_amp);
+    this.dly = new p5.Delay();
+
+    this.flt = new p5.Filter();
+    // this.flt.disconnect();
+
+    this.lfo = new p5.Oscillator();
+
+    this.rev = new p5.Reverb();
+    // this.rev.disconnect();
+    // this.rev.connect(this.dst);
+
+    this.dst = new p5.Distortion(cfg.dst_amp);
+    this.dst.process(this.rev);
 
     this.update(cfg);
+
+    this.lfo.disconnect();
+    this.lfo.start();
   }
 
   connect(voices, cfg) {
     voices.forEach(voice => {
 
       // REVERB
-      this.rev.amp(cfg.rev_amp);
-      this.rev.process(voice.osc);
+      voice.osc.connect(this.rev);
+      // this.rev.amp(cfg.rev_amp);
+      // this.rev.process(voice.osc);
 
       // DELAY
+      // voice.osc.connect(this.dly);
       this.dly.process(
         voice.osc,
         cfg.dly_time,
@@ -28,18 +44,16 @@ class SynthFx {
       );
 
       // FILTER
-      this.flt.process(
-        voice.osc,
-        cfg.flt_frequency,
-        cfg.flt_resonance
-      );
+      voice.osc.connect(this.flt);
+      // this.flt.connect(voice.env);
+      // this.flt.process(
+      //   voice.osc,
+      //   cfg.flt_frequency,
+      //   cfg.flt_resonance
+      // );
 
       // DISTORTION
-      // this.dst.process(
-      //   voice.osc
-      // //   this.dst
-      // );
-      // voice.osc.connect(this.dst);
+      this.dst.process(voice.osc);
 
     });
   }
@@ -68,11 +82,15 @@ class SynthFx {
       cfg.flt_resonance
     );
 
+    this.lfo.freq(cfg.lfo_freq);
+
     // DISTORTION
-    // this.dst = new this.ctx.Distortion(cfg.dst_amp);
-    // console.log('cfg.dst_amp', cfg.dst_amp);
-    // this.dst.set(cfg.dst_amp);
-    // this.dst.output.gain.value = cfg.dst_amp;
+    if (cfg.dst_active) {
+      this.dst.connect();
+    } else {
+      this.dst.disconnect();
+    }
+    this.dst.set(cfg.dst_amount);
 
   }
 }
