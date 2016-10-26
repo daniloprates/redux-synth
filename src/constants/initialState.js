@@ -16,7 +16,8 @@ export const initKeyboard = {
   scale: 'chromatic',
   root: 0,
   showNotes: false,
-  keys: []
+  keys: [],
+  compKeys: {}
 };
 
 export const initMidi = {

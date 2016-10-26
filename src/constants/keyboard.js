@@ -1,4 +1,4 @@
-export const letterToNote = {
+export const letterToNoteChromatic = {
   'q':0,
   '2':1,
   'w':2,
@@ -39,6 +39,40 @@ export const letterToNote = {
   ';':27,
   '/':28,
 };
+
+export const letterToNoteScales = {
+  'q':0,
+  'w':1,
+  'e':2,
+  'r':3,
+  't':4,
+  'y':5,
+  'u':6,
+  'i':7,
+  'o':8,
+  'p':9,
+  '[':10,
+  ']':11,
+
+  'z':12,
+  's':13,
+  'x':14,
+  'd':15,
+  'c':16,
+  'v':17,
+  'g':18,
+  'b':19,
+  'h':20,
+  'n':21,
+  'j':22,
+  'm':23,
+  ',':24,
+  'l':25,
+  '.':26,
+  ';':27,
+  '/':28,
+};
+
 
 // export const letterToNote = {
 //   'q':12,

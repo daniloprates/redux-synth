@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { notesMidi } from '../constants/notes';
 import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
-import { letterToNote } from '../constants/keyboard';
+import { gcd } from '../utils';
+import { letterToNoteChromatic, letterToNoteScales } from '../constants/keyboard';
 // import midi from '../audio/Midi';
 
 let currentKey;
@@ -44,7 +45,61 @@ static getKeys(props) {
       });
     });
 
-    return keys;
+  }
+
+  static getCompKey(props) {
+
+    let scale = scales[props.scale];
+    let notes = scale.length;
+
+    let compKeysMap = (props.scale) === 'chromatic'
+      ? letterToNoteChromatic
+      :letterToNoteScales;
+
+    let compKeys = {};
+
+    Object.keys(compKeysMap).forEach((compKey, note) => {
+
+      if (note > notes) {
+
+      }
+
+      // let note;
+
+      // if (props.keyboard.scale === 'chromatic') {
+      //   note = letterToNoteChromatic[e.key];
+      // } else {
+      //   note = letterToNoteScales[e.key];
+      // }
+
+      // console.log('note1', note);
+
+      // let notes = scale.length;
+      // let noteOctave = (note < notes)
+      //   ? 0
+      //   : parseInt(notes / note);
+      // // console.log('noteOctave', noteOctave);
+      // // console.log('notes', notes);
+      // // console.log('note', note);
+      // let keyboardOctave = props.keyboard.octave;
+
+      // note = scale[note] + (notes * (keyboardOctave + noteOctave));
+
+      // console.log('this.scale[note]', scale[note]);
+      // console.log('(notes * (keyboardOctave + noteOctave)', (notes * (keyboardOctave + noteOctave)));
+      // console.log('notes', notes);
+      // console.log('keyboardOctave', keyboardOctave);
+      // console.log('noteOctave', noteOctave);
+      // console.log('note2', note);
+
+      gcd;
+
+      // return note;
+
+    })
+
+    return compKeys;
+
   }
 
   constructor(props) {
@@ -65,6 +120,11 @@ static getKeys(props) {
 
     this.keyNotes = {};
     this.midiNotes = {};
+    this.scale = scales[props.keyboard.scale];
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.scale = scales[nextProps.keyboard.scale];
   }
 
   /**
@@ -120,6 +180,39 @@ static getKeys(props) {
 
   }
 
+  getNote(e) {
+
+      let note;
+
+      if (this.props.keyboard.scale === 'chromatic') {
+        note = letterToNoteChromatic[e.key];
+      } else {
+        note = letterToNoteScales[e.key];
+      }
+
+      console.log('note1', note);
+
+      let notes = this.scale.length;
+      let noteOctave = (note < notes)
+        ? 0
+        : parseInt(notes / note);
+      // console.log('noteOctave', noteOctave);
+      // console.log('notes', notes);
+      // console.log('note', note);
+      let keyboardOctave = this.props.keyboard.octave;
+
+      note = this.scale[note] + (notes * (keyboardOctave + noteOctave));
+
+      console.log('this.scale[note]', this.scale[note]);
+      console.log('(notes * (keyboardOctave + noteOctave)', (notes * (keyboardOctave + noteOctave)));
+      console.log('notes', notes);
+      console.log('keyboardOctave', keyboardOctave);
+      console.log('noteOctave', noteOctave);
+      console.log('note2', note);
+
+      return note;
+  }
+
   /**
    *
    * KEYBOARD ACTIONS
@@ -128,7 +221,12 @@ static getKeys(props) {
   handleKeyDown(e) {
 
     if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
-      let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
+
+      let note = this.getNote(e);
+
+      if (!note) {
+        return false;
+      }
 
       if (note !== undefined && !isNaN(note) && !this.keyNotes[note]) {
         this.keyNotes[note] = true;
@@ -138,7 +236,12 @@ static getKeys(props) {
 
   }
   handleKeyUp(e) {
-    let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
+
+    let note = this.getNote(e);
+
+    if (!note) {
+      return false;
+    }
 
     delete this.keyNotes[note];
 
@@ -208,6 +311,7 @@ static getKeys(props) {
 SynthKeyboard.propTypes = {
   global: PropTypes.object,
   keyboard: PropTypes.object,
+  scale: PropTypes.object,
   onNoteOn: PropTypes.func.isRequired,
   onNoteOff: PropTypes.func.isRequired,
   onOctavePrev: PropTypes.func.isRequired,
