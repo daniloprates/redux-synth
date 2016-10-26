@@ -38,10 +38,11 @@ export const OscTypeButton = (props) => {
       className={`btn-osc-type`}
       active={getParam('type', props) == props.value}
       onClick={props.onPanelChanged.bind(this, 'OSC_CHANGED', `osc_type${props.i}`, props.value)}
-    >{props.value}</Button>
+    >{props.children}</Button>
   );
 };
 OscTypeButton.propTypes = {
+  children: PropTypes.string,
   i: PropTypes.number,
   value: PropTypes.string,
   onPanelChanged: PropTypes.func
@@ -64,3 +65,19 @@ export const SynthSlider = (props, actionType, param, valueType) => {
 SynthSlider.propTypes = {
   synth: PropTypes.object,
 };
+
+
+export const ButtonSet = (props) => {
+  return (
+    <div className={`button-set ${props.className}`}>
+      {props.children}
+    </div>
+  );
+};
+ButtonSet.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.string,
+};
+
+
+

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { map } from '../utils';
+import {ButtonSet} from './PanelComps';
 
 class PanelDelay extends Component {
     constructor(props) {
@@ -21,21 +22,23 @@ class PanelDelay extends Component {
               value={this.props.synth.dly_amp*100}
               onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_amp', 'decimal')}
             />
-            <button
-              className={`active-${this.props.synth.dly_type=='sync'}`}
-              onMouseDown={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_type', 'sync')}
-            >Sync</button>
-            <button
-              className={`active-${this.props.synth.dly_type=='time'}`}
-              onMouseDown={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_type', 'time')}
-            >Time</button>
+            <ButtonSet>
+              <button
+                className={`active-${this.props.synth.dly_type=='sync'}`}
+                onMouseDown={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_type', 'sync')}
+              >Sync</button>
+              <button
+                className={`active-${this.props.synth.dly_type=='time'}`}
+                onMouseDown={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_type', 'time')}
+              >Time</button>
+            </ButtonSet>
 
             <label>Time</label>
 
             {
               (this.props.synth.dly_type == 'sync')
                 ? (
-                  <div>
+                  <ButtonSet>
                     <button
                       className={`active-${this.props.synth[`dly_divBy`] == 1}`}
                       onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 1)}
@@ -56,7 +59,7 @@ class PanelDelay extends Component {
                       className={`active-${this.props.synth[`dly_divBy`] == 16}`}
                       onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 16)}
                     >1/16</button>
-                  </div>
+                  </ButtonSet>
                 )
                 : (
                     <input

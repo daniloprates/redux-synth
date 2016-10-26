@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { map } from '../utils';
+import {ButtonSet} from './PanelComps';
 
 class PanelFilter extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class PanelFilter extends Component {
         return (
           <div className="PanelFilter">
             <h3>Filter</h3>
-            <div>
+            <ButtonSet>
               <button
                 className={`active-${this.props.synth.flt_type === 'lowpass'}`}
                 onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_type', 'lowpass')}
@@ -23,7 +24,7 @@ class PanelFilter extends Component {
                 className={`active-${this.props.synth.flt_type === 'highpass'}`}
                 onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_type', 'highpass')}
               >high</button>
-            </div>
+            </ButtonSet>
             <label>Frequency</label>
             <input
               type="range"

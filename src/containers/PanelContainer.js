@@ -122,11 +122,11 @@ class SynthPanel extends Component {
               />
             </div>
           </div>
-          <PanelKeyboard
-            {...this.props}
-            onPanelChanged={this.handleParamChanged}
-          />
         </div>
+        <PanelKeyboard
+          {...this.props}
+          onPanelChanged={this.handleParamChanged}
+        />
       </div>
     );
   }
