@@ -1,5 +1,6 @@
 ./src/utils/p5.sound.js
 /src/utils/p5.sound.js
 
-./tools/build.js
-/tools/build.js
+./tools/ghpages.js
+/tools/ghpages.js
+

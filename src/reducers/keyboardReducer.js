@@ -11,7 +11,7 @@ newState.length = scales[newState.scale].length;
 
 export default function keyboardReducer(state = newState, action) {
 
-  let newState, keys, keyIndex;
+  let newState;// , keys, keyIndex;
 
   switch (action.type) {
 
