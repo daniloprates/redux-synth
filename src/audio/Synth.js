@@ -4,7 +4,8 @@ let p5Sound =  require('../utils/p5.sound.js');p5Sound;
 import p5 from 'p5';
 
 const OSCS = 2;
-const VOICES = 5;
+// const VOICES = 5;
+const VOICES = 4;
 
 window.p5 = p5;
 

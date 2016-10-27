@@ -36,8 +36,15 @@ class PanelFilter extends Component {
             <input
               type="range"
               ref="flt_resonance"
-              defaultValue={map(this.props.synth.flt_resonance, 0.001, 25, 0, 100)}
+              defaultValue={map(this.props.synth.flt_resonance, 0.001, 40, 0, 100)}
               onClick={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'flt_resonance')}
+            />
+            <label>LFO Env</label>
+            <input
+              type="range"
+              ref="flt_lfoEnv"
+              value={map(this.props.synth.flt_lfoEnv, 0, 1300, 0, 100)}
+              onChange={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', 'flt_lfoEnv')}
             />
           </div>
         );

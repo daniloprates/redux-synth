@@ -6,6 +6,7 @@ import PanelOscillators from '../components/PanelOscillators';
 import PanelFilter from '../components/PanelFilter';
 import PanelDelay from '../components/PanelDelay';
 import PanelReverb from '../components/PanelReverb';
+import PanelLfo from '../components/PanelLfo';
 import PanelFx from '../components/PanelFx';
 import PanelRec from '../components/PanelRec';
 import PanelKeyboard from '../components/PanelKeyboard';
@@ -28,7 +29,11 @@ class SynthPanel extends Component {
       value.persist();
     }
 
-    if (typeof this.refs == 'object' && this.refs[param]) {
+    if (typeof this === 'undefined') {
+        return console.log('this undefined', param, value);
+    }
+
+    if (typeof this !== 'undefined' && typeof this.refs == 'object' && this.refs[param]) {
         // console.log('param', param);
       let newValue = this.refs[param].value;
       // Generic param types
@@ -64,10 +69,19 @@ class SynthPanel extends Component {
         newValue = map(newValue, 0, 100, 5, 12000);
       }
       if (param === 'flt_resonance') {
-        newValue = map(newValue, 0, 100, 0.001, 25);
+        newValue = map(newValue, 0, 100, 0.001, 40);
+      }
+      if (param === 'lfo_oscFreq' || param === 'lfo_fltFreq') {
+        newValue = map(newValue, 0, 100, 0, 15);
       }
       if (param === 'bpm') {
         newValue = parseInt(map(newValue, 0, 100, 59, 241));
+      }
+      if (param === 'osc_lfoEnv0' || param === 'osc_lfoEnv1') {
+        newValue = parseInt(map(newValue, 0, 100, 0, 60));
+      }
+      if (param === 'flt_lfoEnv') {
+        newValue = parseInt(map(newValue, 0, 100, 0, 1300));
       }
 
       value = newValue;
@@ -107,6 +121,10 @@ class SynthPanel extends Component {
                 onPanelChanged={this.handleParamChanged}
               />
               <PanelReverb
+                {...this.props}
+                onPanelChanged={this.handleParamChanged}
+              />
+              <PanelLfo
                 {...this.props}
                 onPanelChanged={this.handleParamChanged}
               />

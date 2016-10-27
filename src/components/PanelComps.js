@@ -1,9 +1,5 @@
 import React, { PropTypes } from 'react';
 
-export const getParam = (paramName, props) => {
-  return props.synth[`osc_${paramName}${props.i}`];
-};
-
 /* Led light on/off */
 export const Led = (props) => {
   return (<div className={`PanelCompsLed is-on-${props.on}`} />);
@@ -17,7 +13,7 @@ export const Button = (props) => {
   return (
     <button
       className={`PanelButton active-${props.active} ${props.className}`}
-      onMouseDown={props.onClick.bind(this)}
+      onMouseDown={props.onMouseDown.bind(this)}
     >
       {props.children}
     </button>
@@ -25,27 +21,9 @@ export const Button = (props) => {
 };
 Button.propTypes = {
   className: PropTypes.string,
-  onClick: PropTypes.func,
+  onMouseDown: PropTypes.func,
   active: PropTypes.bool,
   children: PropTypes.string
-};
-
-/* Specific button for Oscillator type */
-export const OscTypeButton = (props) => {
-  return (
-    <Button
-      {...props}
-      className={`btn-osc-type`}
-      active={getParam('type', props) == props.value}
-      onClick={props.onPanelChanged.bind(this, 'OSC_CHANGED', `osc_type${props.i}`, props.value)}
-    >{props.children}</Button>
-  );
-};
-OscTypeButton.propTypes = {
-  children: PropTypes.string,
-  i: PropTypes.number,
-  value: PropTypes.string,
-  onPanelChanged: PropTypes.func
 };
 
 export const SynthSlider = (props, actionType, param, valueType) => {
@@ -58,14 +36,13 @@ export const SynthSlider = (props, actionType, param, valueType) => {
       type="range"
       ref="env_releasetime"
       defaultValue={defaultValue}
-      onClick={this.props.onPanelChanged.bind(this, actionType, param, valueType)}
+      onMouseDown={this.props.onPanelChanged.bind(this, actionType, param, valueType)}
     />
   );
 };
 SynthSlider.propTypes = {
   synth: PropTypes.object,
 };
-
 
 export const ButtonSet = (props) => {
   return (
@@ -75,6 +52,63 @@ export const ButtonSet = (props) => {
   );
 };
 ButtonSet.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.array,
+};
+
+
+/* Specific button for Oscillator type */
+export const OscTypeButton = (props) => {
+  return (
+    <Button
+      active={props.synth[props.param] == props.value}
+      onMouseDown={props.onPanelChanged.bind(this, 'OSC_CHANGED', props.param, props.value)}
+    >{props.children}</Button>
+  );
+};
+OscTypeButton.propTypes = {
+  param: PropTypes.string,
+  children: PropTypes.string,
+  i: PropTypes.number,
+  value: PropTypes.string,
+  onPanelChanged: PropTypes.func,
+  synth: PropTypes.object
+};
+
+/* Specific set for Oscillator type */
+export const OscTypeSet = (props) => {
+  return (
+    <ButtonSet>
+      <OscTypeButton
+        {...props}
+        value="sine"
+      >
+      SIN
+      </OscTypeButton>
+      <OscTypeButton
+        {...props}
+        value="triangle"
+      >
+      TRI
+      </OscTypeButton>
+
+      <OscTypeButton
+        {...props}
+        value="sawtooth"
+      >
+      SAW
+      </OscTypeButton>
+      <OscTypeButton
+        {...props}
+        value="square"
+      >
+      SQR
+      </OscTypeButton>
+    </ButtonSet>
+  );
+};
+OscTypeSet.propTypes = {
+  param: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.array,
 };

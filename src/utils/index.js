@@ -59,12 +59,6 @@ export const getDelayTime = (synth, global) => {
     if (synth.dly_type === 'time') {
       return synth.dly_time;
     }
-
-    console.log('BPM 2 ms: ', Math.ceil(60000 / (global.bpm * synth.dly_divBy)) / 1000);
     return Math.ceil(60000 / (global.bpm * synth.dly_divBy)) / 1000;
-
-  /* TODO: CALCULATE SYNCED DELAY */
-  // return synth.dly_time;
-
 };
 

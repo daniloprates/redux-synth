@@ -7,43 +7,47 @@ class SynthFx {
 
     this.dly = new p5.Delay();
     this.flt = new p5.Filter();
-    this.lfo = new p5.Oscillator();
+    this.lfoOsc0 = new p5.Oscillator();
+    this.lfoOsc1 = new p5.Oscillator();
+    this.lfoFlt = new p5.Oscillator();
     this.rev = new p5.Reverb();
     this.dstPre = new p5.Distortion(synth.dst_amp);
     this.dstPost = new p5.Distortion(synth.dst_amp);
 
+    this.update(cfg);
+
     this.dstPost.process(this.rev);
     this.dstPost.process(this.dly);
 
-    this.update(cfg);
-
-    this.lfo.disconnect();
-    this.lfo.start();
+    this.lfoOsc0.disconnect();
+    this.lfoOsc1.disconnect();
+    this.lfoFlt.disconnect();
+    this.lfoOsc0.start();
+    this.lfoOsc1.start();
+    this.lfoFlt.start();
+    this.flt.freq(this.lfoFlt);
   }
 
   connect(voices, cfg) {
     voices.forEach(voice => {
 
-      // REVERB
-      voice.osc.connect(this.rev);
+      voice.osc.connect(this.flt);
 
-      // DELAY
-      // voice.osc.connect(this.dly);
-      this.dly.process(
-        voice.osc,
+      this.dstPre.process(voice.osc);
+      this.dstPost.process(voice.osc);
+
+      voice.osc.freq(this[`lfoOsc${voice.oscIndex}`]);
+
+    });
+
+    this.dly.process(
+        this.flt,
         cfg.dly_time,
         cfg.dly_feedback,
         cfg.dly_filter
       );
+    this.rev.process(this.flt);
 
-      // FILTER
-      voice.osc.connect(this.flt);
-
-      // DISTORTION
-      this.dstPre.process(voice.osc);
-      this.dstPost.process(voice.osc);
-
-    });
   }
 
   update(cfg) {
@@ -72,7 +76,15 @@ class SynthFx {
       synth.flt_resonance
     );
 
-    this.lfo.freq(synth.lfo_freq);
+    this.lfoOsc0.freq(synth.lfo_oscFreq);
+    this.lfoOsc1.freq(synth.lfo_oscFreq);
+    this.lfoFlt.freq(synth.lfo_fltFreq);
+    this.lfoOsc0.setType(synth.lfo_oscType);
+    this.lfoOsc1.setType(synth.lfo_oscType);
+    this.lfoFlt.setType(synth.lfo_fltType);
+    this.lfoOsc0.amp(synth.osc_lfoEnv0);
+    this.lfoOsc1.amp(synth.osc_lfoEnv1);
+    this.lfoFlt.amp(synth.flt_lfoEnv);
 
     // DISTORTION
     if (synth.dst_active == 'pre') {
