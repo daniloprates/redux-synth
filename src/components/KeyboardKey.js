@@ -4,7 +4,7 @@ let isPlaying;
 
 const KeyboardKey = (props) => {
 
-  if (props.className) {
+  if (props.className && props.notes) {
 
     isPlaying = ' is-playing-' + !!props.notes[props.note];
 

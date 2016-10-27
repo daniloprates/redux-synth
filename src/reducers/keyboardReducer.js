@@ -4,12 +4,14 @@ import Keyboard from '../containers/KeyboardContainer';
 import { scales } from '../constants/scales';
 // import { updateOctave } from '../utils/index';
 
-let newState = initKeyboard;
-newState.keys = Keyboard.getKeys(initKeyboard);
-newState.compKeys = Keyboard.getCompKeys(initKeyboard);
-newState.length = scales[newState.scale].length;
+const getDynamicState = (state) => {
+  state.keys = Keyboard.getKeys(state);
+  state.compKeys = Keyboard.getCompKeys(state);
+  state.length = scales[state.scale].length;
+  return state;
+};
 
-export default function keyboardReducer(state = newState, action) {
+export default function keyboardReducer(state = getDynamicState(initKeyboard), action) {
 
   let newState;// , keys, keyIndex;
 
@@ -23,9 +25,7 @@ export default function keyboardReducer(state = newState, action) {
       if (action.param == 'scale' && action.value == 'chromatic') {
         newState.root = 0;
       }
-      newState.keys = Keyboard.getKeys(newState);
-      newState.compKeys = Keyboard.getCompKeys(newState);
-      newState.length = scales[newState.scale].length;
+      newState = getDynamicState(newState);
 
       return newState;
     }
@@ -46,14 +46,14 @@ export default function keyboardReducer(state = newState, action) {
       if (state.octave == 0) {return state;}
       newState = Object.assign({}, state);
       newState.octave = newState.octave - 1;
-      newState.keys = Keyboard.getKeys(newState);
+      newState = getDynamicState(newState);
       return newState;
 
     case types.OCTAVE_NEXT:
       if (state.octave == 9) {return state;}
       newState = Object.assign({}, state);
       newState.octave = newState.octave + 1;
-      newState.keys = Keyboard.getKeys(newState);
+      newState = getDynamicState(newState);
       return newState;
 
     default:
