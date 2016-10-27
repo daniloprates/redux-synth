@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import PanelOscillator from '../components/PanelOscillator';
-import { map } from '../utils';
 
 class PanelOscillators extends Component {
   constructor(props) {

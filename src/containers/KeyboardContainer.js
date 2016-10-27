@@ -143,8 +143,10 @@ class SynthKeyboard extends Component {
   handleMouseDown(e) {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
-
     let key = e.target.getAttribute('data-note');
+    if (!key) {
+      return false;
+    }
     currentKey = key;
     this.props.onNoteOn(key);
 
@@ -155,7 +157,7 @@ class SynthKeyboard extends Component {
 
     let key = e.target.getAttribute('data-note');
     if (!key) {
-      this.props.stopPlaying();
+      // this.props.stopPlaying();
     } else {
       this.props.onNoteOff(key);
     }
@@ -178,7 +180,6 @@ class SynthKeyboard extends Component {
     if (!currentKey) {
       currentKey = key;
     }
-
 
     if (!!key && (key !== currentKey) && this.props.global.isPlaying) {
       this.props.onNoteOff(currentKey);

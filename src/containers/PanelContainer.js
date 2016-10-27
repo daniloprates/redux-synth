@@ -66,7 +66,7 @@ class SynthPanel extends Component {
         newValue = map(newValue, 0, 100, 0, 0.8);
       }
       if (param === 'flt_frequency') {
-        newValue = map(newValue, 0, 100, 5, 12000);
+        newValue = map(newValue, 0, 100, 5, 13000);
       }
       if (param === 'flt_resonance') {
         newValue = map(newValue, 0, 100, 0.001, 40);
