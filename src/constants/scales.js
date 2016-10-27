@@ -1,5 +1,6 @@
 export const scales = {
-  "chromatic":[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ],
+  "chromatic":[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ],
+  // "chromatic":[ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ],
   "major":[ 0, 2, 4, 5, 7, 9, 11 ],
   "major blues":[ 0, 2, 3, 4, 7, 9 ],
   "major flat two pentatonic":[ 0, 1, 4, 7, 9 ],

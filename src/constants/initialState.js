@@ -16,7 +16,10 @@ export const initKeyboard = {
   scale: 'chromatic',
   root: 0,
   showNotes: false,
-  keys: []
+  // loaded dinamicaly
+  // length: 12,
+  // keys: [],
+  // compKeys: {}
 };
 
 export const initMidi = {

@@ -76,7 +76,7 @@ export const ButtonSet = (props) => {
 };
 ButtonSet.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.array,
 };
 
 

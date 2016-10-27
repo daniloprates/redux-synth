@@ -59,3 +59,13 @@ export const getDelayTime = (bpm, divBy) => {
   return (bpm/2*1000)/120/2;
 
 };
+
+
+export const gcd = (a, b) => {
+  if ( ! b) {
+      return a;
+  }
+
+  return gcd(b, a % b);
+};
+

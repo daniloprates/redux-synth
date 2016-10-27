@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { notesMidi } from '../constants/notes';
 import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
-import { letterToNote } from '../constants/keyboard';
+// import { gcd } from '../utils';
+import { letterToNoteChromatic, letterToNoteScales } from '../constants/keyboard';
 // import midi from '../audio/Midi';
 
 let currentKey;
@@ -21,32 +22,100 @@ Array.prototype.each = function(n, cb) {
  */
 class SynthKeyboard extends Component {
 
-static getKeys(props) {
-    const nOfKeys = 12;
-    let keys = {}, scale = scales[props.scale], keyIndex;
+  /**
+   *
+   * Static methods for the keyboard reducer
+   *
+   */
+  static getKeys(props) {
+    let keys = {}, octave, newOctave, scale = scales[props.scale], note, keyIndex, className;
+    let nOfKeys = scale.length;
 
     [].each(props.octaves, (oct) => {
       [].each(nOfKeys, (i) => {
 
-        keyIndex = (i + (oct * nOfKeys));
+          octave = oct;
 
-        if (scale.indexOf(i) > -1) {
+          keyIndex = (i + (octave * nOfKeys));
 
-          keys[`className${keyIndex}`] =
-            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
-            ` is-root-${i === 0}`;
-          keys[`octave${keyIndex}`] = oct;
+          note = scale[i];
+          note = note + props.root;
+
+          if (note >= 12) {
+            newOctave = parseInt(note/12);
+            note = note - parseInt(12 * newOctave);
+
+            octave = octave + newOctave;
+
+            if (note == 12) {
+              note = 0;
+            }
+          }
+
+          octave = octave + props.octave;
+
+          className = ((notesMidi[note].isSharp) ? 'black-key' : 'white-key') +
+            ` is-root-${keyIndex === 0}`;
+
+          note = note + (octave * 12);
+
+          keys[`note${keyIndex}`] = note;
+          keys[`octave${keyIndex}`] = octave;
           keys[`active${keyIndex}`] = false;
-          keys[`note${keyIndex}`] = (i + props.root) + (nOfKeys * oct);
+          keys[`className${keyIndex}`] = className;
 
-        }
+
+        // }
 
       });
     });
-
     return keys;
   }
 
+  static getCompKeys(props) {
+
+    let scale = scales[props.scale],
+        keyboardOctave = props.octave,
+        notes = scale.length,
+        compKeysMap = (props.scale) === 'chromatic'
+          ? letterToNoteChromatic
+          :letterToNoteScales;
+
+    let compKeys = {};
+    let compKey, note, octave, newOctaveave;
+
+    for (compKey in compKeysMap) {
+      if (compKeysMap.hasOwnProperty(compKey)) {
+
+        note = compKeysMap[compKey][0];
+        octave = compKeysMap[compKey][1];
+
+        if (note >= notes) {
+          newOctaveave = parseInt(note/notes);
+          note = note - parseInt(notes * newOctaveave);
+          octave = octave + newOctaveave;
+
+          if (note == notes) {
+            console.log('note == notes' , note);
+            note = 0;
+          }
+        }
+
+        note = scale[note];
+        note = (note + (12 * octave)) + (12 * keyboardOctave);
+        compKeys[compKey] = note;
+
+      }
+    }
+
+    return compKeys;
+  }
+
+  /**
+   *
+   * Instance methods for the Keyboard component
+   *
+   */
   constructor(props) {
     super(props);
 
@@ -65,6 +134,7 @@ static getKeys(props) {
 
     this.keyNotes = {};
     this.midiNotes = {};
+    this.scale = scales[props.keyboard.scale];
   }
 
   /**
@@ -120,32 +190,27 @@ static getKeys(props) {
 
   }
 
+
   /**
    *
    * KEYBOARD ACTIONS
    *
    */
   handleKeyDown(e) {
-
     if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
-      let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
+      let key = this.props.keyboard.compKeys[e.key];
 
-      if (note !== undefined && !isNaN(note) && !this.keyNotes[note]) {
-        this.keyNotes[note] = true;
-        this.props.onNoteOn(note);
+      if (!isNaN(key) && typeof key !== 'undefined') {
+        this.props.onNoteOn(key);
       }
     }
-
   }
   handleKeyUp(e) {
-    let note = letterToNote[e.key] + (12 * this.props.keyboard.octave);
+    let key = this.props.keyboard.compKeys[e.key];
 
-    delete this.keyNotes[note];
-
-    if (note !== undefined && !isNaN(note)) {
-      this.props.onNoteOff(note);
+    if (!isNaN(key) && typeof key !== 'undefined') {
+      this.props.onNoteOff(key);
     }
-
   }
 
   /**
@@ -193,6 +258,7 @@ static getKeys(props) {
       <div
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
+        className="keyboard-container"
         >
         <Keyboard
           {...this.props}
@@ -208,6 +274,7 @@ static getKeys(props) {
 SynthKeyboard.propTypes = {
   global: PropTypes.object,
   keyboard: PropTypes.object,
+  scale: PropTypes.object,
   onNoteOn: PropTypes.func.isRequired,
   onNoteOff: PropTypes.func.isRequired,
   onOctavePrev: PropTypes.func.isRequired,
