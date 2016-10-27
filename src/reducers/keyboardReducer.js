@@ -5,7 +5,7 @@ import Keyboard from '../containers/KeyboardContainer';
 
 let newState = initKeyboard;
 newState.keys = Keyboard.getKeys(initKeyboard);
-newState.compKeys = Keyboard.getKeys(initKeyboard);
+newState.compKeys = Keyboard.getCompKeys(initKeyboard);
 
 export default function keyboardReducer(state = newState, action) {
 
@@ -23,7 +23,7 @@ export default function keyboardReducer(state = newState, action) {
         newState.root = 0;
       }
       newState.keys = Keyboard.getKeys(newState);
-      newState.compKeys = Keyboard.getKeys(newState);
+      newState.compKeys = Keyboard.getCompKeys(newState);
 
       return newState;
     }

@@ -10,7 +10,6 @@ $border-radius-small: 2px;
 @import 'form';
 @import 'panel';
 @import 'keyboard';
-@import 'nav';
 
 /* Styles */
 body {
@@ -26,11 +25,7 @@ body {
   height: 50vh;
 }
 .Panel {
-  height: 40vh;
-  // min-width: 200px;
-}
-.Nav {
-  height: 10vh;
+  height: 50vh;
 }
 
 @media (max-height: 500px) {
