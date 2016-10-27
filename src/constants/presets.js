@@ -42,10 +42,10 @@ export default {
     "rev_reverse": false,
     "dst_active": 'off',
     "dst_amount": 0.01,
-    "lfo_oscType": 'sine',
-    "lfo_oscFreq": 0.5,
-    "lfo_fltType": 'sine',
-    "lfo_fltFreq": 0.5,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 12,
+    "lfo_fltType": "sine",
+    "lfo_fltFreq": 0.5
   },
 
   Strings : {
@@ -79,10 +79,10 @@ export default {
     "rev_reverse": false,
     "dst_active": "off",
     "dst_amount": 0.01,
-    "lfo_oscType": "sine",
-    "lfo_oscFreq": 0.5,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 12,
     "lfo_fltType": "sine",
-    "lfo_fltFreq": 6.199999999999995
+    "lfo_fltFreq": 0.5
   },
 
   Contemplative : {
@@ -116,10 +116,10 @@ export default {
     "rev_reverse": false,
     "dst_active": 'off',
     "dst_amount": 0.01,
-    "lfo_oscType": 'sine',
-    "lfo_oscFreq": 0.5,
-    "lfo_fltType": 'sine',
-    "lfo_fltFreq": 0.5,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 12,
+    "lfo_fltType": "sine",
+    "lfo_fltFreq": 0.5
   },
 
   Organ: {
@@ -154,7 +154,10 @@ export default {
     "rev_reverse": false,
     "dst_active": 'post',
     "dst_amount": 0.9,
-    "lfo_freq": 0.5,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 12,
+    "lfo_fltType": "sine",
+    "lfo_fltFreq": 0.5
   },
 
   "Distort Organ": {
@@ -189,10 +192,10 @@ export default {
     "rev_reverse": false,
     "dst_active": "post",
     "dst_amount": 0.01,
-    "lfo_oscType": "sine",
-    "lfo_oscFreq": 13.999999999999995,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 12,
     "lfo_fltType": "sine",
-    "lfo_fltFreq": 0.6
+    "lfo_fltFreq": 0.5
   },
 
   "Tremolo" : {
@@ -227,7 +230,7 @@ export default {
     "dst_active": "off",
     "dst_amount": 0.01,
     "lfo_oscType": "square",
-    "lfo_oscFreq": 9.499999999999995,
+    "lfo_oscFreq": 12,
     "lfo_fltType": "sine",
     "lfo_fltFreq": 0.5
   }
