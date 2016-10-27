@@ -45,6 +45,8 @@ static getKeys(props) {
       });
     });
 
+    return keys;
+
   }
 
   static getCompKey(props) {
@@ -296,6 +298,7 @@ static getKeys(props) {
       <div
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
+        className="keyboard-container"
         >
         <Keyboard
           {...this.props}

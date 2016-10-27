@@ -14,7 +14,7 @@ $border-radius-small: 2px;
 
 /* Styles */
 body {
-  // background: url(http://f.cl.ly/items/2q1f3t0C3R1b0g081w3n/vwood.png);
+  font-family: 'Roboto Condensed', sans-serif;
   background: $bg;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-smoothing: antialiased;
@@ -22,7 +22,7 @@ body {
   margin: 0;
 }
 
-.Keyboard {
+.keyboard-container {
   height: 50vh;
 }
 .Panel {

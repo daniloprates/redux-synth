@@ -1,7 +1,13 @@
 $br: 3px;
 $grow-margin: -4.9%;
 
+.keyboard-container {
+  box-sizing: border-box;
+  padding: 0 0 10px;
+}
+
 .Keyboard {
+  height: 100%;
   // height: 60vh;
   display: flex;
   justify-content: space-around;
