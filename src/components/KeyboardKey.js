@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
 
-let note, isPlaying;
+let isPlaying;
 
 const KeyboardKey = (props) => {
 
-  note = props.i + (12 * props.o);
-  isPlaying = ' is-playing-' + props.keys[`playing${note}`];
-
   if (props.className) {
+
+    isPlaying = ' is-playing-' + !!props.notes[props.note];
+
     return (
         <li
           data-octave={props.octave}
-          data-note={note}
+          data-note={props.note}
           className={props.className + isPlaying}
           />
     );
@@ -22,7 +22,9 @@ const KeyboardKey = (props) => {
 
 KeyboardKey.propTypes = {
   className: PropTypes.string,
+  note: PropTypes.number,
   octave: PropTypes.object,
+  notes: PropTypes.object,
   i: PropTypes.number,
   o: PropTypes.number,
   keys: PropTypes.object

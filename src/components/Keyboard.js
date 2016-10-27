@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Key from './KeyboardKey';
 
 const Keyboard = (props) => {
-  let { keys, octaves, scale, octave } = props.keyboard;
+  let { keys, octaves, scale, length } = props.keyboard;
 
   return (
 
@@ -16,14 +16,13 @@ const Keyboard = (props) => {
             [...Array(octaves)].map((y, o) => (
               <ul key={o}>
                 {
-                  [...Array(12)].map((x, i) => (
+                  [...Array(length)].map((x, i) => (
                     <Key
                       key={i}
-                      i={i}
-                      o={octave + o}
                       data-octave={keys[`octave${i}`]}
                       className={keys[`className${i}`]}
-                      keys={keys}
+                      note={keys[`note${i + (o * length)}`]}
+                      notes={props.global.notes}
                     />
                   ))
                 }

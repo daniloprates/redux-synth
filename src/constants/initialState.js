@@ -13,12 +13,13 @@ export const initKeyboard = {
   octaves: 2,
   octave: 4,
   velocity: 100,
-  scale: 'major',
-  // scale: 'chromatic',
+  scale: 'chromatic',
   root: 0,
   showNotes: false,
-  keys: [],
-  compKeys: {}
+  // loaded dinamicaly
+  // length: 12,
+  // keys: [],
+  // compKeys: {}
 };
 
 export const initMidi = {

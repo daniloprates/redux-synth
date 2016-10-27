@@ -28,24 +28,44 @@ class SynthKeyboard extends Component {
    *
    */
   static getKeys(props) {
-    const nOfKeys = 12;
-    let keys = {}, scale = scales[props.scale], keyIndex;
+    let keys = {}, octave, newOctave, scale = scales[props.scale], note, keyIndex, className;
+    let nOfKeys = scale.length;
 
     [].each(props.octaves, (oct) => {
       [].each(nOfKeys, (i) => {
 
-        keyIndex = (i + (oct * nOfKeys));
+          octave = oct;
 
-        if (scale.indexOf(i) > -1) {
+          keyIndex = (i + (octave * nOfKeys));
 
-          keys[`className${keyIndex}`] =
-            (notesMidi[keyIndex].isSharp) ? 'black-key' : 'white-key' +
-            ` is-root-${i === 0}`;
-          keys[`octave${keyIndex}`] = oct;
+          note = scale[i];
+          note = note + props.root;
+
+          if (note >= 12) {
+            newOctave = parseInt(note/12);
+            note = note - parseInt(12 * newOctave);
+
+            octave = octave + newOctave;
+
+            if (note == 12) {
+              note = 0;
+            }
+          }
+
+          octave = octave + props.octave;
+
+          className = ((notesMidi[note].isSharp) ? 'black-key' : 'white-key') +
+            ` is-root-${keyIndex === 0}`;
+
+          note = note + (octave * 12);
+
+          keys[`note${keyIndex}`] = note;
+          keys[`octave${keyIndex}`] = octave;
           keys[`active${keyIndex}`] = false;
-          keys[`note${keyIndex}`] = (i + props.root) + (nOfKeys * oct);
+          keys[`className${keyIndex}`] = className;
 
-        }
+
+        // }
 
       });
     });
@@ -62,7 +82,7 @@ class SynthKeyboard extends Component {
           :letterToNoteScales;
 
     let compKeys = {};
-    let compKey, note, octave, newOctave;
+    let compKey, note, octave, newOctaveave;
 
     for (compKey in compKeysMap) {
       if (compKeysMap.hasOwnProperty(compKey)) {
@@ -71,9 +91,9 @@ class SynthKeyboard extends Component {
         octave = compKeysMap[compKey][1];
 
         if (note >= notes) {
-          newOctave = parseInt(note/notes);
-          note = note - parseInt(notes * newOctave);
-          octave = octave + newOctave;
+          newOctaveave = parseInt(note/notes);
+          note = note - parseInt(notes * newOctaveave);
+          octave = octave + newOctaveave;
 
           if (note == notes) {
             console.log('note == notes' , note);
