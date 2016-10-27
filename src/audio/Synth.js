@@ -29,7 +29,7 @@ class Synth {
   init(cfg) {
 
     this.cfg = cfg;
-    this.fx = new SynthFx(p5, this.cfg.synth);
+    this.fx = new SynthFx(p5, this.cfg);
     this.setVoices();
     this.fx.connect(this.voices, this.cfg.synth);
 
@@ -56,17 +56,18 @@ class Synth {
       return false;
     }
 
-    let { preset, amplitude } = cfg.global;
+    let { preset, amplitude, bpm } = cfg.global;
     let { global } = this.cfg;
 
     if (
       JSON.stringify(cfg.synth) !== JSON.stringify(this.cfg.synth) ||
       preset !== global.preset ||
-      amplitude !== global.amplitude
+      amplitude !== global.amplitude ||
+      bpm !== global.bpm
     ) {
       this.cfg = cfg;
       this.voices.forEach(voice => voice.update(this.cfg));
-      this.fx.update(this.cfg.synth);
+      this.fx.update(this.cfg);
     }
   }
 

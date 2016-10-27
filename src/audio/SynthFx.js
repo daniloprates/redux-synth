@@ -1,24 +1,17 @@
-// import { getDelayTime } from '../utils';
-
+import { getDelayTime } from '../utils';
 
 class SynthFx {
   constructor(p5, cfg) {
 
-    this.p5 = p5;
+    let { synth } = cfg;
 
     this.dly = new p5.Delay();
-
     this.flt = new p5.Filter();
-    // this.flt.disconnect();
-
     this.lfo = new p5.Oscillator();
-
     this.rev = new p5.Reverb();
-    // this.rev.disconnect();
-    // this.rev.connect(this.dst);
+    this.dstPre = new p5.Distortion(synth.dst_amp);
+    this.dstPost = new p5.Distortion(synth.dst_amp);
 
-    this.dstPre = new p5.Distortion(cfg.dst_amp);
-    this.dstPost = new p5.Distortion(cfg.dst_amp);
     this.dstPost.process(this.rev);
     this.dstPost.process(this.dly);
 
@@ -33,8 +26,6 @@ class SynthFx {
 
       // REVERB
       voice.osc.connect(this.rev);
-      // this.rev.amp(cfg.rev_amp);
-      // this.rev.process(voice.osc);
 
       // DELAY
       // voice.osc.connect(this.dly);
@@ -47,12 +38,6 @@ class SynthFx {
 
       // FILTER
       voice.osc.connect(this.flt);
-      // this.flt.connect(voice.env);
-      // this.flt.process(
-      //   voice.osc,
-      //   cfg.flt_frequency,
-      //   cfg.flt_resonance
-      // );
 
       // DISTORTION
       this.dstPre.process(voice.osc);
@@ -63,37 +48,39 @@ class SynthFx {
 
   update(cfg) {
 
+    let { synth, global } = cfg;
+
     // DELAY
-    this.dly.amp(cfg.dly_amp);
-    this.dly.delayTime(cfg.dly_time);
-    this.dly.feedback(cfg.dly_feedback);
-    this.dly.filter(cfg.dly_filter);
+    this.dly.amp(synth.dly_amp);
+    this.dly.delayTime(getDelayTime(synth, global));
+    this.dly.feedback(synth.dly_feedback);
+    this.dly.filter(synth.dly_filter);
 
     // // REVERB
-    this.rev.amp(cfg.rev_amp);
+    this.rev.amp(synth.rev_amp);
     this.rev.set(
-      cfg.rev_seconds,
-      cfg.rev_decay,
-      cfg.rev_reverse
+      synth.rev_seconds,
+      synth.rev_decay,
+      synth.rev_reverse
     );
 
     // // FILTER
-    // this.flt.amp(cfg.flt_amp);
-    this.flt.setType(cfg.flt_type);
+    // this.flt.amp(synth.flt_amp);
+    this.flt.setType(synth.flt_type);
     this.flt.set(
-      cfg.flt_frequency,
-      cfg.flt_resonance
+      synth.flt_frequency,
+      synth.flt_resonance
     );
 
-    this.lfo.freq(cfg.lfo_freq);
+    this.lfo.freq(synth.lfo_freq);
 
     // DISTORTION
-    if (cfg.dst_active == 'pre') {
-      this.dstPre.set(cfg.dst_amount);
+    if (synth.dst_active == 'pre') {
+      this.dstPre.set(synth.dst_amount);
       this.dstPre.connect();
       this.dstPost.disconnect();
-    } else if (cfg.dst_active == 'post') {
-      this.dstPost.set(cfg.dst_amount);
+    } else if (synth.dst_active == 'post') {
+      this.dstPost.set(synth.dst_amount);
       this.dstPre.disconnect();
       this.dstPost.connect();
     } else {

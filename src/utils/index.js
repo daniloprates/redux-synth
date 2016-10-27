@@ -54,18 +54,17 @@ export const updateOctave = (notes,octave) => {
 };
 
 
-export const getDelayTime = (bpm, divBy) => {
-  divBy;
-  return (bpm/2*1000)/120/2;
+export const getDelayTime = (synth, global) => {
 
-};
+    if (synth.dly_type === 'time') {
+      return synth.dly_time;
+    }
 
+    console.log('BPM 2 ms: ', Math.ceil(60000 / (global.bpm * synth.dly_divBy)) / 1000);
+    return Math.ceil(60000 / (global.bpm * synth.dly_divBy)) / 1000;
 
-export const gcd = (a, b) => {
-  if ( ! b) {
-      return a;
-  }
+  /* TODO: CALCULATE SYNCED DELAY */
+  // return synth.dly_time;
 
-  return gcd(b, a % b);
 };
 

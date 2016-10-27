@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { notesMidi } from '../constants/notes';
 import { scales } from '../constants/scales';
 import Keyboard from '../components/Keyboard';
-// import { gcd } from '../utils';
 import { letterToNoteChromatic, letterToNoteScales } from '../constants/keyboard';
-// import midi from '../audio/Midi';
 
 let currentKey;
 

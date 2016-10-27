@@ -40,24 +40,24 @@ class PanelDelay extends Component {
                 ? (
                   <ButtonSet>
                     <button
+                      className={`active-${this.props.synth[`dly_divBy`] == .5}`}
+                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, .5)}
+                    >1</button>
+                    <button
                       className={`active-${this.props.synth[`dly_divBy`] == 1}`}
                       onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 1)}
-                    >1</button>
+                    >1/4</button>
+                    <button
+                      className={`active-${this.props.synth[`dly_divBy`] == 2}`}
+                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 2)}
+                    >1/8</button>
+                    <button
+                      className={`active-${this.props.synth[`dly_divBy`] == 3}`}
+                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 3)}
+                    >1/8t</button>
                     <button
                       className={`active-${this.props.synth[`dly_divBy`] == 4}`}
                       onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 4)}
-                    >1/4</button>
-                    <button
-                      className={`active-${this.props.synth[`dly_divBy`] == 8}`}
-                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 8)}
-                    >1/8</button>
-                    <button
-                      className={`active-${this.props.synth[`dly_divBy`] == '8t'}`}
-                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, '8t')}
-                    >1/8t</button>
-                    <button
-                      className={`active-${this.props.synth[`dly_divBy`] == 16}`}
-                      onMouseDown={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `dly_divBy`, 16)}
                     >1/16</button>
                   </ButtonSet>
                 )
