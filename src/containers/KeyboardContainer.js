@@ -199,7 +199,6 @@ class SynthKeyboard extends Component {
       let key = this.props.keyboard.compKeys[e.key];
 
       if (!isNaN(key) && typeof key !== 'undefined' && !this.keyNotes[key]) {
-        console.log('handleKeyDown', key);
         this.keyNotes[key] = true;
         this.props.onNoteOn(key);
       }

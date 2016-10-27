@@ -22,10 +22,10 @@ body {
 }
 
 .keyboard-container {
-  height: 50vh;
+  // height: 50vh;
 }
 .Panel {
-  height: 50vh;
+  // height: 50vh;
 }
 
 @media (max-height: 500px) {
@@ -33,7 +33,7 @@ body {
     // height: 20vh;
   }
   .Panel {
-    height: auto;
+    // height: auto;
     // height: 80vh;
   }
 

@@ -38,7 +38,7 @@ class PanelLfo extends Component {
         <input
           type="range"
           ref="lfo_fltFreq"
-          value={map(this.props.synth.lfo_fltFreq, 0, 5, 0, 100)}
+          value={map(this.props.synth.lfo_fltFreq, 0, 15, 0, 100)}
           onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'lfo_fltFreq')}
         />
 

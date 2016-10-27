@@ -1,11 +1,14 @@
 
 .Panel {
-  // height: 40vh;
-  padding: 0 10px;
-  box-sizing: border-box;
-  // display: flex;
-  // flex-direction: row;
+  // padding: 0 10px;
   // box-sizing: border-box;
+  height: 270px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 10px 10px 0;
+
 
   h1 {
     font-size: 55px;
@@ -161,6 +164,9 @@
 
 .PanelGlobal {
   flex-grow: 1.5;
+  &:before {
+    display: none;
+  }
 }
 .PanelOscillators {
   flex-grow: 2;
