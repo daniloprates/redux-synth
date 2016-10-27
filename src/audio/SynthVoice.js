@@ -37,10 +37,15 @@ class SynthOscVoice {
     this.octave = cfg.synth[`osc_octave${this.oscIndex}`];
   }
 
-  play(note, velocity) {
+  play(_note, velocity) {
 
     // Get the note acording to the osc octave
-    note = parseInt(note) + (12 * this.octave);
+    let note = parseInt(_note) + (12 * this.octave);
+
+    if (!notesMidi[note]) {
+      console.warn('Note not found', _note, note);
+      return false;
+    }
 
     let gain = map(velocity, 0, 127, 0, this.amplitude);
     let frequency = notesMidi[note].frequency;

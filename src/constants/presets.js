@@ -38,7 +38,7 @@ export default {
     "rev_seconds": 3,
     "rev_decay": 2,
     "rev_reverse": false,
-    "dst_active": false,
+    "dst_active": 'off',
     "dst_amount": 0.01,
     "lfo_freq": 1
   },
@@ -69,7 +69,7 @@ export default {
     "rev_seconds": 3,
     "rev_decay": 2,
     "rev_reverse": false,
-    "dst_active": false,
+    "dst_active": 'off',
     "dst_amount": 0.01,
     "lfo_freq": 1
   },
@@ -100,7 +100,7 @@ export default {
     "rev_seconds": 5,
     "rev_decay": 3,
     "rev_reverse": false,
-    "dst_active": false,
+    "dst_active": 'off',
     "dst_amount": 0.01,
     "lfo_freq": 1
   },
@@ -132,7 +132,7 @@ export default {
     "rev_seconds": 1,
     "rev_decay": 2,
     "rev_reverse": false,
-    "dst_active": true,
+    "dst_active": 'post',
     "dst_amount": 0.9,
     "lfo_freq": 1
   },
@@ -164,7 +164,7 @@ export default {
     "rev_seconds": 1,
     "rev_decay": 2,
     "rev_reverse": false,
-    "dst_active": true,
+    "dst_active": 'post',
     "dst_amount": 0.01,
     "lfo_freq": 1
   },

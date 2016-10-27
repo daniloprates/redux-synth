@@ -17,8 +17,10 @@ class SynthFx {
     // this.rev.disconnect();
     // this.rev.connect(this.dst);
 
-    this.dst = new p5.Distortion(cfg.dst_amp);
-    this.dst.process(this.rev);
+    this.dstPre = new p5.Distortion(cfg.dst_amp);
+    this.dstPost = new p5.Distortion(cfg.dst_amp);
+    this.dstPost.process(this.rev);
+    this.dstPost.process(this.dly);
 
     this.update(cfg);
 
@@ -53,7 +55,8 @@ class SynthFx {
       // );
 
       // DISTORTION
-      this.dst.process(voice.osc);
+      this.dstPre.process(voice.osc);
+      this.dstPost.process(voice.osc);
 
     });
   }
@@ -85,12 +88,18 @@ class SynthFx {
     this.lfo.freq(cfg.lfo_freq);
 
     // DISTORTION
-    if (cfg.dst_active) {
-      this.dst.connect();
+    if (cfg.dst_active == 'pre') {
+      this.dstPre.set(cfg.dst_amount);
+      this.dstPre.connect();
+      this.dstPost.disconnect();
+    } else if (cfg.dst_active == 'post') {
+      this.dstPost.set(cfg.dst_amount);
+      this.dstPre.disconnect();
+      this.dstPost.connect();
     } else {
-      this.dst.disconnect();
+        this.dstPost.disconnect();
+        this.dstPre.disconnect();
     }
-    this.dst.set(cfg.dst_amount);
 
   }
 }
