@@ -195,6 +195,43 @@ export default {
     "lfo_fltFreq": 0.6
   },
 
+  "Tremolo" : {
+    "osc_type0": "sine",
+    "osc_amplitude0": 0.75,
+    "osc_octave0": 0,
+    "osc_lfoEnv0": 13,
+    "osc_type1": "sawtooth",
+    "osc_amplitude1": 0.25,
+    "osc_octave1": 0,
+    "osc_lfoEnv1": 6,
+    "env_attackLevel": 0,
+    "env_releaseLevel": 0,
+    "env_attackTime": 0.01,
+    "env_decayTime": 0.4,
+    "env_susPercent": 0.61,
+    "env_releaseTime": 0.4,
+    "flt_type": "lowpass",
+    "flt_frequency": 1434.45,
+    "flt_resonance": 0.001,
+    "flt_lfoEnv": 975,
+    "dly_amp": 0.01,
+    "dly_type": "sync",
+    "dly_divBy": 1,
+    "dly_time": 0.3,
+    "dly_feedback": 0.3,
+    "dly_filter": 2300,
+    "rev_amp": 0.27,
+    "rev_seconds": 3,
+    "rev_decay": 2,
+    "rev_reverse": false,
+    "dst_active": "off",
+    "dst_amount": 0.01,
+    "lfo_oscType": "square",
+    "lfo_oscFreq": 9.499999999999995,
+    "lfo_fltType": "sine",
+    "lfo_fltFreq": 0.5
+  }
+
 
 
 
