@@ -103,7 +103,7 @@ class SynthPanel extends Component {
             onPanelChanged={this.handleParamChanged}
           />
           <div className="panel-tabs">
-            <div className="panel-tab tab-active">
+            <div className="panel-tab tab-active panel-container">
               <PanelOscillators
                 {...this.props}
                 onPanelChanged={this.handleParamChanged}

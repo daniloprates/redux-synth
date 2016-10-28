@@ -1,0 +1,94 @@
+
+
+@mixin theme($bg, $panelBg, $inputBg, $colorMed, $inputActive) {
+
+  body {
+    background-color: $bg;
+  }
+
+  .panel-content {
+    background: $panelBg;
+  }
+
+
+
+
+  /* TEXT COLOR */
+  .Panel {
+    label {
+      color: $textColor;
+    }
+  }
+
+  /* Active */
+  .Panel {
+
+    button.active-true,
+    button:active,
+    .PanelRec button,
+    input[type=range]::-webkit-slider-thumb,
+    input[type=range]::-moz-range-thumb,
+    input[type=range]::-ms-thumb
+    {
+      background: $inputActive;
+    }
+
+    // input[type=range]::-webkit-slider-thumb {background: $inputActive;}
+    // input[type=range]::-moz-range-thumb {background: $inputActive;}
+    // input[type=range]::-ms-thumb {background: $inputActive; }
+
+  }
+
+  /* COLOR LIGHT */
+  .Panel {
+    // BG
+    select,
+    button,
+    {
+      background-color: $inputBg;
+    }
+
+    input[type=range]:focus::-webkit-slider-runnable-track {background-color: $inputBg; }
+    input[type=range]::-moz-range-track {background-color: $inputBg;}
+    input[type=range]::-ms-fill-lower {background-color: $inputBg;}
+    input[type=range]::-ms-fill-upper {background-color: $inputBg;}
+    input[type=range]:focus::-ms-fill {background-color: $inputBg;}-lower {background-color: $inputBg;}
+    input[type=range]:focus::-ms-fill-upper {background-color: $inputBg;}
+
+
+
+
+
+    // BORDER
+    .PanelRec button {
+      border-color: $inputBg;
+    }
+
+  }
+
+  /* COLOR MED */
+  .Panel {
+
+    .panel-item {
+
+    }
+  }
+
+
+}
+
+$bg: #fbf9ec;
+$panelBg: rgba(0, 0, 0, 0.05);
+$inputBg: #cccabb;
+// $colorMed: #d2cfc1;
+$colorMed: #dedcce;
+$inputActive: #929086;
+$textColor: #929086;
+
+// @include theme(
+//   $bg,
+//   $panelBg,
+//   $inputBg,
+//   $colorMed,
+//   $inputActive
+// );

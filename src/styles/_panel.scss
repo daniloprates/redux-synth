@@ -45,7 +45,6 @@
     display: block;
     font-size: 11px;
     padding: 4px 0 1px;
-    color: #929086;
   }
 
   select {
@@ -55,10 +54,8 @@
     -webkit-appearance: button;
     padding: 5px;
     border-radius: $border-radius-small;
-    background: $color-light;
   }
   button {
-    background: #cccabb;
     border: none;
     margin-right: 1px;
     padding: 5px 0;
@@ -67,7 +64,6 @@
       margin-right: 0;
     }
     &.active-true, &:active {
-      background: #929086;
       border: none;
       color: white;
     }
@@ -92,15 +88,13 @@
 }
 
 .panel-content {
-  // background: #55a2d4;
-  background: rgba(0, 0, 0, 0.05);
   width: 100%;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
   border-radius: 6px;
   height: 85%;
-  border-bottom: 5px solid #fbf9ec;
+  border-bottom: 5px solid $bg;
 }
 
 
@@ -139,15 +133,14 @@
   position: relative;
   flex-grow: 1;
 
-  &:before {
-    content: "";
-    width: 10px;
-    height: 23px;
-    background: #d2cfc1;
-    text-align: left;
-    position: absolute;
-    left: 11px;
-  }
+}
+.panel-container > div:before {
+  content: "";
+  width: 10px;
+  height: 23px;
+  text-align: left;
+  position: absolute;
+  left: 11px;
 }
 
 .PanelGlobal,
@@ -222,24 +215,18 @@
 .PanelRec button {
   width: 0;
   height: 0;
-  background: #929086;
   border-radius: 100%;
   box-sizing: border-box;
-  border: 20px solid #cccabb;
+  border: 20px solid;
   padding: 7px;
   &.is-recording-true {
     background: red;
-  }
-  &:active {
-    background: #cccabb;
-    border: 20px solid #929086;
   }
 }
 
 
 .PanelKeyboard {
   height: 15%;
-  background: #dedcce;
   padding: 10px;
   box-sizing: border-box;
   label, h3 {
@@ -253,7 +240,7 @@
   }
   .panel-key-root {
     width: 10%;
-    border-left: 3px solid #dedcce;
+    border-left: 3px solid $colorMed;
   }
   .button-set {
     float: right;
