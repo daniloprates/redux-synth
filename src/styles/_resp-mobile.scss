@@ -1,0 +1,79 @@
+@media (max-width: 780px) {
+
+  html, body, body, #app, #app > div, .app-container {
+    height: 100%;
+  }
+
+  .Panel {
+    height: 40%;
+
+    .panel-content {
+      height: 70%;
+    }
+    .PanelKeyboard {
+      height: 30%;
+      .panel-key-scale {
+        // width: 80%;
+      }
+    }
+
+    .PanelGlobal {
+      // label,
+      input[type="range"],
+      input#panel-global-bpm,
+      select
+      {
+        width: 50% !important;
+        margin-bottom: 2px;
+        height: 25px;
+        display: inline-block;
+        vertical-align: middle;
+        border: 5px solid transparent;
+        box-sizing: border-box;
+      }
+      input[type="range"] {
+        background: transparent;
+      }
+
+      label{
+        display: none;
+      }
+
+    }
+
+    .PanelKeyboard {
+      .keyboard-octave,
+      .keyboard-octaves {
+        width: 25%;
+      }
+    }
+
+    .panel-tabs {
+      display: none;
+    }
+
+  }
+
+  .keyboard-container {
+    height: 100%;
+    padding: 50% 0 10px;
+  }
+
+
+  .btn-octaves {
+    display: none;
+    &:first-child,
+    &:nth-child(2) {
+      display: block;
+    }
+  }
+
+  .panel-item, .PanelOscillators {
+    display: none;
+  }
+  .PanelGlobal,
+  .PanelKeyboard {
+    display: block;
+  }
+
+}

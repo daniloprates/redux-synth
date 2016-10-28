@@ -18,7 +18,7 @@ class SynthPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app-container">
         <PanelContainer
           {...this.props}
           onParamChanged={this.props.paramChanged}

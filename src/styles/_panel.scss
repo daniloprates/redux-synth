@@ -262,24 +262,3 @@ input#panel-global-bpm {
     width: 15%;
   }
 }
-
-// @media (max-width: 480px) {
-@media (max-width: 780px) {
-  .btn-octaves {
-    display: none;
-    &:first-child,
-    &:nth-child(2) {
-      display: block;
-    }
-  }
-
-  .panel-item, .PanelOscillators {
-    display: none;
-  }
-  .PanelGlobal,
-  .PanelKeyboard {
-    display: block;
-  }
-
-}
-
