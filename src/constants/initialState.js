@@ -6,7 +6,7 @@ export const initGlobal = {
   bpm: 120,
   amplitude: 0.7,
   rec_active: false,
-  preset: 'piano'
+  preset: 'Piano'
 };
 
 export const initKeyboard = {

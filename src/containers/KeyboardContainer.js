@@ -197,7 +197,7 @@ class SynthKeyboard extends Component {
     let key = target.getAttribute('data-note');
 
     if (!key || isNaN(key)) {
-      console.warn('no key', key);
+      // console.warn('no key', key);
       return false;
     }
 

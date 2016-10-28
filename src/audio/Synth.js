@@ -4,8 +4,8 @@ let p5Sound =  require('../utils/p5.sound.js');p5Sound;
 import p5 from 'p5';
 
 const OSCS = 2;
-// const VOICES = 5;
-const VOICES = 4;
+const VOICES = 5;
+// const VOICES = 4;
 
 window.p5 = p5;
 
@@ -35,6 +35,7 @@ class Synth {
     this.fx = new SynthFx(p5, this.cfg);
     this.setVoices();
     this.fx.connect(this.voices, this.cfg.synth);
+    this.fx.update(this.cfg);
 
     window.s = this;
 

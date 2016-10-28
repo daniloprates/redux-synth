@@ -8,12 +8,8 @@ class SynthOscVoice {
     this.osc = new p5.Oscillator();
     this.env = new p5.Env();
     this.osc.disconnect();
-    // this.env.disconnect();
-    this.osc.amp(0);
-    setTimeout(()=> {
-      this.osc.amp(this.env);
-    }, 1000);
-    // p5 sound bug that starts the osc amp != env amp
+    this.osc.output.gain.value = 0;
+    this.osc.amp(this.env);
     this.osc.output.gain.value = 0;
     this.oscIndex = oscIndex;
 
