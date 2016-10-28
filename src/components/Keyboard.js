@@ -7,10 +7,16 @@ const Keyboard = (props) => {
   return (
 
       <div
-        className={`Keyboard octaves-${octaves} ${scale == 'chromatic' ? 'chromatic' : ''}`}
+        onTouchStart={props.onMouseDown.bind(this)}
+        onTouchEnd={props.onMouseUp.bind(this)}
+        onTouchCancel={props.onMouseUp.bind(this)}
+        onTouchMove={props.onMouseMove.bind(this)}
+
         onMouseDown={props.onMouseDown.bind(this)}
         onMouseUp={props.onMouseUp.bind(this)}
         onMouseMove={props.onMouseMove.bind(this)}
+
+        className={`Keyboard octaves-${octaves} ${scale == 'chromatic' ? 'chromatic' : ''}`}
         >
           {
             [...Array(octaves)].map((y, o) => (
@@ -35,9 +41,9 @@ const Keyboard = (props) => {
 };
 
 Keyboard.propTypes = {
-  onMouseDown: PropTypes.func.isRequired,
-  onMouseUp: PropTypes.func.isRequired,
-  onMouseMove: PropTypes.func.isRequired,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onMouseMove: PropTypes.func,
   octaves: PropTypes.number,
   octave: PropTypes.number,
   keyboard: PropTypes.object,

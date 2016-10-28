@@ -94,7 +94,6 @@ class SynthKeyboard extends Component {
           octave = octave + newOctaveave;
 
           if (note == notes) {
-            console.log('note == notes' , note);
             note = 0;
           }
         }
@@ -127,7 +126,7 @@ class SynthKeyboard extends Component {
             sysex: false
         }).then(this.handleMidiSuccess.bind(this), this.handleMidiError);
     } else {
-        console.log("No MIDI support in your browser.");
+        console.warn("No MIDI support in your browser.");
     }
 
     this.keyNotes = {};
@@ -155,7 +154,16 @@ class SynthKeyboard extends Component {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
-    let key = e.target.getAttribute('data-note');
+    let target;
+
+    if (e.type === 'touchend') {
+      let myLocation = e.changedTouches[0];
+      target = document.elementFromPoint(myLocation.clientX, myLocation.clientY) || e.target.getAttribute('data-note');
+    } else {
+      target = e.target;
+    }
+
+    let key = target.getAttribute('data-note');
     if (!key) {
       // this.props.stopPlaying();
     } else {
@@ -166,8 +174,10 @@ class SynthKeyboard extends Component {
   handleMouseMove(e) {
     e.persist();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        window.e = e;
+        window.event = e;
 
-    if (!e.buttons) {
+    if (!e.buttons && e.type !== 'touchmove') {
       if (Object.keys(this.keyNotes).length) {
         return false;
       } else if (!this.props.global.notes || Object.keys(this.props.global.notes).length) {
@@ -175,7 +185,21 @@ class SynthKeyboard extends Component {
       }
     }
 
-    let key = e.target.getAttribute('data-note');
+    let target;
+
+    if (e.type === 'touchmove') {
+      let myLocation = e.changedTouches[0];
+      target = document.elementFromPoint(myLocation.clientX, myLocation.clientY) || e.target.getAttribute('data-note');
+    } else {
+      target = e.target;
+    }
+
+    let key = target.getAttribute('data-note');
+
+    if (!key || isNaN(key)) {
+      console.warn('no key', key);
+      return false;
+    }
 
     if (!currentKey) {
       currentKey = key;
@@ -251,7 +275,7 @@ class SynthKeyboard extends Component {
 
   }
   handleMidiError(err) {
-    console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + err);
+    console.warn("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + err);
   }
 
   render() {
@@ -263,9 +287,14 @@ class SynthKeyboard extends Component {
         >
         <Keyboard
           {...this.props}
+
           onMouseDown={this.handleMouseDown.bind(this)}
           onMouseUp={this.handleMouseUp.bind(this)}
           onMouseMove={this.handleMouseMove.bind(this)}
+          onTouchStart={this.handleMouseDown.bind(this)}
+          onTouchEnd={this.handleMouseUp.bind(this)}
+          onTouchMove={this.handleMouseMove.bind(this)}
+
         />
       </div>
     );

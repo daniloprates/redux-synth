@@ -13,6 +13,8 @@ class Synth {
 
   constructor() {
 
+    this.cfg = {};
+
     this.notes = [];
     this.voices = [];
     this.notesPlaying = {};
@@ -129,6 +131,14 @@ class Synth {
     this.setAvailableOsc(osc);
     this.voices[osc].stop();
     this.voices[osc+VOICES].stop();
+  }
+
+  stopAll() {
+
+    Object.keys(this.notesPlaying).map(note => {
+      this.stop(note);
+    });
+
   }
 
 }

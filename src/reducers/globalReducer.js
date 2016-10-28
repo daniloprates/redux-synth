@@ -1,5 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { initGlobal, initKeyboard, initMidi } from '../constants/initialState';
+import synth from '../audio/Synth';
+
 
 export default function keyboardReducer(state = initGlobal, action) {
 
@@ -29,7 +31,8 @@ export default function keyboardReducer(state = initGlobal, action) {
       return Object.assign({}, state, {notes, isPlaying } );
 
     case types.STOP_PLAYING:
-      return Object.assign({}, state, {isPlaying: false, notes: initKeyboard.notes});
+      synth.stopAll();
+      return Object.assign({}, state, {isPlaying: false, notes: {}});
 
     case types.GLOBAL_CHANGED: {
       newState = Object.assign({}, state);

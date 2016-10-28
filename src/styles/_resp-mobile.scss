@@ -6,6 +6,7 @@
 
   .Panel {
     height: 40%;
+    position: relative;
 
     .panel-content {
       height: 70%;
@@ -19,11 +20,11 @@
 
     .PanelGlobal {
       // label,
-      input[type="range"],
-      input#panel-global-bpm,
+      .panel-global-bpm,
+      .panel-global-bpm-range,
       select
       {
-        width: 50% !important;
+        width: 50%;
         margin-bottom: 2px;
         height: 25px;
         display: inline-block;
@@ -34,9 +35,24 @@
       input[type="range"] {
         background: transparent;
       }
+      .panel-global-amplitude {
+        display: none;
+      }
+      .panel-global-presets {
+        width: 70%;
+      }
+      .panel-global-panic {
+      width: 28%;
+      height: 25px;
+      margin-bottom: 2px;
+      float: right;
+      }
 
       label{
         display: none;
+      }
+      select {
+        padding: 0;
       }
 
     }
@@ -52,28 +68,40 @@
       display: none;
     }
 
+    .btn-octaves {
+      display: none;
+      &:first-child,
+      &:nth-child(2) {
+        display: block;
+      }
+    }
+
+    .panel-item, .PanelOscillators {
+      display: none;
+    }
+    .PanelGlobal,
+    .PanelKeyboard {
+      display: block;
+    }
+
   }
 
   .keyboard-container {
-    height: 100%;
-    padding: 50% 0 10px;
-  }
+    height: 60%;
+    padding: 0 0 10px;
+    .Keyboard {
 
-
-  .btn-octaves {
-    display: none;
-    &:first-child,
-    &:nth-child(2) {
-      display: block;
     }
-  }
 
-  .panel-item, .PanelOscillators {
-    display: none;
-  }
-  .PanelGlobal,
-  .PanelKeyboard {
-    display: block;
+    li {
+      box-shadow: none;
+      &.is-playing-true {
+        background: #dcdcdc;
+        box-shadow: none;
+      }
+
+    }
+
   }
 
 }

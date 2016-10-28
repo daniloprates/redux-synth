@@ -24,7 +24,7 @@ class SynthPanel extends Component {
     this.amp = 0;
   }
 
-  handleParamChanged(type, param, value) {
+  handleParamChanged(type, param, value, forceValue) {
     if (typeof item == 'object' && value.persist) {
       value.persist();
     }
@@ -33,7 +33,7 @@ class SynthPanel extends Component {
         return console.log('this undefined', param, value);
     }
 
-    if (typeof this !== 'undefined' && typeof this.refs == 'object' && this.refs[param]) {
+    if (typeof this !== 'undefined' && typeof this.refs == 'object' && this.refs[param] && forceValue !== true) {
         // console.log('param', param);
       let newValue = this.refs[param].value;
       // Generic param types
