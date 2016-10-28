@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import {ButtonSet} from './PanelComps';
 import presets from '../constants/presets';
+import fileSave from '../utils/fileSave';
 import { map } from '../utils';
 
 class PanelGlobal extends Component {
     constructor(props) {
       super(props);
+      window.g = this;
     }
 
     render() {
@@ -53,9 +56,19 @@ class PanelGlobal extends Component {
             }
           </select>
 
+          <ButtonSet>
+            <button
+              onClick={fileSave.bind(this,this.props)}
+            >
+              Load Preset
+            </button>
+            <button
+              onClick={fileSave.bind(this,this.props)}
+            >
+              Save Preset
+            </button>
 
-
-
+          </ButtonSet>
 
         </div>
       );

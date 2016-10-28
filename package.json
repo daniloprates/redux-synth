@@ -29,6 +29,7 @@
   "author": "Danilo Prates <daniloprates@gmail.com> (http://daniloprates.github.io)",
   "license": "MIT",
   "dependencies": {
+    "file-saver": "1.3.3",
     "object-assign": "4.1.0",
     "p5": "0.5.3",
     "p5.sound": "git+https://github.com/processing/p5.js-sound.git",
