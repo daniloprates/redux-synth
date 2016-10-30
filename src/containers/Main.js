@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { noteOn, noteOff, paramChanged, stopPlaying, octavePrev, octaveNext} from '../actions/synthActions';
 import PanelContainer from './PanelContainer';
 import KeyboardContainer from './KeyboardContainer';
-import Theme from '../components/Theme';
 import synth from '../audio/Synth';
 
 class SynthPage extends Component {

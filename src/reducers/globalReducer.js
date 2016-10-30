@@ -2,7 +2,6 @@ import * as types from '../constants/actionTypes';
 import { initGlobal, initKeyboard, initMidi } from '../constants/initialState';
 import synth from '../audio/Synth';
 
-
 export default function keyboardReducer(state = initGlobal, action) {
 
   let notes = Object.assign({}, state.notes);

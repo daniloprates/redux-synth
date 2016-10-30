@@ -1,9 +1,9 @@
+@import 'default';
 
-
-@mixin theme($bg, $panelBg, $inputBg, $colorMed, $inputActive) {
+// @mixin theme($bg, $panelBg, $inputBg, $colorMed, $inputActive) {
 
   body {
-    background-color: $bg;
+    background-color: $pageBg;
   }
 
   .panel-content {
@@ -16,7 +16,7 @@
   /* TEXT COLOR */
   .Panel {
     label {
-      color: $textColor;
+      color: $controllersText;
     }
   }
 
@@ -30,7 +30,7 @@
     input[type=range]::-moz-range-thumb,
     input[type=range]::-ms-thumb
     {
-      background: $inputActive;
+      background: $controllersBg;
     }
 
     // input[type=range]::-webkit-slider-thumb {background: $inputActive;}
@@ -75,20 +75,20 @@
   }
 
 
-}
+// }
 
-$bg: #fbf9ec;
-$panelBg: rgba(0, 0, 0, 0.05);
-$inputBg: #cccabb;
-// $colorMed: #d2cfc1;
-$colorMed: #dedcce;
-$inputActive: #929086;
-$textColor: #929086;
+// $bg: #fbf9ec;
+// $panelBg: rgba(0, 0, 0, 0.05);
+// $inputBg: #cccabb;
+// // $colorMed: #d2cfc1;
+// $colorMed: #dedcce;
+// $inputActive: #929086;
+// $textColor: #929086;
 
-// @include theme(
-//   $bg,
-//   $panelBg,
-//   $inputBg,
-//   $colorMed,
-//   $inputActive
-// );
+// // @include theme(
+// //   $bg,
+// //   $panelBg,
+// //   $inputBg,
+// //   $colorMed,
+// //   $inputActive
+// // );
