@@ -1,27 +1,50 @@
-@import 'themes/test';
+// @import 'themes/clean';
+// @import 'themes/sky';
+@import 'themes/default';
 
+$panelBg: $pageBg !default;
 
-/* DEFAULTS */
+$controllerLed: red !default;
+
+$panelTitleBg: $panelText !default;
 $panelKeyboardBg: $panelBg !default;
 $panelText: $controllersText !default;
 
-$sliderBg: $controllersBg !default;
-$sliderThumb: $controllersBgActive !default;
+$controllersTextActive: $controllersText !default;
+$controllersRadius: 2px !default;
 
 $buttonBg: $controllersBg !default;
 $buttonText: $controllersText !default;
+$buttonRadius: $controllersRadius !default;
 
 $buttonBgActive: $controllersBgActive !default;
 $buttonTextActive: $controllersTextActive !default;
 
 $selectBg: $controllersBg !default;
+$selectText: $controllersText !default;
+$selectRadius: $controllersRadius !default;
+
+$sliderBg: $controllersBg !default;
+$sliderThumb: $controllersBgActive !default;
+$sliderRadius: $controllersRadius !default;
+$sliderHeight: 20px !default;
+$sliderHeightThumb: 20px !default;
+$sliderRadiusThumb: $controllersRadius !default;
 
 $bpmBg: $controllersBg !default;
 
-$keyWhiteBorderColor: $pageBg !default;
+$keyBorderColor: $pageBg !default;
+$keyWhiteBoxShadow: none !default;
 $keyWhiteBoxShadowActive: $keyWhiteBoxShadow !default;
+
+
+$keyBlackBoxShadow: none !default;
+$keyBlackBoxShadowActive: $keyBlackBoxShadow !default;
 
 $keyBlackScaleBg: $keyBlackBg !default;
 $keyBlackScaleBgActive: $keyBlackBgActive !default;
 $keyBlackScaleBoxShadow: $keyBlackBoxShadow !default;
 $keyBlackScaleBoxShadowActive: $keyBlackBoxShadowActive !default;
+
+$keyRootWhite: $keyBlackBgActive !default;
+$keyRootBlack: $keyWhiteBg !default;

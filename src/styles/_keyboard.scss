@@ -44,7 +44,7 @@ $grow-margin: -4.9%;
     background: $keyWhiteBg;
     list-style: none;
     border-radius: 0 0 $br $br;
-    border-left: 1px solid $keyWhiteBorderColor;
+    border-left: 1px solid $keyBorderColor;
     margin-left: -1px;
     cursor: pointer;
     position: relative;
@@ -66,16 +66,17 @@ $grow-margin: -4.9%;
 
     li {
       &.black-key {
+        background: $keyBlackBg;
+        box-shadow: $keyBlackBoxShadow;
+        border-right: 1px solid $keyBorderColor;
+        border-bottom: 1px solid $keyBorderColor;
         height: 70%;
         margin-left: $grow-margin;
         flex-grow: 1;
         z-index: 1;
-        background: $keyBlackBg;
-        // background: orange;
-        box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2), 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
         &.is-playing-true {
           background: $keyBlackBgActive;
-          box-shadow: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
+          box-shadow: $keyBlackBoxShadowActive;
         }
         & + li {
           margin-left: $grow-margin;
@@ -86,23 +87,35 @@ $grow-margin: -4.9%;
   }
   &:not(.chromatic) {
     li {
-      &.black-key {
-        background: $keyBlackScaleBg;
-        &.is-playing-true {
-          background: $keyBlackScaleBgActive;
+      &.is-root-true:before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        margin-left: -5px;
+        border-radius: 50%;
+      }
+      &.white-key {
+        &.is-root-true:before {
+          background: $keyRootWhite;
         }
       }
-      &.is-root-true:before {
-          content: "";
-          width: 10px;
-          height: 10px;
-          background: #8e8d8d;
-          position: absolute;
-          bottom: 10%;
-          left: 50%;
-          margin-left: -5px;
-          border-radius: 50%;
+      &.black-key {
+        background: $keyBlackScaleBg;
+        box-shadow: $keyBlackScaleBoxShadow;
+        border-right: 1px solid $keyBorderColor;
+        border-bottom: 1px solid $keyBorderColor;
+        &.is-playing-true {
+          background: $keyBlackScaleBgActive;
+          box-shadow: $keyBlackScaleBoxShadowActive;
+        }
+        &.is-root-true:before {
+          background: $keyRootBlack;
+        }
       }
+
     }
   }
 

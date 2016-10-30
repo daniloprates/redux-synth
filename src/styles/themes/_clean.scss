@@ -1,0 +1,61 @@
+
+
+  // MAIN PAGE
+  $pageBg: #F3F3F3;
+  $pageTitleText: #333;
+
+  // PANEL
+  // $panelBg: #82d2d9;
+  $panelText: rgba(0,0,0,0);
+  // $panelKeyboardBg: #77c3ca;
+  // $panelTitleBg: #ebbb33;
+
+  // Panel mandatory
+
+
+    $controllersBg: darken($pageBg, 3);
+    $controllersText: #b7b7b7;
+    $controllersRadius: 0;
+
+    $controllersBgActive: #b7b7b7;
+    $controllersTextActive: #333;
+    $controllersRadius: 50%;
+
+    $controllerLed: $controllersBgActive;
+  // Panel Optionals
+
+  // $sliderBg: ;
+  // $sliderThumb: ;
+  // $buttonBg: ;
+  // $buttonText: ;
+  // $buttonBgActive: ;
+  // $buttonTextActive: ;
+
+  $sliderBg: #b7b7b7;
+  $sliderHeight: 1px;
+  $sliderHeightThumb: 15px;
+
+  $sliderRadius: 0;
+
+
+  // $bpmBg: #b5b9aa;
+
+  // KEYBOARD
+
+  // Keyboard Mandatory
+
+  // White Key
+  $keyWhiteBg: darken($pageBg, 5);
+  $keyWhiteBgActive: darken($pageBg, 15);
+
+  // Black Key
+  $keyBlackBg: #b7b7b7;
+  $keyBlackBgActive: darken($keyBlackBg, 5);
+
+  // Black Key on scales
+  $keyBlackScaleBg: darken($keyWhiteBg, 5);
+  $keyBlackScaleBgActive: darken($keyWhiteBg, 15);
+  // $keyBlackScaleBoxShadow: ;
+  // $keyBlackScaleBoxShadowActive: ;
+
+

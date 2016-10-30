@@ -2,10 +2,12 @@
 
   // MAIN PAGE
   $pageBg: purple;
+  $pageTitleText: orange;
 
   // PANEL
   $panelBg: lightcyan;
-  $panelText: green;
+  $panelText: red;
+  // $panelTitleBg: orange;
   $panelKeyboardBg: lightcoral;
 
   // Panel mandatory
@@ -25,6 +27,7 @@
   // $buttonBgActive: ;
   // $buttonTextActive: ;
   // $selectBg
+  // $selectText
 
   // KEYBOARD
 
@@ -37,16 +40,16 @@
   $keyWhiteBoxShadowActive: 0px 3px 1px 3px rgba(0, 0, 0, 0.15) inset;
 
   // Black Key
-  $keyBlackBg: #333;
-  $keyBlackBgActive: #222;
-  $keyBlackBoxShadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);
-  $keyBlackBoxShadowActive: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
+  $keyBlackBg: purple;
+  $keyBlackBgActive: pink;
+  $keyBlackBoxShadow: none;
+  // $keyBlackBoxShadowActive: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
 
   // Black Key on scales
   $keyBlackScaleBg: red;
-  // $keyBlackScaleBgActive: ;
+  // $keyBlackScaleBgActive: yellow;
   // $keyBlackScaleBoxShadow: ;
   // $keyBlackScaleBoxShadowActive: ;
 
-  $keyBlackRoot: purple;
+  $keyRoot: purple;
 

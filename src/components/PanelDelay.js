@@ -7,10 +7,6 @@ class PanelDelay extends Component {
         super(props);
     }
 
-    delaySync() {
-
-    }
-
     render() {
         return (
           <div className="PanelDelay">

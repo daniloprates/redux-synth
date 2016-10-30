@@ -2,11 +2,13 @@
 
   // MAIN PAGE
   $pageBg: #fbf9ec;
+  $pageTitleText: #333;
 
   // PANEL
   $panelBg: rgba(0, 0, 0, 0.05);
   $panelText: #666;
   $panelKeyboardBg: #dedcce;
+  $panelTitleBg: #dedcce;
 
   // Panel mandatory
 
@@ -41,7 +43,7 @@
   // Black Key
   $keyBlackBg: #333;
   $keyBlackBgActive: #222;
-  $keyBlackBoxShadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);
+  $keyBlackBoxShadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2), 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
   $keyBlackBoxShadowActive: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
 
   // Black Key on scales
@@ -49,3 +51,5 @@
   // $keyBlackScaleBgActive: ;
   // $keyBlackScaleBoxShadow: ;
   // $keyBlackScaleBoxShadowActive: ;
+
+
