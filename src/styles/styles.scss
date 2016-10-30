@@ -5,6 +5,7 @@ $color-light: #cccabb;
 $color-dark: #929086;
 $border-radius-small: 2px;
 
+@import 'theme';
 @import 'reset';
 @import 'fonts';
 @import 'form';
@@ -15,27 +16,9 @@ $border-radius-small: 2px;
 /* Styles */
 body {
   font-family: 'Roboto Condensed', sans-serif;
-  background: $bg;
+  background: $pageBg;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-smoothing: antialiased;
   padding: 0;
   margin: 0;
-}
-
-.keyboard-container {
-  // height: 50vh;
-}
-.Panel {
-  // height: 50vh;
-}
-
-@media (max-height: 500px) {
-  .Keyboard {
-    // height: 20vh;
-  }
-  .Panel {
-    // height: auto;
-    // height: 80vh;
-  }
-
 }

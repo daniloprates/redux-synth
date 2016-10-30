@@ -31,7 +31,7 @@
 
     text-align: left;
     padding: 3px 5px 5px 15px;
-    color: #666;
+    color: $panelText;
     font-size: 13px;
     margin-bottom: 5px;
   }
@@ -45,7 +45,7 @@
     display: block;
     font-size: 11px;
     padding: 4px 0 1px;
-    color: #929086;
+    color: $panelText;
   }
 
   select {
@@ -55,10 +55,10 @@
     -webkit-appearance: button;
     padding: 5px;
     border-radius: $border-radius-small;
-    background: $color-light;
+    background: $selectBg;
   }
   button {
-    background: #cccabb;
+    background: $buttonBg;
     border: none;
     margin-right: 1px;
     padding: 5px 0;
@@ -67,7 +67,7 @@
       margin-right: 0;
     }
     &.active-true, &:active {
-      background: #929086;
+      background: $buttonBgActive;
       border: none;
       color: white;
     }
@@ -93,14 +93,14 @@
 
 .panel-content {
   // background: #55a2d4;
-  background: rgba(0, 0, 0, 0.05);
+  background: $panelBg;
   width: 100%;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
   height: 85%;
-  border-bottom: 5px solid #fbf9ec;
+  // border-bottom: 5px solid $pageBg;
 }
 
 
@@ -120,20 +120,8 @@
   }
 }
 
-.Oscillator {
-  display: none;
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 100px;
-  height: 30px;
-  background: lightblue;
-}
-
 .panel-item {
   width: 10px;
-  // background-color: rgba(255,255,255,0.2);
-  // margin: 5px 1px;
   padding: 10px;
   box-sizing: border-box;
   position: relative;
@@ -206,7 +194,7 @@
 
 .panel-global-bpm {
   font-family: 'Orbitron';
-  background: gray;
+  background: $bpmBg;
   border: 1px inset;
   padding: 5px;
   text-align: center;
@@ -239,7 +227,7 @@
 
 .PanelKeyboard {
   height: 15%;
-  background: #dedcce;
+  background: $panelKeyboardBg;
   padding: 10px;
   box-sizing: border-box;
   label, h3 {
