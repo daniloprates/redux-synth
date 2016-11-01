@@ -37,7 +37,7 @@ class PanelKeyboard extends Component {
   render() {
 
     return (
-      <div className="PanelKeyboard">
+      <div className="panel-keyboard">
         <label>Scale</label>
         <select
           className="panel-key-scale"

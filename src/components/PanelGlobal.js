@@ -7,7 +7,9 @@ class PanelGlobal extends Component {
       super(props);
       window.onresize = this.handleGlobalAmp.bind(this);
       this.handleGlobalAmp();
+      window.glob = this.props.onPanelChanged;
     }
+
 
     handleGlobalAmp() {
 
@@ -21,7 +23,7 @@ class PanelGlobal extends Component {
 
     render() {
       return (
-        <div className="PanelGlobal">
+        <div className="panel-global">
           <h1>RDX</h1>
           <label>BPM</label>
           <input

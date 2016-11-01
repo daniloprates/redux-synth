@@ -7,7 +7,7 @@ class PanelEnvelope extends Component {
 
     render() {
         return (
-          <div className="PanelEnvelope">
+          <div className="panel-envelope">
             <h3>Envelope</h3>
             <label>ADSR</label>
             <input

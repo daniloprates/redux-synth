@@ -12,10 +12,6 @@ class SynthPage extends Component {
     // this.synth = new Synth(props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    synth.update(nextProps);
-  }
-
   render() {
     return (
       <div className="app-container">

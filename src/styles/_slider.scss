@@ -1,0 +1,44 @@
+
+@mixin track() {
+  width: 100%;
+  cursor: pointer;
+  animate: 0.2s;
+  border: none;
+}
+@mixin thumb() {
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type=range] {
+  // height: $sliderHeightThumb;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  @include track();
+}
+input[type=range]::-webkit-slider-thumb {
+  @include thumb();
+}
+
+
+input[type=range]::-moz-range-track {
+  @include track();
+}
+input[type=range]::-moz-range-thumb {
+  @include thumb();
+}
+input[type=range]::-ms-track {
+  @include track();
+}
+input[type=range]::-ms-thumb {
+  @include thumb();
+}

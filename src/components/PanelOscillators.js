@@ -8,7 +8,7 @@ class PanelOscillators extends Component {
 
   render() {
     return (
-      <div className="PanelOscillators">
+      <div className="panel-oscillators">
         <h3>Oscillators</h3>
         <input
           type="range"

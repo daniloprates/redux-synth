@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 import { initGlobal, initKeyboard, initMidi } from '../constants/initialState';
 import synth from '../audio/Synth';
 
+document.body.className = `theme-${initGlobal.theme}`;
 
 export default function keyboardReducer(state = initGlobal, action) {
 
@@ -37,6 +38,12 @@ export default function keyboardReducer(state = initGlobal, action) {
     case types.GLOBAL_CHANGED: {
       newState = Object.assign({}, state);
       newState[action.param] = action.value;
+      console.log('action.param', action.param);
+
+      if (action.param === 'theme') {
+        document.body.className = `theme-${action.value}`;
+      }
+
       return newState;
     }
 

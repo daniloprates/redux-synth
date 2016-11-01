@@ -45,11 +45,13 @@
   $keyBlackBgActive: #222;
   $keyBlackBoxShadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2), 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
   $keyBlackBoxShadowActive: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset;
+  $keyBorderColor: black;
 
   // Black Key on scales
   $keyBlackScaleBg: #8e8d8d;
-  // $keyBlackScaleBgActive: ;
-  // $keyBlackScaleBoxShadow: ;
-  // $keyBlackScaleBoxShadowActive: ;
+  $keyBlackScaleBgActive: #3e3d3d;
+  $keyBlackScaleBoxShadow: none;
+  $keyBlackScaleBoxShadowActive: none;
+  $keyBorderColor: transparent;
 
 

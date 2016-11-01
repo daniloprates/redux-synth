@@ -9,7 +9,7 @@ class PanelFilter extends Component {
 
     render() {
         return (
-          <div className="PanelFilter">
+          <div className="panel-filter">
             <h3>Filter</h3>
             <ButtonSet>
               <button

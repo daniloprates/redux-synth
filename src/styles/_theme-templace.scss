@@ -1,0 +1,58 @@
+
+$newTheme: (
+  pageBg:
+  pageTitleText:
+  panelBg:
+  panelText:
+  panelTitleBg:
+  panelKeyboardBg:
+  controllersBg:
+  controllersBgActive:
+  controllersText:
+  controllersTextActive:
+  controllersRadius:
+  sliderHeight:
+  sliderHeightThumb:
+  controllerLed:
+  keyWhiteBg:
+  keyWhiteBgActive:
+  keyWhiteBoxShadow:
+  keyWhiteBoxShadowActive:
+  keyWhiteBorderColor:
+  keyBlackBg:
+  keyBlackBgActive:
+  keyBlackBoxShadow:
+  keyBlackBoxShadowActive:
+  keyBorderColor:
+  keyBlackScaleBg:
+  keyBlackScaleBgActive:
+  keyBlackScaleBoxShadow:
+  keyBlackScaleBoxShadowActive:
+  // panelBg: /* DEFAULT: pageBg */
+  // panelTitleBg: /* DEFAULT: panelText */
+  // panelKeyboardBg: /* DEFAULT: panelBg */
+  // controllersTextActive: /* DEFAULT: controllersText */
+  // buttonBg: /* DEFAULT: controllersBg */
+  // buttonText: /* DEFAULT: controllersText */
+  // buttonRadius: /* DEFAULT: controllersRadius */
+  // buttonBgActive: /* DEFAULT: controllersBgActive */
+  // buttonTextActive: /* DEFAULT: controllersTextActive */
+  // selectBg: /* DEFAULT: controllersBg */
+  // selectText: /* DEFAULT: controllersText */
+  // selectRadius: /* DEFAULT: controllersRadius */
+  // sliderBg: /* DEFAULT: controllersBg */
+  // sliderThumb: /* DEFAULT: controllersBgActive */
+  // sliderRadius: /* DEFAULT: controllersRadius */
+  // sliderRadiusThumb: /* DEFAULT: controllersRadius */
+  // controllerBPM: /* DEFAULT: controllersBg */
+  // keyWhiteBoxShadowActive: /* DEFAULT: keyWhiteBoxShadow */
+  // keyBlackBoxShadowActive: /* DEFAULT: keyBlackBoxShadow */
+  // keyBlackScaleBg: /* DEFAULT: keyBlackBg */
+  // keyBlackScaleBgActive: /* DEFAULT: keyBlackBgActive */
+  // keyBlackScaleBoxShadow: /* DEFAULT: keyBlackBoxShadow */
+  // keyBlackScaleBoxShadowActive: /* DEFAULT: keyBlackBoxShadowActive */
+  // keyRootWhite: /* DEFAULT: keyBlackBgActive */
+  // keyRootBlack: /* DEFAULT: keyWhiteBg */
+);
+
+@include theme($newTheme);

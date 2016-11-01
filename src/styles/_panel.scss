@@ -1,5 +1,5 @@
 
-.Panel {
+.panel {
   height: 270px;
   position: absolute;
   width: 100%;
@@ -16,13 +16,12 @@
     line-height: 19px;
     height: 40px;
     margin-bottom: 5px;
-    color: $pageTitleText;
   }
 
   h3 {
+    color: inherit;
     text-align: left;
     padding: 3px 5px 5px 15px;
-    color: $panelText;
     font-size: 13px;
     margin-bottom: 5px;
   }
@@ -32,26 +31,19 @@
   }
 
   label {
-    color: $panelText;
     width: 100%;
     display: block;
     font-size: 11px;
     padding: 4px 0 1px;
   }
-
   select {
-    background: $selectBg;
-    color: $selectText;
     min-width: 50%;
     max-width: 100%;
     border: none;
     -webkit-appearance: button;
     padding: 5px;
-    border-radius: $selectRadius;
   }
   button {
-    background: $buttonBg;
-    color: $buttonText;
     border: none;
     margin-right: 1px;
     padding: 5px 0;
@@ -60,8 +52,6 @@
       margin-right: 0;
     }
     &.active-true, &:active {
-      background: $buttonBgActive;
-      text: $buttonTextActive;
       border: none;
       color: white;
     }
@@ -74,10 +64,8 @@
     button {
       flex-grow: 1;
       &:first-child {
-        border-radius: $buttonRadius 0 0 3px;
       }
       &:last-child{
-        border-radius: 0 3px 3px 0;
       }
     }
   }
@@ -86,14 +74,12 @@
 }
 
 .panel-content {
-  background: $panelBg;
   width: 100%;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
   border-radius: 6px 6px 0 0;
   height: 85%;
-  // border-bottom: 5px solid $pageBg;
 }
 
 
@@ -103,6 +89,7 @@
   width: 10px;
   box-sizing: border-box;
   position: relative;
+  overflow: auto;
 }
 .panel-tab {
   width: 100%;
@@ -112,16 +99,27 @@
     display: flex;
   }
 }
+.panel-tabs::-webkit-scrollbar-thumb {
+    height: 20px;
+    background: blue;
+}
+.panel-tabs::-webkit-scrollbar-track {
+    background: red;
+}
+.panel-tabs::-webkit-scrollbar {
+    background: red;
+}
 
 .panel-item {
   width: 10px;
+  min-width: 150px;
   padding: 10px;
   box-sizing: border-box;
   position: relative;
   flex-grow: 1;
 
   &:before {
-    background: $panelTitleBg;
+    // background: $panelTitleBg;
     content: "";
     width: 10px;
     height: 23px;
@@ -131,38 +129,39 @@
   }
 }
 
-.PanelGlobal,
-.PanelOscillators,
-.PanelEnvelope,
-.PanelFilter,
-.PanelDelay,
-.PanelReverb,
-.PanelLfo,
-.PanelFx,
-.PanelRec,
-// .PanelKeyboard,
+.panel-global,
+.panel-oscillators,
+.panel-envelope,
+.panel-filter,
+.panel-delay,
+.panel-reverb,
+.panel-lfo,
+.panel-fx,
+.panel-rec,
+.panel-settings,
+// .panel-keyboard,
 {
   @extend .panel-item;
 }
 
-.PanelGlobal {
+.panel-global {
   flex-grow: 1.5;
   &:before {
     display: none;
   }
 }
-.PanelOscillators {
+.panel-oscillators {
   flex-grow: 2;
 }
-.PanelFx {
+.panel-fx {
   flex-grow: .75;
 }
-.PanelRec {
+.panel-rec {
   flex-grow: .5;
 }
 
 
-.PanelOscillator {
+.panel-oscillator {
   width: 50%;
   text-align: center;
   float: left;
@@ -171,23 +170,23 @@
 }
 
 
-.PanelCompsLed {
+.panel-compsLed {
+  // background: darken($controllerLed, 30);
   width: 10px;
   height: 10px;
-  background: darken($controllerLed, 30);
   text-align: center;
   margin: 0 auto 10px;
   border-radius: 50%;
   box-shadow: -1px -1px 2px darken($controllerLed, 30) inset;
   &.is-on-true {
-    background: $controllerLed;
+    // background: $controllerLed;
     box-shadow: -1px -1px 2px darken($controllerLed, 30) inset, 0px 0px 5px 2px rgba(255, 255, 255, 0.2);
   }
 }
 
 .panel-global-bpm {
   font-family: 'Orbitron';
-  background: $bpmBg;
+  // background: $controllerBPM;
   border: 1px inset;
   padding: 5px;
   text-align: center;
@@ -196,11 +195,13 @@
   box-sizing: border-box;
   color: white;
 }
-.panel-global-presets {
+.panel-global-presets,
+.panel-settings-themes
+{
   width: 100%;
 }
 
-.PanelRec button {
+.panel-rec button {
   width: 0;
   height: 0;
   background: #929086;
@@ -218,9 +219,9 @@
 }
 
 
-.PanelKeyboard {
+.panel-keyboard {
+  // background: $panelKeyboardBg;
   height: 15%;
-  background: $panelKeyboardBg;
   padding: 10px;
   box-sizing: border-box;
   label, h3 {
@@ -234,7 +235,7 @@
   }
   .panel-key-root {
     width: 10%;
-    border-left: 3px solid #dedcce;
+    border-left: 3px solid $panelKeyboardBg;
   }
   .button-set {
     float: right;

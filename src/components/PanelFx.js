@@ -15,7 +15,7 @@ class PanelFx extends Component {
 
   render() {
     return (
-      <div className="PanelFx">
+      <div className="panel-fx">
         <h3>Fx</h3>
         <label>Distort</label>
         <ButtonSet>

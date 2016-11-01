@@ -10,6 +10,7 @@ import PanelLfo from '../components/PanelLfo';
 import PanelFx from '../components/PanelFx';
 import PanelRec from '../components/PanelRec';
 import PanelKeyboard from '../components/PanelKeyboard';
+import PanelSettings from '../components/PanelSettings';
 import { map } from '../utils';
 
 /**
@@ -96,49 +97,49 @@ class SynthPanel extends Component {
 
   render() {
     return (
-      <div className="Panel">
+      <div className="panel">
         <div className="panel-content">
           <PanelGlobal
             {...this.props}
             onPanelChanged={this.handleParamChanged}
           />
           <div className="panel-tabs">
-            <div className="panel-tab tab-active">
-              <PanelOscillators
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelEnvelope
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelFilter
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelDelay
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelReverb
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelLfo
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-              <PanelFx
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-            </div>
-            <div className="panel-tab">
-              <PanelRec
-                {...this.props}
-                onPanelChanged={this.handleParamChanged}
-              />
-            </div>
+            <PanelOscillators
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelEnvelope
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelFilter
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelDelay
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelReverb
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelLfo
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelFx
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelRec
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
+            <PanelSettings
+              {...this.props}
+              onPanelChanged={this.handleParamChanged}
+            />
           </div>
         </div>
         <PanelKeyboard

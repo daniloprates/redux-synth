@@ -9,7 +9,7 @@ class PanelDelay extends Component {
 
     render() {
         return (
-          <div className="PanelDelay">
+          <div className="panel-delay">
             <h3>Delay</h3>
             <label>Amp</label>
             <input

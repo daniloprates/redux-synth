@@ -1,0 +1,33 @@
+$cleanPageBg: #F3F3F3;
+$cleanKeyBlackBg: #b7b7b7;
+$cleanKeyWhiteBg: darken($cleanPageBg, 5);
+
+$cleanTheme: (
+  name: 'clean',
+  pageBg: $cleanPageBg,
+  pageTitleText: #333,
+  panelText: rgba(0,0,0,0),
+  controllersBg: darken($cleanPageBg, 3),
+  controllersText: #b7b7b7,
+  controllersRadius: 0,
+  controllersBgActive: #b7b7b7,
+  controllersTextActive: #333,
+  controllerLed: controllersBgActive,
+  sliderBg: #b7b7b7,
+  sliderHeight: 1px,
+  sliderHeightThumb: 15px,
+  sliderRadius: 0,
+  sliderRadiusThumb: 100%,
+  keyWhiteBg: darken($cleanPageBg, 5),
+  keyWhiteBgActive: darken($cleanPageBg, 15),
+  keyBlackBg: $cleanKeyBlackBg,
+  keyBlackBgActive: darken($cleanKeyBlackBg, 5),
+  keyBlackScaleBg: darken($cleanKeyWhiteBg, 5),
+  keyBlackScaleBgActive: darken($cleanKeyWhiteBg, 15)
+);
+
+@include theme($cleanTheme);
+
+
+
+

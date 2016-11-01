@@ -1,0 +1,107 @@
+
+$h: 1em;
+$w: 100%;
+
+@mixin trackN($n) {
+  input[type='range'].n.n#{$n}:before {
+    $bgW: $w / ($n - 1);
+    background-size: (
+      $bgW $h,
+      $w .25em
+    );
+  }
+}
+
+@mixin track() {
+  width: $w;
+  box-sizing: border-box;
+  height: $h;
+  border-radius: $h/2;
+  // margin-right: 1em;
+  box-sizing: content-box;
+  background:
+    (
+      radial-gradient(circle at $h/2 50%, $sliderBg .3125em, $sliderBg .3125em, $sliderBg $h/2,transparent $h/2),
+      linear-gradient(90deg, transparent $h, $sliderBg $h) repeat-x 0 50%
+    );
+}
+
+@mixin thumb() {
+  border: none;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: (solid .35em transparent) null (solid .25em transparent);
+  width: $h + .3em;
+  height: $h + .3em;
+  background: $sliderThumb;
+  background-clip: content-box;
+  position: relative;
+  z-index: 10;
+  margin-top: -.1em;
+  margin-left: .05em;
+}
+
+input[type='range'].n {
+
+  display: block;
+  margin: 1em auto;
+  padding: 0;
+  background: transparent;
+  font-size: 1em;
+  cursor: pointer;
+  width: $w;
+  position: relative;
+
+  &,
+  &::-webkit-slider-runnable-track,
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  &:after {
+    content: "";
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: $sliderBg;
+    position: absolute;
+    right: 0;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: $h - .2em;
+    height: $h;
+    background:
+      (
+        radial-gradient(circle at $h/2 50%, $sliderBg .3125em,  $sliderBg .3125em, $sliderBg $h/2,transparent $h/2),
+        linear-gradient(90deg, transparent 0, $sliderBg 0) repeat-x 0 50%
+      );
+    box-sizing: border-box;
+  }
+
+  &::-ms-track {
+    border: none;
+    color: transparent;
+  }
+  &::-webkit-slider-thumb {
+    @include thumb();
+  }
+  &::-moz-range-thumb {
+    @include thumb();
+  }
+  &::-ms-thumb {
+    @include thumb();
+  }
+  &::-ms-tooltip {
+    display: none
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+@for $n from 2 through 10 {
+  @include trackN($n);
+}

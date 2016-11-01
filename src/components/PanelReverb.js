@@ -7,7 +7,7 @@ class PanelReverb extends Component {
 
     render() {
         return (
-          <div className="PanelReverb">
+          <div className="panel-reverb">
             <h3>Reverb</h3>
             <label>Amp</label>
             <input

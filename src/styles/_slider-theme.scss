@@ -1,0 +1,23 @@
+
+@mixin track(
+  $sliderHeight,
+  $sliderBg,
+  $sliderRadius,
+) {
+  height: $sliderHeight;
+  background: $sliderBg;
+  border-radius: $sliderRadius;
+}
+@mixin thumb(
+  $sliderHeight,
+  $sliderHeightThumb,
+  $sliderRadiusThumb,
+  $sliderThumb
+) {
+  height: $sliderHeightThumb;
+  width: $sliderHeightThumb;
+  border-radius: $sliderRadiusThumb;
+  background: $sliderThumb;
+  margin-top: ($sliderHeight - $sliderHeightThumb) /2;
+}
+

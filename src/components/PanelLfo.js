@@ -13,7 +13,7 @@ class PanelLfo extends Component {
 
   render() {
     return (
-      <div className="PanelLfo">
+      <div className="panel-lfo">
         <h3>LFO</h3>
         <label>OSC Type</label>
         <OscTypeSet

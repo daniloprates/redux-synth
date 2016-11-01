@@ -1,50 +1,164 @@
-// @import 'themes/clean';
-// @import 'themes/sky';
-@import 'themes/default';
+// @import 'slider-theme';
 
-$panelBg: $pageBg !default;
+$defaultMap: (
+  pageBg: #fbf9ec,
+  pageTitleText: #333,
+  panelBg: pageBg,
+  panelText: #929086,
+  panelTitleBg: panelText,
+  panelKeyboardBg: panelBg,
+  controllersBg: #cccabb,
+  controllersBgActive: #929086,
+  controllersText: #b7b7b7,
+  controllersTextActive: #ffffff,
+  controllersRadius: 2px,
+  sliderHeight: 20px,
+  sliderHeightThumb: 20px,
+  controllerLed: red,
+  keyWhiteBg: #ffffff,
+  keyWhiteBgActive: #ecebeb,
+  keyWhiteBoxShadow: 0px -2px 1px 1px rgba(0, 0, 0, 0.2) inset,
+  keyWhiteBoxShadowActive: 0px 3px 1px 3px rgba(0, 0, 0, 0.15) inset,
+  keyWhiteBorderColor: #999,
+  keyBlackBg: #333,
+  keyBlackBgActive: #222,
+  keyBlackBoxShadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2), 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset,
+  keyBlackBoxShadowActive: 0px -4px 1px 4px rgba(0, 0, 0, 0.5) inset,
+  keyBorderColor: black,
+  keyBlackScaleBg: #8e8d8d,
+  keyBlackScaleBgActive: #3e3d3d,
+  keyBlackScaleBoxShadow: none,
+  keyBlackScaleBoxShadowActive: none
+);
 
-$controllerLed: red !default;
+@function gv($keyName, $keyDefault) {
+  @return if(
+    map-has-key($final, $keyName),
+    map-get($final, $keyName),
+    map-get($final, $keyDefault)
+  );
+};
 
-$panelTitleBg: $panelText !default;
-$panelKeyboardBg: $panelBg !default;
-$panelText: $controllersText !default;
+@function g($map, $keyName) {
+  @return map-get($map, $keyName);
+};
 
-$controllersTextActive: $controllersText !default;
-$controllersRadius: 2px !default;
+@mixin theme($themeMap) {
 
-$buttonBg: $controllersBg !default;
-$buttonText: $controllersText !default;
-$buttonRadius: $controllersRadius !default;
+  // style: merge of theme and default styles
+  $s: map-merge($defaultMap, $themeMap);
 
-$buttonBgActive: $controllersBgActive !default;
-$buttonTextActive: $controllersTextActive !default;
+  body.theme-#{g($s, name)} {
+    background: g($s, pageBg);
+  //   h1 {
+  //     color: $pageTitleText;
+  //   }
+  //   .panel {
+  //     .panel-tab {
+  //       &::-webkit-scrollbar-track {
+  //         background: $pageBg;
+  //       }
+  //       &::-webkit-scrollbar-track-piece {
+  //         background: $controllersBg;
+  //       }
+  //     }
+  //     .panel-content {
+  //       background: $panelBg;
+  //       color: $panelText;
+  //     }
+  //     .panel-item:before {
+  //       background: $panelTitleBg;
+  //     }
+  //     .panel-keyboard {
+  //       background: $panelKeyboardBg;
+  //     }
+  //     label {
+  //       color: $controllersText;
+  //     }
+  //     select {
+  //       background: $selectBg;
+  //       color: $selectText;
+  //       border-radius: $selectRadius;
+  //     }
+  //     button {
+  //       background: $buttonBg;
+  //       color: $buttonText;
+  //       &.active-true, &:active {
+  //         background: $buttonBgActive;
+  //         text: $buttonTextActive;
+  //       }
+  //     }
+  //     .button-set {
+  //       button {
+  //         &:first-child {
+  //           border-radius: $buttonRadius 0 0 $buttonRadius;
+  //         }
+  //         &:last-child{
+  //           border-radius: 0 $buttonRadius $buttonRadius 0;
+  //         }
+  //       }
+  //     }
+  //     .panel-compsLed {
+  //       background: darken($controllerLed, 30);
+  //       &.is-on-true {
+  //         background: $controllerLed;
+  //       }
+  //     }
+  //     .panel-global-bpm {
+  //       background: $controllerBPM;
+  //     }
 
-$selectBg: $controllersBg !default;
-$selectText: $controllersText !default;
-$selectRadius: $controllersRadius !default;
+  //     input[type=range] {
+  //       height: $sliderHeightThumb;
+  //     }
+  //     input[type=range]::-webkit-slider-runnable-track {
+  //       // @include track(
+  //       //   $sliderHeight,
+  //       //   $sliderBg,
+  //       //   $sliderRadius
+  //       // );
+  //     }
+  //     input[type=range]::-webkit-slider-thumb {
+  //       // @include thumb();
+  //     }
+  //     input[type=range]::-moz-range-track {
+  //       // @include track(
+  //       //   $sliderHeight,
+  //       //   $sliderBg,
+  //       //   $sliderRadius
+  //       // );
+  //     }
+  //     input[type=range]::-moz-range-thumb {
+  //       // @include thumb();
+  //     }
+  //     input[type=range]::-ms-track {
+  //       // @include track(
+  //       //   $sliderHeight,
+  //       //   $sliderBg,
+  //       //   $sliderRadius
+  //       // );
+  //     }
+  //     input[type=range]::-ms-thumb {
+  //       // @include thumb();
+  //     }
 
-$sliderBg: $controllersBg !default;
-$sliderThumb: $controllersBgActive !default;
-$sliderRadius: $controllersRadius !default;
-$sliderHeight: 20px !default;
-$sliderHeightThumb: 20px !default;
-$sliderRadiusThumb: $controllersRadius !default;
-
-$bpmBg: $controllersBg !default;
-
-$keyBorderColor: $pageBg !default;
-$keyWhiteBoxShadow: none !default;
-$keyWhiteBoxShadowActive: $keyWhiteBoxShadow !default;
+  //     // input[type=range]:focus::-webkit-slider-runnable-track {
+  //     //   background: $sliderBg;
+  //     // }
 
 
-$keyBlackBoxShadow: none !default;
-$keyBlackBoxShadowActive: $keyBlackBoxShadow !default;
 
-$keyBlackScaleBg: $keyBlackBg !default;
-$keyBlackScaleBgActive: $keyBlackBgActive !default;
-$keyBlackScaleBoxShadow: $keyBlackBoxShadow !default;
-$keyBlackScaleBoxShadowActive: $keyBlackBoxShadowActive !default;
 
-$keyRootWhite: $keyBlackBgActive !default;
-$keyRootBlack: $keyWhiteBg !default;
+
+
+
+  //   }
+  }
+}
+
+
+
+
+
+
+

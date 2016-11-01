@@ -1,56 +1,24 @@
+@import '../theme';
+
+$pageBg: #58a6bf;
+$pageTitleText: #333;
+$panelBg: #82d2d9;
+$panelText: #625d57;
+$panelKeyboardBg: #77c3ca;
+$panelTitleBg: #ebbb33;
+$controllersBg: #625d57;
+$controllersText: #fff;
+$controllersRadius: 0;
+$controllersBgActive: #ebbb33;
+$controllersTextActive: #333;
+$sliderThumb: #625d57;
+$sliderHeight: 10px;
+$controllerBPM: #b5b9aa;
+$keyWhiteBg: #f8f7f3;
+$keyWhiteBgActive: #e6e5e1;
+$keyBlackBg: #625d57;
+$keyBlackBgActive: #4a4641;
+$keyBlackScaleBg: #8e8d8d;
 
 
-  // MAIN PAGE
-  $pageBg: #58a6bf;
-  $pageTitleText: #333;
-
-  // PANEL
-  $panelBg: #82d2d9;
-  $panelText: #625d57;
-  $panelKeyboardBg: #77c3ca;
-  $panelTitleBg: #ebbb33;
-
-  // Panel mandatory
-
-    $controllersBg: #625d57;
-    $controllersText: #fff;
-    $controllersRadius: 0;
-
-    $controllersBgActive: #ebbb33;
-    $controllersTextActive: #333;
-
-  // Panel Optionals
-
-  // $sliderBg: ;
-  // $sliderThumb: ;
-  // $buttonBg: ;
-  // $buttonText: ;
-  // $buttonBgActive: ;
-  // $buttonTextActive: ;
-
-  $sliderThumb: #625d57;
-  $sliderHeight: 10px;
-
-
-  $bpmBg: #b5b9aa;
-
-  // KEYBOARD
-
-  // Keyboard Mandatory
-
-  // White Key
-  $keyWhiteBg: #f8f7f3;
-  $keyWhiteBgActive: #e6e5e1;
-  // $keyWhiteBorderColor: #999;
-
-  // Black Key
-  $keyBlackBg: #625d57;
-  $keyBlackBgActive: #4a4641;
-
-  // Black Key on scales
-  $keyBlackScaleBg: #8e8d8d;
-  // $keyBlackScaleBgActive: ;
-  // $keyBlackScaleBoxShadow: ;
-  // $keyBlackScaleBoxShadowActive: ;
-
-
+@include theme('sky');

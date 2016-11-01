@@ -15,7 +15,7 @@ class PanelOscillator extends Component {
 
   render() {
     return (
-      <div className="PanelOscillator">
+      <div className="panel-oscillator">
         <Led
           {...this.props}
           on={this.param('amplitude') > 0}

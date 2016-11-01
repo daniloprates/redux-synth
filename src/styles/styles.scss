@@ -1,21 +1,16 @@
-// $bg: #472445;
-// $bg: #2980b9;
-$bg: #fbf9ec;
-$color-light: #cccabb;
-$color-dark: #929086;
-
+// @import 'reset';
 @import 'theme';
-@import 'reset';
-@import 'fonts';
-@import 'form';
-@import 'panel';
-@import 'keyboard';
+@import 'theme-sky';
+@import 'theme-clean';
+@import 'theme-test';
+// @import 'fonts';
+// @import 'slider';
+// @import 'panel';
+// @import 'keyboard';
 @import 'resp-mobile';
 
-/* Styles */
 body {
   font-family: 'Roboto Condensed', sans-serif;
-  background: $pageBg;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-smoothing: antialiased;
   padding: 0;

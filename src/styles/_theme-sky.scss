@@ -1,0 +1,24 @@
+$skyTheme: (
+  name: 'sky',
+  pageBg: #58a6bf,
+  pageTitleText: #333,
+  panelBg: #82d2d9,
+  panelText: #625d57,
+  panelKeyboardBg: #77c3ca,
+  panelTitleBg: #ebbb33,
+  controllersBg: #625d57,
+  controllersText: #fff,
+  controllersRadius: 0,
+  controllersBgActive: #ebbb33,
+  controllersTextActive: #333,
+  sliderThumb: #625d57,
+  sliderHeight: 10px,
+  controllerBPM: #b5b9aa,
+  keyWhiteBg: #f8f7f3,
+  keyWhiteBgActive: #e6e5e1,
+  keyBlackBg: #625d57,
+  keyBlackBgActive: #4a4641,
+  keyBlackScaleBg: #8e8d8d
+);
+
+@include theme($skyTheme);

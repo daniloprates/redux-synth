@@ -7,7 +7,7 @@ class PanelRec extends Component {
 
     render() {
         return (
-          <div className="PanelRec">
+          <div className="panel-rec">
             <h3>Rec</h3>
             <button
               className={`is-recording-${this.props.global.rec_active === true}`}
