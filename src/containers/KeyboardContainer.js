@@ -280,23 +280,19 @@ class SynthKeyboard extends Component {
 
   render() {
     return (
-      <div
-        onKeyDown={this.handleKeyDown}
-        onKeyUp={this.handleKeyUp}
-        className="keyboard-container"
-        >
-        <Keyboard
-          {...this.props}
+      <Keyboard
+        {...this.props}
 
-          onMouseDown={this.handleMouseDown.bind(this)}
-          onMouseUp={this.handleMouseUp.bind(this)}
-          onMouseMove={this.handleMouseMove.bind(this)}
-          onTouchStart={this.handleMouseDown.bind(this)}
-          onTouchEnd={this.handleMouseUp.bind(this)}
-          onTouchMove={this.handleMouseMove.bind(this)}
+        onKeyDown={this.handleKeyDown.bind(this)}
+        onKeyUp={this.handleKeyUp.bind(this)}
+        onMouseDown={this.handleMouseDown.bind(this)}
+        onMouseUp={this.handleMouseUp.bind(this)}
+        onMouseMove={this.handleMouseMove.bind(this)}
+        onTouchStart={this.handleMouseDown.bind(this)}
+        onTouchEnd={this.handleMouseUp.bind(this)}
+        onTouchMove={this.handleMouseMove.bind(this)}
 
-        />
-      </div>
+      />
     );
   }
 }
