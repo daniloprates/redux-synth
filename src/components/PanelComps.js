@@ -42,6 +42,8 @@ export const Slider = (props, actionType, param, valueType) => {
 };
 Slider.propTypes = {
   synth: PropTypes.object,
+  onPanelChanged: PropTypes.string
+
 };
 
 export const ButtonSet = (props) => {
