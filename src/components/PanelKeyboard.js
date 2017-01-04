@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { scales } from '../constants/scales';
 import {ButtonSet} from './PanelComps';
+import Panel from './Panel';
 
 class PanelKeyboard extends Component {
   constructor(props) {
@@ -37,7 +38,11 @@ class PanelKeyboard extends Component {
   render() {
 
     return (
-      <div className="PanelKeyboard">
+      <Panel
+        name="Keyboard"
+        type="keyboard"
+        noTitle={true}
+      >
         <label>Scale</label>
         <select
           className="panel-key-scale"
@@ -81,7 +86,7 @@ class PanelKeyboard extends Component {
           >&#8640;</button>
         </ButtonSet>
 
-      </div>
+      </Panel>
     );
   }
 }

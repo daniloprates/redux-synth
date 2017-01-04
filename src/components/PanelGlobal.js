@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import presets from '../constants/presets';
 import { map } from '../utils';
+import Panel from './Panel';
 
 class PanelGlobal extends Component {
     constructor(props) {
@@ -21,8 +22,11 @@ class PanelGlobal extends Component {
 
     render() {
       return (
-        <div className="PanelGlobal">
-          <h1>RDX</h1>
+        <Panel
+        name="RDX"
+        tagLevel="1"
+        size="1_5"
+      >
           <label>BPM</label>
           <input
             type="text"
@@ -78,7 +82,7 @@ class PanelGlobal extends Component {
 
 
 
-        </div>
+        </Panel>
       );
     }
 }

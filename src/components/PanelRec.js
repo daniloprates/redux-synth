@@ -1,20 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import Panel from './Panel';
 
 class PanelRec extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+      super(props);
+  }
 
-    render() {
-        return (
-          <div className="PanelRec">
-            <h3>Rec</h3>
-            <button
-              className={`is-recording-${this.props.global.rec_active === true}`}
-            />
-          </div>
-        );
-    }
+  render() {
+    return (
+      <Panel
+        name="Rec"
+      >
+        <button
+          className={`is-recording-${this.props.global.rec_active === true}`}
+        />
+      </Panel>
+    );
+  }
 }
 
 PanelRec.propTypes = {

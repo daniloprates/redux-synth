@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { map } from '../utils';
 import { OscTypeSet } from './PanelComps';
 // import {ButtonSet, Button, Led, OscTypeSet} from './PanelComps';
+import Panel from './Panel';
 
 class PanelLfo extends Component {
   constructor(props) {
@@ -13,8 +14,9 @@ class PanelLfo extends Component {
 
   render() {
     return (
-      <div className="PanelLfo">
-        <h3>LFO</h3>
+      <Panel
+        name="Lfo"
+      >
         <label>OSC Type</label>
         <OscTypeSet
           {...this.props}
@@ -42,7 +44,7 @@ class PanelLfo extends Component {
           onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'lfo_fltFreq')}
         />
 
-      </div>
+      </Panel>
     );
   }
 }

@@ -26,7 +26,7 @@ Button.propTypes = {
   children: PropTypes.string
 };
 
-export const SynthSlider = (props, actionType, param, valueType) => {
+export const Slider = (props, actionType, param, valueType) => {
   let defaultValue = props.synth[param];
   if (valueType == 'decimal') {
     valueType = valueType * 100;
@@ -40,7 +40,7 @@ export const SynthSlider = (props, actionType, param, valueType) => {
     />
   );
 };
-SynthSlider.propTypes = {
+Slider.propTypes = {
   synth: PropTypes.object,
 };
 

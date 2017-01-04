@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import PanelOscillator from '../components/PanelOscillator';
+import Panel from './Panel';
 
 class PanelOscillators extends Component {
   constructor(props) {
@@ -8,8 +9,10 @@ class PanelOscillators extends Component {
 
   render() {
     return (
-      <div className="PanelOscillators">
-        <h3>Oscillators</h3>
+      <Panel
+        name="Oscillatorz"
+        size="double"
+      >
         <input
           type="range"
           value={this.props.synth.osc_amplitude1*100}
@@ -26,7 +29,7 @@ class PanelOscillators extends Component {
           onPanelOscChanged={this.props.onPanelChanged.bind(this)}
           i={1}
         />
-      </div>
+      </Panel>
     );
   }
 }

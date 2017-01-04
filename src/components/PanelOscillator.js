@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {ButtonSet, Button, Led, OscTypeSet} from './PanelComps';
 import { map } from '../utils';
+import Panel from './Panel';
 
 class PanelOscillator extends Component {
   constructor(props) {
@@ -15,7 +16,12 @@ class PanelOscillator extends Component {
 
   render() {
     return (
-      <div className="PanelOscillator">
+
+      <Panel
+        name="Oscillator"
+        size="half-percent"
+        noTitle={true}
+      >
         <Led
           {...this.props}
           on={this.param('amplitude') > 0}
@@ -43,18 +49,15 @@ class PanelOscillator extends Component {
           >1</Button>
         </ButtonSet>
 
-        {/**/}
-          <label>LFO Env</label>
-          <input
-            type="range"
-            ref={`osc_lfoEnv${this.props.i}`}
-            value={map(this.props.synth[`osc_lfoEnv${this.props.i}`], 0, 60, 0, 100)}
-            onChange={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `osc_lfoEnv${this.props.i}`)}
-          />
-        {/**/}
+        <label>LFO Env</label>
+        <input
+          type="range"
+          ref={`osc_lfoEnv${this.props.i}`}
+          value={map(this.props.synth[`osc_lfoEnv${this.props.i}`], 0, 60, 0, 100)}
+          onChange={this.props.onPanelChanged.bind(this, 'OSC_CHANGED', `osc_lfoEnv${this.props.i}`)}
+        />
 
-
-      </div>
+      </Panel>
     );
   }
 }

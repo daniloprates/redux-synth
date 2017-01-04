@@ -113,7 +113,7 @@
   }
 }
 
-.panel-item {
+.panel-type-default {
   width: 10px;
   padding: 10px;
   box-sizing: border-box;
@@ -131,45 +131,19 @@
   }
 }
 
-.PanelGlobal,
-.PanelOscillators,
-.PanelEnvelope,
-.PanelFilter,
-.PanelDelay,
-.PanelReverb,
-.PanelLfo,
-.PanelFx,
-.PanelRec,
-// .PanelKeyboard,
-{
-  @extend .panel-item;
-}
-
-.PanelGlobal {
-  flex-grow: 1.5;
-  &:before {
-    display: none;
-  }
-}
-.PanelOscillators {
+.panel-size-double {
   flex-grow: 2;
 }
-.PanelFx {
+.panel-size-1_5 {
+  flex-grow: 1.5;
+}
+.panel-size-0_75 {
   flex-grow: .75;
 }
-.PanelRec {
-  flex-grow: .5;
-}
 
-
-.PanelOscillator {
+.panel-size-half-percent {
   width: 50%;
-  text-align: center;
-  float: left;
-  padding: 5px;
-  box-sizing: border-box;
 }
-
 
 .PanelCompsLed {
   width: 10px;
@@ -218,7 +192,7 @@
 }
 
 
-.PanelKeyboard {
+.panel-keyboard {
   height: 15%;
   background: $panelKeyboardBg;
   padding: 10px;

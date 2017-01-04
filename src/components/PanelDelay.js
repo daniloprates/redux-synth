@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { map } from '../utils';
 import {ButtonSet} from './PanelComps';
+import Panel from './Panel';
 
 class PanelDelay extends Component {
     constructor(props) {
@@ -9,8 +10,9 @@ class PanelDelay extends Component {
 
     render() {
         return (
-          <div className="PanelDelay">
-            <h3>Delay</h3>
+          <Panel
+        name="Delay"
+      >
             <label>Amp</label>
             <input
               type="range"
@@ -75,7 +77,7 @@ class PanelDelay extends Component {
               onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dly_feedback')}
             />
 
-          </div>
+          </Panel>
         );
     }
 }

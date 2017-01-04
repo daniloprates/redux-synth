@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {ButtonSet} from './PanelComps';
+import Panel from './Panel';
 
 class PanelFx extends Component {
   constructor(props) {
@@ -15,8 +16,10 @@ class PanelFx extends Component {
 
   render() {
     return (
-      <div className="PanelFx">
-        <h3>Fx</h3>
+      <Panel
+        name="Fx"
+        size="0_75"
+      >
         <label>Distort</label>
         <ButtonSet>
           <button
@@ -45,7 +48,7 @@ class PanelFx extends Component {
           onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'dst_amount', 'decimal')}
         />
 
-      </div>
+      </Panel>
     );
   }
 }

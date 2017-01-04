@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Panel from './Panel';
 
 class PanelEnvelope extends Component {
     constructor(props) {
@@ -7,8 +8,9 @@ class PanelEnvelope extends Component {
 
     render() {
         return (
-          <div className="PanelEnvelope">
-            <h3>Envelope</h3>
+          <Panel
+        name="Envelope"
+      >
             <label>ADSR</label>
             <input
               type="range"
@@ -34,7 +36,7 @@ class PanelEnvelope extends Component {
               value={this.props.synth.env_releaseTime*100}
               onChange={this.props.onPanelChanged.bind(this, 'FX_CHANGED', 'env_releaseTime', 'decimal')}
             />
-          </div>
+          </Panel>
         );
     }
 }
